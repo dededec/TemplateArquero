@@ -1,13 +1,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-namespace TemplateArquero
+public class BottomIcon : MonoBehaviour, IPointerClickHandler
 {
-    public class BottomIcon : MonoBehaviour
-    {
-        private Image selector;
+    [SerializeField] private GameObject _selector;
+    [SerializeField] private ScrollRect _scrollScreen;
 
+    public void OnPointerClick(PointerEventData eventData)
+    {
+        
     }
 }
