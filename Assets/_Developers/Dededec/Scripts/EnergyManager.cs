@@ -6,16 +6,8 @@ namespace TemplateArquero
 {
     public class EnergyManager : MonoBehaviour
     {
-        #region Fields
-
-        [SerializeField] private GameObject _rechargeUI;
+        #region Singleton
         private static EnergyManager _instance;
-        private int _currentEnergy;
-
-        #endregion
-
-        #region Properties
-
         public static EnergyManager Instance
         {
             get
@@ -23,18 +15,6 @@ namespace TemplateArquero
                 return _instance;
             }
         }
-
-        public int Energy
-        {
-            get
-            {
-                return _currentEnergy;
-            }
-        }
-
-        #endregion
-
-        #region Life Cycle
 
         private void Awake()
         {
@@ -47,6 +27,27 @@ namespace TemplateArquero
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
+        #region Fields
+
+        [SerializeField] private GameObject _rechargeUI;
+        [SerializeField] private float _timeToRecharge;
+        private float _timeRemaining;
+        private int _currentEnergy;
+
+        #endregion
+
+        #region Properties
+
+        public int Energy
+        {
+            get
+            {
+                return _currentEnergy;
             }
         }
 
@@ -71,6 +72,26 @@ namespace TemplateArquero
         }
 
         public void Add(int quantity) => Substract(-quantity);
+
+        #endregion
+
+        #region Private Methods
+
+        private IEnumerator crRechargeEnergy()
+        {
+            yield return new WaitForSeconds(_timeToRecharge);
+            _currentEnergy++;
+        }
+
+        private IEnumerator crRechargeEnergy2()
+        {
+            while(true)
+            {
+                
+            }
+            yield return new WaitForSeconds(_timeToRecharge);
+            _currentEnergy++;
+        }
 
         #endregion
     }
