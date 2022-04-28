@@ -9,9 +9,11 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f736b5555a532549969e0ca71e9dfbd, type: 3}
-  m_Name: AttackUp
+  m_Script: {fileID: 11500000, guid: ffcb891d6fcd3fd4d9f8de05794939f0, type: 3}
+  m_Name: HardCoin50
   m_EditorClassIdentifier: 
-  name: Attack Up
-  description: You deal more damage
-  icon: {fileID: 10905, guid: 0000000000000000f000000000000000, type: 0}
+  type: 0
+  quantity: 50
+  description: Hardcoin 50
+  price: 13
+  icon: {fileID: 21300000, guid: b85b036111184a04daaa72403e5b07ec, type: 3}

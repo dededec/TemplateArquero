@@ -47,7 +47,6 @@ public class PauseSystemController : MonoBehaviour
     private void onGameStateChanged(GameState newGameState)
     {
         enabled = newGameState == GameState.Gameplay;
-        print("uwu");
     }
         
     #endregion
