@@ -58,6 +58,7 @@ public class SoftCoinManager : MonoBehaviour
             return false;
         }
 
+        Debug.Log("Se han añadido soft coin");
         _currentValue -= quantity;
         return true;
     }

@@ -1,0 +1,38 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51b7d36a211b10b458476de3d381455f, type: 3}
+  m_Name: Prueba
+  m_EditorClassIdentifier: 
+  name: Prueba
+  description: sfsdfsdfsdfs
+  icon: {fileID: 0}
+  stages: 0
+  highestStageReached: 0
+  gameScene: {fileID: 0}
+  rewards:
+  - level: 10
+    reward:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2309711127365656329, guid: 0a462ae7981693a44abd330fef83d128,
+            type: 3}
+          m_TargetAssemblyTypeName: SoftCoinManager, Assembly-CSharp
+          m_MethodName: Add
+          m_Mode: 3
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 100
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2

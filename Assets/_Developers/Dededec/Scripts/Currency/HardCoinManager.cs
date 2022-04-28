@@ -60,6 +60,7 @@ namespace TemplateArquero
                 return false;
             }
 
+            Debug.Log("Se han añadido hard coin");
             _currentValue -= quantity;
             return true;
         }
