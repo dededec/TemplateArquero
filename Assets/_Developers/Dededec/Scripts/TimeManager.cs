@@ -21,6 +21,11 @@ public class TimeManager : MonoBehaviour
 
         #endregion
 
+        private void OnDisable() 
+        {
+            LastConnection = System.DateTime.Now;    
+        }
+
         public System.TimeSpan TimeSinceLastConnection()
         {
             return System.DateTime.Now - LastConnection;
