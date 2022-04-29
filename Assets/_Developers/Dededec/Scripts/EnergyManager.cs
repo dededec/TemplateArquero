@@ -37,7 +37,6 @@ namespace TemplateArquero
         [SerializeField] private GameObject _rechargeUI;
         [SerializeField] private float _timeToRecharge;
         private float _timeRemaining;
-        private int _currentEnergy;
 
         #endregion
 
@@ -47,7 +46,12 @@ namespace TemplateArquero
         {
             get
             {
-                return _currentEnergy;
+                return SaveDataController.Energy;
+            }
+
+            set
+            {
+                SaveDataController.Energy = value;
             }
         }
 
@@ -62,16 +66,19 @@ namespace TemplateArquero
 
         public bool Substract(int quantity)
         {
-            if (quantity > _currentEnergy)
+            if (quantity > Energy)
             {
                 return false;
             }
 
-            _currentEnergy -= quantity;
+            Energy -= quantity;
             return true;
         }
 
-        public void Add(int quantity) => Substract(-quantity);
+        public void Add(int quantity)
+        {
+            Energy += quantity;
+        }
 
         #endregion
 
@@ -80,18 +87,18 @@ namespace TemplateArquero
         private IEnumerator crRechargeEnergy()
         {
             yield return new WaitForSeconds(_timeToRecharge);
-            _currentEnergy++;
+            Energy++;
         }
 
-        private IEnumerator crRechargeEnergy2()
-        {
-            while(true)
-            {
+        // private IEnumerator crRechargeEnergy2()
+        // {
+        //     while(true)
+        //     {
                 
-            }
-            yield return new WaitForSeconds(_timeToRecharge);
-            _currentEnergy++;
-        }
+        //     }
+        //     yield return new WaitForSeconds(_timeToRecharge);
+        //     Energy++;
+        // }
 
         #endregion
     }

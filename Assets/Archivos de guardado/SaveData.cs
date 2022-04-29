@@ -6,6 +6,13 @@ using UnityEngine;
 public class SaveData
 {
     public int softCoins;
+    public int hardCoins;
+    public int energy;
+
+    // Last Time Connected
+    // day, month, year, hour, minute, second
+    public string lastConnection;
+
     public bool boolExample;
     public int intExample;
     public string stringExample;
@@ -13,7 +20,10 @@ public class SaveData
 
     public SaveData()
     {
-        boolArrayExample = new bool[6];
+        softCoins = 0;
+        hardCoins = 0;
+        lastConnection = System.DateTime.Now.ToString();
 
+        boolArrayExample = new bool[6];
     }
 }

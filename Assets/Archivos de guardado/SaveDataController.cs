@@ -57,19 +57,12 @@ public class SaveDataController : MonoBehaviour
         return outSb.ToString();
     }
 
-
-    public static void AddSoftCoins(int amount)
-    {
-        CheckInitialized();
-        saveData.softCoins += amount;
-        SaveToFile();
-    }
-
-    public static int GetSoftCoins()
-    {
-        CheckInitialized();
-        return saveData.softCoins;
-    }
+    // public static void AddSoftCoins(int amount)
+    // {
+    //     CheckInitialized();
+    //     saveData.softCoins += amount;
+    //     SaveToFile();
+    // }
 
     public static int SoftCoins
     {
@@ -82,6 +75,51 @@ public class SaveDataController : MonoBehaviour
         {
             CheckInitialized();
             saveData.softCoins = value;
+            SaveToFile();
+        }
+    }
+
+    public static int HardCoins
+    {
+        get 
+        {
+            CheckInitialized();
+            return saveData.hardCoins;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.hardCoins = value;
+            SaveToFile();
+        }
+    }
+
+    public static int Energy
+    {
+        get 
+        {
+            CheckInitialized();
+            return saveData.energy;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.energy = value;
+            SaveToFile();
+        }
+    }
+
+    public static string LastConnection
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.lastConnection;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.lastConnection = value;
             SaveToFile();
         }
     }

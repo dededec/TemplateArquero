@@ -7,7 +7,6 @@ public class SoftCoinManager : MonoBehaviour
     #region Fields
 
     private static SoftCoinManager _instance;
-    private int _currentValue;
 
     #endregion
 
@@ -21,11 +20,16 @@ public class SoftCoinManager : MonoBehaviour
         }
     }
 
-    public int Value
+    public int SoftCoins
     {
         get
         {
-            return _currentValue;
+            return SaveDataController.SoftCoins;
+        }
+
+        set
+        {
+            SaveDataController.SoftCoins = value;
         }
     }
 
@@ -53,17 +57,21 @@ public class SoftCoinManager : MonoBehaviour
 
     public bool Pay(int quantity)
     {
-        if(quantity > _currentValue)
+        if(quantity > SoftCoins)
         {
             return false;
         }
 
-        Debug.Log("Se han añadido soft coin");
-        _currentValue -= quantity;
+        Debug.Log("Se han pagado soft coins.");
+        SoftCoins -= quantity;
         return true;
     }
 
-    public void Add(int quantity) => Pay(-quantity);
+    public void Add(int quantity)
+    {
+        Debug.Log("Se han añadido soft coins.");
+        SoftCoins += quantity;
+    }
 
     #endregion
 }

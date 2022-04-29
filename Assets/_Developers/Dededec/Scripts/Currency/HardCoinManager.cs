@@ -9,7 +9,6 @@ namespace TemplateArquero
         #region Fields
 
         private static HardCoinManager _instance;
-        private int _currentValue;
 
         #endregion
 
@@ -23,11 +22,16 @@ namespace TemplateArquero
             }
         }
 
-        public int Value
+        public int HardCoins
         {
             get
             {
-                return _currentValue;
+                return SaveDataController.HardCoins;
+            }
+
+            set
+            {
+                SaveDataController.HardCoins = value;
             }
         }
 
@@ -55,17 +59,21 @@ namespace TemplateArquero
 
         public bool Pay(int quantity)
         {
-            if (quantity > _currentValue)
+            if (quantity > HardCoins)
             {
                 return false;
             }
 
-            Debug.Log("Se han añadido hard coin");
-            _currentValue -= quantity;
+            Debug.Log("Se han pagado hard coins.");
+            HardCoins -= quantity;
             return true;
         }
 
-        public void Add(int quantity) => Pay(-quantity);
+        public void Add(int quantity)
+        {
+            Debug.Log("Se han añadido hard coins.");
+            HardCoins += quantity;
+        }
 
         #endregion
     }
