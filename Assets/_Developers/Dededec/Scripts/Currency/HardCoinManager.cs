@@ -6,13 +6,9 @@ namespace TemplateArquero
 {
     public class HardCoinManager : MonoBehaviour
     {
-        #region Fields
+        #region Singleton
 
         private static HardCoinManager _instance;
-
-        #endregion
-
-        #region Properties
 
         public static HardCoinManager Instance
         {
@@ -21,23 +17,6 @@ namespace TemplateArquero
                 return _instance;
             }
         }
-
-        public int HardCoins
-        {
-            get
-            {
-                return SaveDataController.HardCoins;
-            }
-
-            set
-            {
-                SaveDataController.HardCoins = value;
-            }
-        }
-
-        #endregion
-
-        #region Life Cycle
 
         private void Awake()
         {
@@ -50,6 +29,23 @@ namespace TemplateArquero
             else
             {
                 Destroy(gameObject);
+            }
+        }
+
+        #endregion
+
+        #region Properties
+
+        public static int HardCoins
+        {
+            get
+            {
+                return SaveDataController.HardCoins;
+            }
+
+            set
+            {
+                SaveDataController.HardCoins = value;
             }
         }
 

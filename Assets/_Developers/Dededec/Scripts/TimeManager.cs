@@ -20,8 +20,8 @@ public class TimeManager : MonoBehaviour
         }
 
         #endregion
-
-        private void OnDisable() 
+        
+        private void OnApplicationQuit() 
         {
             LastConnection = System.DateTime.Now;    
         }

@@ -4,13 +4,9 @@ using UnityEngine;
 
 public class SoftCoinManager : MonoBehaviour
 {
-    #region Fields
+    #region Singleton
 
     private static SoftCoinManager _instance;
-
-    #endregion
-
-    #region Properties
 
     public static SoftCoinManager Instance
     {
@@ -19,23 +15,6 @@ public class SoftCoinManager : MonoBehaviour
             return _instance;
         }
     }
-
-    public int SoftCoins
-    {
-        get
-        {
-            return SaveDataController.SoftCoins;
-        }
-
-        set
-        {
-            SaveDataController.SoftCoins = value;
-        }
-    }
-
-    #endregion
-
-    #region Life Cycle
 
     private void Awake()
     {
@@ -48,6 +27,23 @@ public class SoftCoinManager : MonoBehaviour
         else
         {
             Destroy(gameObject);
+        }
+    }
+
+    #endregion
+
+    #region Properties
+
+    public static int SoftCoins
+    {
+        get
+        {
+            return SaveDataController.SoftCoins;
+        }
+
+        set
+        {
+            SaveDataController.SoftCoins = value;
         }
     }
 
