@@ -13,13 +13,13 @@ public class PurchaseProductDisplay : MonoBehaviour
     [SerializeField] private TextMeshProUGUI price;
     [SerializeField] private TextMeshProUGUI description;
 
+    //Uncomment this if you want to fill the button
     private void Start() {
 
-        icon.sprite = product.icon;
-        quantity.text = "" + product.quantity;
-        price.text = product.price.ToString();
-        description.text = product.description;
-
+        // icon.sprite = product.icon;
+        // quantity.text = "" + product.quantity;
+        // price.text = product.price.ToString();
+        // description.text = product.description;
     }
     
 }

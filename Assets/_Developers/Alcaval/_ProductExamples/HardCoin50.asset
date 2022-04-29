@@ -12,7 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ffcb891d6fcd3fd4d9f8de05794939f0, type: 3}
   m_Name: HardCoin50
   m_EditorClassIdentifier: 
-  type: 0
+  paymentMethod: 3
+  productType: 0
   quantity: 50
   description: Hardcoin 50
   price: 13

@@ -8,8 +8,9 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
 
-    private Reward r;
+    private Reward reward;
 
+    // Here you have to write every possible reward that can be given by an ad
     public enum Reward
     {
         ENERGY5,
@@ -35,15 +36,12 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     public void LoadAd()
     {
         // IMPORTANT! Only load content AFTER initialization (in this example, initialization is handled in a different script).
-        Debug.Log("Loading Ad: " + _adUnitId);
         Advertisement.Load(_adUnitId, this);
     }
  
     // If the ad successfully loads, add a listener to the button and enable it:
     public void OnUnityAdsAdLoaded(string adUnitId)
     {
-        Debug.Log("Ad Loaded: " + adUnitId);
- 
         if (adUnitId.Equals(_adUnitId))
         {
             // Configure the button to call the ShowAd() method when clicked:
@@ -56,7 +54,7 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     // Implement a method to execute when the user clicks the button:
     public void ShowAd(Reward r)
     {
-        this.r = r;
+        this.reward = r;
         // Disable the button:
         //_showAdButton.interactable = false;
         // Then show the ad:
@@ -68,9 +66,13 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            Debug.Log("Unity Ads Rewarded Ad Completed");
             // Grant a reward.
-            Debug.Log(r);
+            switch(reward)
+            {
+                case Reward.ENERGY5:
+                Debug.Log("Get rewarded with 5 energy");
+                break;
+            }
             // Load another ad:
             Advertisement.Load(_adUnitId, this);
         }

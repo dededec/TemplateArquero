@@ -6,12 +6,11 @@ using UnityEngine.UI;
 public class AdButtonController : MonoBehaviour
 {
     [SerializeField] public RewardedAdManager _rewardedAdManager;    
-    [SerializeField] RewardedAdManager.Reward r;
-
+    [SerializeField] RewardedAdManager.Reward reward;
     
     private void Start() 
     {
-        transform.GetComponent<Button>().onClick.AddListener(delegate{ _rewardedAdManager.ShowAd(r); }) ;
+        transform.GetComponent<Button>().onClick.AddListener(delegate{ _rewardedAdManager.ShowAd(reward); }) ;
     }
 
     void OnDestroy()

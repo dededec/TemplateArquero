@@ -7,9 +7,11 @@ using System;
 
 public class HCP_ButtonManager : MonoBehaviour
 {
+    //In case the purchase has an ad option
     [SerializeField] private int _adUses;
     [SerializeField] private bool _canUseAds;
     [SerializeField] private GameObject _adButton;
+
     [SerializeField] private GameObject _priceText;
     [SerializeField] private PurchaseProduct _purchaseProduct;
 
@@ -42,20 +44,24 @@ public class HCP_ButtonManager : MonoBehaviour
         _adUses--;
     }
 
+    
     public void onBuy()
     {
         if(!_canUseAds)
         {
-            switch(_purchaseProduct.type)
+            switch(_purchaseProduct.productType)
             {
-                case PurchaseProduct.Type.SOFTCOIN:
-                    //HardCoinManager.Instance.Pay(_purchaseProduct.price);
-                    SoftCoinManager.Instance.Add(100);
-                    Debug.Log("Has comprado " + _purchaseProduct.quantity + " " + _purchaseProduct.type);
+                case PurchaseProduct.ProductType.SOFTCOIN:
+                    if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
+                    {
+                        SoftCoinManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
+                    }
                     break;
-                case PurchaseProduct.Type.ENERGY:
-                    EnergyManager.Instance.Add(100);
-                    Debug.Log("Has comprado " + _purchaseProduct.quantity + " " + _purchaseProduct.type);
+                case PurchaseProduct.ProductType.ENERGY:
+                    if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
+                    {
+                        EnergyManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
+                    }
                     break;
             }
         }
