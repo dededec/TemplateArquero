@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3033144602205727460}
   - component: {fileID: 3033144602205727451}
+  - component: {fileID: 363792313}
   m_Layer: 0
   m_Name: AdsManager
   m_TagString: Untagged
@@ -26,7 +27,7 @@ Transform:
   m_GameObject: {fileID: 3033144602205727450}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 30.87455, y: 175.9222, z: -2.2016034}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.18277757, y: 0.18277757, z: 0.18277757}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -47,4 +48,18 @@ MonoBehaviour:
   _androidGameId: 4726623
   _iOSGameId: 4726622
   _testMode: 0
-  _rewardedAdManager: {fileID: 0}
+  _rewardedAdManager: {fileID: 363792313}
+--- !u!114 &363792313
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3033144602205727450}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aaad29dbfa09674dae56924f83fd424, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _androidAdUnitId: Rewarded_Android
+  _iOSAdUnitId: Rewarded_iOS
