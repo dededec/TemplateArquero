@@ -6,28 +6,28 @@ public class TimeManager : MonoBehaviour
 {
     #region Properties
 
-        public System.DateTime LastConnection
+    public System.DateTime LastConnection
+    {
+        get
         {
-            get
-            {
-                return System.DateTime.Parse(SaveDataController.LastConnection);
-            }
-
-            set
-            {
-                SaveDataController.LastConnection = value.ToString();
-            }
+            return System.DateTime.Parse(SaveDataController.LastConnection);
         }
 
-        #endregion
-        
-        private void OnApplicationQuit() 
+        set
         {
-            LastConnection = System.DateTime.Now;    
+            SaveDataController.LastConnection = value.ToString();
         }
+    }
 
-        public System.TimeSpan TimeSinceLastConnection()
-        {
-            return System.DateTime.Now - LastConnection;
-        }
+    #endregion
+
+    private void OnApplicationQuit()
+    {
+        LastConnection = System.DateTime.Now;
+    }
+
+    public System.TimeSpan TimeSinceLastConnection()
+    {
+        return System.DateTime.Now - LastConnection;
+    }
 }

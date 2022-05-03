@@ -9,6 +9,9 @@ public class PlayerLevelManager : MonoBehaviour
 
     [Tooltip("Total experience needed to reach player level at position i.")]
     [SerializeField] private List<int> _experienceToReach;
+
+    // List<List<Reward>> rewardsPerLevel;
+
     private int _lastLevelReached;
 
     public int Experience
@@ -27,7 +30,7 @@ public class PlayerLevelManager : MonoBehaviour
     public void AddExperience(int amount)
     {
         if (amount < 0) return;
-        
+
         Experience += amount;
 
         int aux = _lastLevelReached;
@@ -44,7 +47,7 @@ public class PlayerLevelManager : MonoBehaviour
             }
         }
 
-        if(aux < _lastLevelReached)
+        for (int i = aux; i <= _lastLevelReached; ++i)
         {
             onNewLevel.Invoke();
         }

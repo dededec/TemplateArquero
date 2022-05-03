@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TemplateArquero
 {
-    public class EnergyManager : MonoBehaviour
+    public class EnergyManager : EconomyManager
     {
         #region Singleton
         private static EnergyManager _instance;
@@ -36,7 +36,7 @@ namespace TemplateArquero
 
         [SerializeField] private GameObject _rechargeUI;
         [SerializeField] private float _timeToRecharge;
-        private float _timeRemaining;
+        private float _timeElapsed;
 
         #endregion
 
@@ -52,6 +52,30 @@ namespace TemplateArquero
             set
             {
                 SaveDataController.Energy = value;
+            }
+        }
+
+        public float TimeToRecharge
+        {
+            get;
+            set;
+        }
+
+        #endregion
+
+        #region Life Cycle
+
+        private void Update() 
+        {
+            if(_timeElapsed > _timeToRecharge)
+            {
+                // Recarga
+                _timeElapsed = 0;
+                Energy++;
+            }
+            else
+            {
+                _timeElapsed += Time.deltaTime;
             }
         }
 
@@ -75,31 +99,17 @@ namespace TemplateArquero
             return true;
         }
 
-        public void Add(int quantity)
+        public override bool Pay(int amount)
+        {
+            return Substract(amount);
+        }
+
+        public override void Add(int quantity)
         {
             Energy += quantity;
         }
 
         #endregion
 
-        #region Private Methods
-
-        private IEnumerator crRechargeEnergy()
-        {
-            yield return new WaitForSeconds(_timeToRecharge);
-            Energy++;
-        }
-
-        // private IEnumerator crRechargeEnergy2()
-        // {
-        //     while(true)
-        //     {
-                
-        //     }
-        //     yield return new WaitForSeconds(_timeToRecharge);
-        //     Energy++;
-        // }
-
-        #endregion
     }
 }
