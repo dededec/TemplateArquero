@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace TemplateArquero
 {
-    public class HardCoinManager : MonoBehaviour
+    public class HardCoinManager : EconomyManager
     {
         #region Singleton
 
@@ -53,22 +53,22 @@ namespace TemplateArquero
 
         #region Public Methods
 
-        public bool Pay(int quantity)
+        public override bool Pay(int amount)
         {
-            if (quantity > HardCoins)
+            if (amount > HardCoins)
             {
                 return false;
             }
 
             Debug.Log("Se han pagado hard coins.");
-            HardCoins -= quantity;
+            HardCoins -= amount;
             return true;
         }
 
-        public void Add(int quantity)
+        public override void Add(int amount)
         {
             Debug.Log("Se han añadido hard coins.");
-            HardCoins += quantity;
+            HardCoins += amount;
         }
 
         #endregion
