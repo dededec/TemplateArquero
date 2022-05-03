@@ -1334,6 +1334,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5155902418906312802, guid: 9a6e4f3f188e6524bbc7a9d4f11de0fd,
         type: 3}
+      propertyPath: productId
+      value: com.CompanyName.NameOfGame.example
+      objectReference: {fileID: 0}
+    - target: {fileID: 5155902418906312802, guid: 9a6e4f3f188e6524bbc7a9d4f11de0fd,
+        type: 3}
       propertyPath: onPurchaseFailed.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 4343528232006107379}

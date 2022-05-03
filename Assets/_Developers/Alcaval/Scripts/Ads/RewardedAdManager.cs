@@ -70,8 +70,8 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
             switch(reward)
             {
                 case Reward.ENERGY5:
-                Debug.Log("Get rewarded with 5 energy");
-                break;
+                    Debug.Log("Get rewarded with 5 energy");
+                    break;
             }
             // Load another ad:
             Advertisement.Load(_adUnitId, this);
