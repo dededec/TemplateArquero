@@ -20,7 +20,6 @@ public class DataManagement : MonoBehaviour
     public static void DeleteStreamingAssetsFolder()
     {
         File.Delete(Application.persistentDataPath + "/" + _userDataFileName);
-
     }
 
 }
