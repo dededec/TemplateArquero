@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TemplateArquero;
+//using TemplateArquero;
 using System;
 
 public class HCP_ButtonManager : MonoBehaviour
@@ -47,24 +47,24 @@ public class HCP_ButtonManager : MonoBehaviour
     
     public void onBuy()
     {
-        if(!_canUseAds)
-        {
-            switch(_purchaseProduct.productType)
-            {
-                case PurchaseProduct.ProductType.SOFTCOIN:
-                    if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
-                    {
-                        SoftCoinManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
-                    }
-                    break;
-                case PurchaseProduct.ProductType.ENERGY:
-                    if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
-                    {
-                        EnergyManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
-                    }
-                    break;
-            }
-        }
+        // if(!_canUseAds)
+        // {
+        //     switch(_purchaseProduct.productType)
+        //     {
+        //         case PurchaseProduct.ProductType.SOFTCOIN:
+        //             if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
+        //             {
+        //                 SoftCoinManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
+        //             }
+        //             break;
+        //         case PurchaseProduct.ProductType.ENERGY:
+        //             if(HardCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
+        //             {
+        //                 EnergyManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
+        //             }
+        //             break;
+        //     }
+        // }
     }
 
 }

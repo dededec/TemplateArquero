@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
-    public void GiveRewards()
+    public void GiveReward(Reward reward)
     {
-
+        Debug.Log("Se hace entrega de tal");
     }
 }

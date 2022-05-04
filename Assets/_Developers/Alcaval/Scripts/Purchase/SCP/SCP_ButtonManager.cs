@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TemplateArquero;
+//using TemplateArquero;
 using System;
 
 public class SCP_ButtonManager : MonoBehaviour
@@ -17,14 +17,14 @@ public class SCP_ButtonManager : MonoBehaviour
 
     public void onBuy()
     {
-        switch(_purchaseProduct.productType)
-        {
-            case PurchaseProduct.ProductType.ENERGY:
-                if(SoftCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
-                {
-                    EnergyManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
-                }
-                break;
-        }
+        // switch(_purchaseProduct.productType)
+        // {
+        //     case PurchaseProduct.ProductType.ENERGY:
+        //         if(SoftCoinManager.Instance.Pay(Convert.ToInt32(_purchaseProduct.price)))
+        //         {
+        //             EnergyManager.Instance.Add(Convert.ToInt32(_purchaseProduct.quantity));
+        //         }
+        //         break;
+        // }
     }
 }

@@ -4,9 +4,10 @@ using UnityEngine;
 
 public class Reward
 {
-
     #region Fields
  
+    public int item;
+    public int ammount;
         
     #endregion
 }
