@@ -37,6 +37,7 @@ public static class EconomyManager
         HARDCOIN,
         SOFTCOIN,
         ENERGY,
+        NONE,
     }
 
     #region Properties
