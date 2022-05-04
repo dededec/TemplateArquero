@@ -23,10 +23,9 @@ MonoBehaviour:
     reward:
       m_PersistentCalls:
         m_Calls:
-        - m_Target: {fileID: 2309711127365656328, guid: 0a462ae7981693a44abd330fef83d128,
-            type: 3}
+        - m_Target: {fileID: 11500000, guid: 16955860d14485d4dac0b8b80d0e63c8, type: 3}
           m_TargetAssemblyTypeName: TemplateArquero.HardCoinManager, Assembly-CSharp
-          m_MethodName: Add
+          m_MethodName: 
           m_Mode: 3
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -35,4 +34,4 @@ MonoBehaviour:
             m_FloatArgument: 0
             m_StringArgument: 
             m_BoolArgument: 0
-          m_CallState: 2
+          m_CallState: 1

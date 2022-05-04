@@ -11,6 +11,8 @@ public class PlayerLevelManager : MonoBehaviour
     [SerializeField] private List<int> _experienceToReach;
 
     // List<List<Reward>> rewardsPerLevel;
+    
+    // !!!! La experiencia y los rewards se leen desde un archivo
 
     private int _lastLevelReached;
 

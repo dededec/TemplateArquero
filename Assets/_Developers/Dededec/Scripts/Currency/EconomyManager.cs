@@ -89,13 +89,16 @@ public static class EconomyManager
         switch (type)
         {
             case CoinType.HARDCOIN:
-                result = PayInternal(HardCoins, amount);
+                HardCoins = PayInternal(HardCoins, amount);
+                result = HardCoins >= amount;
                 break;
             case CoinType.SOFTCOIN:
-                result = PayInternal(SoftCoins, amount);
+                SoftCoins = PayInternal(SoftCoins, amount);
+                result = SoftCoins >= amount;
                 break;
             case CoinType.ENERGY:
-                result = PayInternal(Energy, amount);
+                Energy = PayInternal(Energy, amount);
+                result = Energy >= amount;
                 break;
         }
 
@@ -107,31 +110,32 @@ public static class EconomyManager
         switch (type)
         {
             case CoinType.HARDCOIN:
-                AddInternal(HardCoins, amount);
+                HardCoins = AddInternal(HardCoins, amount);
                 break;
             case CoinType.SOFTCOIN:
-                AddInternal(SoftCoins, amount);
+                SoftCoins = AddInternal(SoftCoins, amount);
                 break;
             case CoinType.ENERGY:
-                AddInternal(Energy, amount);
+                Energy = AddInternal(Energy, amount);
                 break;
         }
     }
 
-    private static bool PayInternal(int currency, int amount)
+    private static int PayInternal(int currency, int amount)
     {
         if (amount > currency)
         {
-            return false;
+            return currency;
         }
 
         currency -= amount;
-        return true;
+        return currency;
     }
 
-    private static void AddInternal(int currency, int amount)
+    private static int AddInternal(int currency, int amount)
     {
         currency += amount;
+        return currency;
     }
 
 }
