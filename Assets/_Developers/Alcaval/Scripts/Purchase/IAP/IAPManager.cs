@@ -5,6 +5,7 @@ using UnityEngine.Purchasing;
 
 public class IAPManager : MonoBehaviour
 {
+
     private string example = "com.CompanyName.NameOfGame.example";
 
     public void OnPurchaseComplete(Product product)

@@ -1,6 +1,8 @@
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Advertisements;
+using System.Collections;
+using System.Collections.Generic;
  
 public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAdsShowListener
 {
@@ -8,25 +10,20 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     [SerializeField] string _androidAdUnitId = "Rewarded_Android";
     [SerializeField] string _iOSAdUnitId = "Rewarded_iOS";
 
-    private Reward reward;
+    [SerializeField] private RewardManager _rewardManager;
+    private List<Reward> _listOfRewards = new List<Reward>();
 
-    // Here you have to write every possible reward that can be given by an ad
-    public enum Reward
-    {
-        ENERGY5,
-        SOFTCOIN900,
-    }
 
     string _adUnitId = null; // This will remain null for unsupported platforms
  
     void Awake()
     {   
         // Get the Ad Unit ID for the current platform:
-#if UNITY_IOS
-        _adUnitId = _iOSAdUnitId;
-#elif UNITY_ANDROID
-        _adUnitId = _androidAdUnitId;
-#endif
+        #if UNITY_IOS
+                _adUnitId = _iOSAdUnitId;
+        #elif UNITY_ANDROID
+                _adUnitId = _androidAdUnitId;
+        #endif
 
         //Disable the button until the ad is ready to show:
         //_showAdButton.interactable = false;
@@ -52,9 +49,10 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     }
  
     // Implement a method to execute when the user clicks the button:
-    public void ShowAd(Reward r)
+    public void ShowAd(List<Reward> lor)
     {
-        this.reward = r;
+        Debug.Log(lor);
+        _listOfRewards = lor;
         // Disable the button:
         //_showAdButton.interactable = false;
         // Then show the ad:
@@ -66,13 +64,9 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
     {
         if (adUnitId.Equals(_adUnitId) && showCompletionState.Equals(UnityAdsShowCompletionState.COMPLETED))
         {
-            // Grant a reward.
-            switch(reward)
-            {
-                case Reward.ENERGY5:
-                    Debug.Log("Get rewarded with 5 energy");
-                    break;
-            }
+            Debug.Log(_listOfRewards);
+            _rewardManager.GiveReward(_listOfRewards);
+            
             // Load another ad:
             Advertisement.Load(_adUnitId, this);
         }
