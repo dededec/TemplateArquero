@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SoftCoinManager : EconomyManager
+public class SoftCoinManager : MonoBehaviour
 {
     #region Singleton
 
@@ -51,7 +51,7 @@ public class SoftCoinManager : EconomyManager
 
     #region Public Methods
 
-    public override bool Pay(int amount)
+    public bool Pay(int amount)
     {
         if(amount > SoftCoins)
         {
@@ -63,13 +63,10 @@ public class SoftCoinManager : EconomyManager
         return true;
     }
 
-    public override void Add(int amount)
+    public void Add(int amount)
     {
         Debug.Log("Se han añadido soft coins.");
         SoftCoins += amount;
-
-        EconomyManager a = this.GetComponent<SoftCoinManager>();
-        a.Pay(2);
     }
 
     
