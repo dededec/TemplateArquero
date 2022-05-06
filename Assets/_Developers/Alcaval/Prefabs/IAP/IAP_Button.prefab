@@ -148,7 +148,6 @@ GameObject:
   - component: {fileID: 5155902418906312803}
   - component: {fileID: 5155902418906312800}
   - component: {fileID: 5155902418906312801}
-  - component: {fileID: 9119908867457539464}
   m_Layer: 5
   m_Name: IAP_Button
   m_TagString: Untagged
@@ -310,23 +309,6 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9119908867457539464
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5155902418906312807}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: aac6d8fc7b38e9746aefbaf16ea3c164, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  product: {fileID: 11400000, guid: 4b21d059152db1245bb5ef6797598bc6, type: 2}
-  icon: {fileID: 7803833895358074773}
-  quantity: {fileID: 981099123655200934}
-  price: {fileID: 7270576217628155627}
-  description: {fileID: 2697686749251547803}
 --- !u!1 &5832938677731156848
 GameObject:
   m_ObjectHideFlags: 0

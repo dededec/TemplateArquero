@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &8599601062759146279
+--- !u!1 &7185270344762069289
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,61 +8,61 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8599601062759146278}
-  - component: {fileID: 8599601062759146266}
-  - component: {fileID: 8599601062759146267}
-  - component: {fileID: 8599601062759146264}
-  - component: {fileID: 787785796}
+  - component: {fileID: 7185270344762069290}
+  - component: {fileID: 7185270344762069295}
+  - component: {fileID: 7185270344762069294}
+  - component: {fileID: 7185270344762069293}
+  - component: {fileID: 7185270344762069280}
   m_Layer: 5
-  m_Name: RewardedAdButton
+  m_Name: RewardedButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8599601062759146278
+--- !u!224 &7185270344762069290
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601062759146279}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_GameObject: {fileID: 7185270344762069289}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 64.962715, y: 64.962715, z: 64.962715}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 80, y: 80, z: 80}
+  m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 8599601064016380527}
+  - {fileID: 7185270344981346222}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -1306, y: 14821}
-  m_SizeDelta: {x: 56.307007, y: 30}
+  m_AnchoredPosition: {x: 5794.6133, y: 14821}
+  m_SizeDelta: {x: 79.12, y: 37.06}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8599601062759146266
+--- !u!222 &7185270344762069295
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601062759146279}
+  m_GameObject: {fileID: 7185270344762069289}
   m_CullTransparentMesh: 1
---- !u!114 &8599601062759146267
+--- !u!114 &7185270344762069294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601062759146279}
+  m_GameObject: {fileID: 7185270344762069289}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.495283, b: 0.495283, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -79,13 +79,13 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
---- !u!114 &8599601062759146264
+--- !u!114 &7185270344762069293
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601062759146279}
+  m_GameObject: {fileID: 7185270344762069289}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
@@ -119,13 +119,13 @@ MonoBehaviour:
     m_SelectedTrigger: Selected
     m_DisabledTrigger: Disabled
   m_Interactable: 1
-  m_TargetGraphic: {fileID: 8599601062759146267}
+  m_TargetGraphic: {fileID: 7185270344762069294}
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: HCP_ButtonManager, Assembly-CSharp
-        m_MethodName: minusUse
+      - m_Target: {fileID: 7185270344762069280}
+        m_TargetAssemblyTypeName: RewardButtonManager, Assembly-CSharp
+        m_MethodName: ButtonPressed
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -135,21 +135,25 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!114 &787785796
+--- !u!114 &7185270344762069280
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601062759146279}
+  m_GameObject: {fileID: 7185270344762069289}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 959972c0b12a30e44a5cbabe3b167fdb, type: 3}
+  m_Script: {fileID: 11500000, guid: 889793aa90b39a74ebe0dbc543ebd893, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _rewardedAdManager: {fileID: 0}
-  _listOfRewards: []
---- !u!1 &8599601064016380524
+  _paymentMethod: 1
+  price: 1
+  listOfRewards:
+  - RewardedItem: {fileID: 11400000, guid: be0435c338573bc4f8a559421b951efa, type: 2}
+    ammount: 100
+  _rewardManager: {fileID: 0}
+--- !u!1 &7185270344981346221
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -157,51 +161,51 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 8599601064016380527}
-  - component: {fileID: 8599601064016380513}
-  - component: {fileID: 8599601064016380526}
+  - component: {fileID: 7185270344981346222}
+  - component: {fileID: 7185270344981346208}
+  - component: {fileID: 7185270344981346223}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!224 &8599601064016380527
+--- !u!224 &7185270344981346222
 RectTransform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601064016380524}
+  m_GameObject: {fileID: 7185270344981346221}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8599601062759146278}
+  m_Father: {fileID: 7185270344762069290}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -2.6193e-10, y: 0.0000016689}
+  m_SizeDelta: {x: 63.0341, y: 26.3422}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!222 &8599601064016380513
+--- !u!222 &7185270344981346208
 CanvasRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601064016380524}
+  m_GameObject: {fileID: 7185270344981346221}
   m_CullTransparentMesh: 1
---- !u!114 &8599601064016380526
+--- !u!114 &7185270344981346223
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8599601064016380524}
+  m_GameObject: {fileID: 7185270344981346221}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
@@ -215,7 +219,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Ad
+  m_text: BUTTON REWARDED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -224,8 +228,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4294967295
+  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -242,11 +246,11 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 10.8
+  m_fontSizeBase: 36
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 4
   m_fontSizeMax: 72
   m_fontStyle: 0
   m_HorizontalAlignment: 2

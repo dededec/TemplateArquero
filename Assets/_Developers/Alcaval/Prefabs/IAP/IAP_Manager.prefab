@@ -44,3 +44,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a3a6163f4a786784b87b13e0fef8fff4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _IAPRewardList:
+  - idProduct: com.CompanyName.NameOfGame.example
+    rewards:
+    - RewardedItem: {fileID: 11400000, guid: be0435c338573bc4f8a559421b951efa, type: 2}
+      ammount: 3
+  _rewardManager: {fileID: 0}

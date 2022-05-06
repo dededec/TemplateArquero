@@ -5,15 +5,25 @@ using UnityEngine.Purchasing;
 
 public class IAPManager : MonoBehaviour
 {
+    [SerializeField] private List<IAPReward> _IAPRewardList;
+    
+    [SerializeField] private RewardManager _rewardManager;
 
-    private string example = "com.CompanyName.NameOfGame.example";
+    [System.Serializable]
+    public class IAPReward
+    {
+        public string idProduct;
+        public List<Reward> rewards;
+    }
 
     public void OnPurchaseComplete(Product product)
     {
-        //The player has made the example purchase
-        if(product.definition.id == example) 
+        foreach(IAPReward IAPr in _IAPRewardList)
         {
-            Debug.Log("Made a purchase of example");
+            if(IAPr.idProduct == product.definition.id)
+            {
+                _rewardManager.GiveReward(IAPr.rewards);
+            }
         }
     }
 

@@ -13,15 +13,19 @@ public class RewardManager : MonoBehaviour
             {
                 case Item.TypeOfReward.HARDCOIN:
                     EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.ammount);
+                    Debug.Log("Hardcoin rewarded");
                     break;
                 case Item.TypeOfReward.SOFTCOIN:
                     EconomyManager.Add(EconomyManager.CoinType.SOFTCOIN, r.ammount);
+                    Debug.Log("Softcoin rewarded");
                     break;
                 case Item.TypeOfReward.ENERGY:
                     EconomyManager.Add(EconomyManager.CoinType.ENERGY, r.ammount);
+                    Debug.Log("Energy rewarded");
                     break;
                 case Item.TypeOfReward.EQUIPMENT:
-                    // Añadir tal objeto al inventario
+                    // Añadir tal objeto al inventario por ejemplo un objeto random o algo
+                    Debug.Log("Other rewarded");
                     break;
             }
         }
