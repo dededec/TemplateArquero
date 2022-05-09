@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d3a6dc8879d1546bb9aaa36984f657, type: 3}
   m_Name: Hardcoin
   m_EditorClassIdentifier: 
-  id: 0
+  id: hc
   typeOfReward: 0
+  inventoryUse: 0
   rarity: 2
   name: Hardcoin
   description: Lets you buy things

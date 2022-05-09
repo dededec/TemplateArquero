@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d3a6dc8879d1546bb9aaa36984f657, type: 3}
   m_Name: Energy
   m_EditorClassIdentifier: 
-  id: 2
+  id: ec
   typeOfReward: 2
+  inventoryUse: 0
   rarity: 2
   name: 
   description: 

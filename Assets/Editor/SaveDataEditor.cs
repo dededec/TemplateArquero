@@ -54,7 +54,26 @@ public class SaveDataEditor : EditorWindow
             saveData.experience = EditorGUILayout.IntField(saveData.experience, GUILayout.Height(height), GUILayout.Width(100));
             EditorGUILayout.EndHorizontal();
         
+            // Inventory
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Inventory", GUILayout.Height(height), GUILayout.Width(200));
+            saveData.inventory = EditorGUILayout.TextField(saveData.inventory, GUILayout.Height(height), GUILayout.Width(200)); 
+            EditorGUILayout.EndHorizontal();
 
+            // Inventory
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Equipment", GUILayout.Height(height), GUILayout.Width(200));
+            saveData.equipment = EditorGUILayout.TextField(saveData.inventory, GUILayout.Height(height), GUILayout.Width(200)); 
+            EditorGUILayout.EndHorizontal();
+
+            //Talents.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Talents", GUILayout.Height(height), GUILayout.Width(200));
+            for (int i = 0; i < saveData.talentsList.Length; i++)
+            {
+                saveData.talentsList[i] = EditorGUILayout.IntField(saveData.talentsList[i], GUILayout.Height(height), GUILayout.Width(20));
+            }
+            EditorGUILayout.EndHorizontal();
 
             // //Ejemplo de variable bool
             // EditorGUILayout.BeginHorizontal();
@@ -72,15 +91,6 @@ public class SaveDataEditor : EditorWindow
             // EditorGUILayout.BeginHorizontal();
             // GUILayout.Label("string example", GUILayout.Height(height), GUILayout.Width(200));
             // saveData.stringExample = EditorGUILayout.TextField(saveData.stringExample, GUILayout.Height(height), GUILayout.Width(500));
-            // EditorGUILayout.EndHorizontal();
-
-            // //Ejemplo de array de bool
-            // EditorGUILayout.BeginHorizontal();
-            // GUILayout.Label("Bool Array Example", GUILayout.Height(height), GUILayout.Width(200));
-            // for (int i = 0; i < saveData.boolArrayExample.Length; i++)
-            // {
-            //     saveData.boolArrayExample[i] = EditorGUILayout.Toggle(saveData.boolArrayExample[i], GUILayout.Height(height), GUILayout.Width(20));
-            // }
             // EditorGUILayout.EndHorizontal();
 
             if (GUILayout.Button("Save Data"))

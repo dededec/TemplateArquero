@@ -13,6 +13,11 @@ public class SaveData
     // Last Time Connected: dd/mm/yyyy hh/mm/ss
     public string lastConnection;
 
+    //Array of talent
+    public int[] talentsList;
+    public string inventory;
+    public string equipment;
+
     // public bool boolExample;
     // public int intExample;
     // public string stringExample;
@@ -24,6 +29,9 @@ public class SaveData
         hardCoins = 0;
         experience = 0;
         lastConnection = System.DateTime.Now.ToString();
+        talentsList = new int[12];
+        inventory = "";
+        equipment = "";
         // boolArrayExample = new bool[6];
     }
 }

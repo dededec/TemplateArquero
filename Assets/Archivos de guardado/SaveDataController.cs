@@ -131,4 +131,49 @@ public class SaveDataController : MonoBehaviour
             SaveToFile();
         }
     }
+
+    public static int[] TalentsList
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.talentsList;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.talentsList = value;
+            SaveToFile();
+        }
+    }
+
+    public static string Inventory
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.inventory;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.inventory = value;
+            SaveToFile();
+        }
+    }
+
+    public static string Equipment
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.equipment;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.equipment = value;
+            SaveToFile();
+        }
+    }
 }

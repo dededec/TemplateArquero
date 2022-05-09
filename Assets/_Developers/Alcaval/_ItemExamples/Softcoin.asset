@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d3a6dc8879d1546bb9aaa36984f657, type: 3}
   m_Name: Softcoin
   m_EditorClassIdentifier: 
-  id: 1
+  id: sc
   typeOfReward: 1
+  inventoryUse: 0
   rarity: 2
   name: Softcoin
   description: Lets you buy other things

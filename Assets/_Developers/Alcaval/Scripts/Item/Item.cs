@@ -15,6 +15,18 @@ public class Item : ScriptableObject
         
     }
 
+    public enum InventoryUse
+    {
+        PAYMENT,
+        SLOT1,
+        SLOT2,
+        SLOT3,
+        SLOT4,
+        SLOT5,
+        SLOT6,
+        UPGRADE_WEAPON,
+    }
+
     public enum Rarity
     {
         RARE,
@@ -22,8 +34,9 @@ public class Item : ScriptableObject
         COIN,
     }
 
-    public int id;
+    public string id;
     public TypeOfReward typeOfReward;
+    public InventoryUse inventoryUse;
     public Rarity rarity;
     public new string name;
     public string description;
