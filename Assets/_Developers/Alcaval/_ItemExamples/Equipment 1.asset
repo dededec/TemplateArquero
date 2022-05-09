@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 10d3a6dc8879d1546bb9aaa36984f657, type: 3}
   m_Name: Equipment 1
   m_EditorClassIdentifier: 
-  id: eq01
+  id: eq02
   typeOfReward: 3
-  inventoryUse: 1
+  inventoryUse: 2
   rarity: 0
   name: Equipamiento
   description: Refacherin
