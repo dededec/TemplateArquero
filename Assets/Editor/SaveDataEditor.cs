@@ -63,7 +63,7 @@ public class SaveDataEditor : EditorWindow
             // Inventory
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Equipment", GUILayout.Height(height), GUILayout.Width(200));
-            saveData.equipment = EditorGUILayout.TextField(saveData.inventory, GUILayout.Height(height), GUILayout.Width(200)); 
+            saveData.equipment = EditorGUILayout.TextField(saveData.equipment, GUILayout.Height(height), GUILayout.Width(200)); 
             EditorGUILayout.EndHorizontal();
 
             //Talents.

@@ -1,0 +1,5 @@
+id,ItemName,typeOfReward,inventoryUse,rarity,description,icon
+0,Pechera,EQUIPMENT,SLOT1,RARE,Tal,path
+1,Casco,EQUIPMENT,SLOT2,COMMON,Refachero,path
+2,Peto,EQUIPMENT,SLOT1,COMMON,Tal,path
+3,Chanclas,EQUIPMENT,SLOT4,RARE,Facherin,path

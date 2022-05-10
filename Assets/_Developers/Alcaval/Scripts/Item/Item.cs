@@ -22,8 +22,7 @@ public class Item : ScriptableObject
         SLOT2,
         SLOT3,
         SLOT4,
-        SLOT5,
-        SLOT6,
+        ACCESORIES,
         UPGRADE_WEAPON,
     }
 
@@ -41,4 +40,16 @@ public class Item : ScriptableObject
     public new string name;
     public string description;
     public Sprite icon;
+
+    public void init(string id, string name, TypeOfReward typeOfReward, InventoryUse inventoryUse, Rarity rarity, string description, string icon)
+    {
+        this.id = id;
+        this.typeOfReward = typeOfReward;
+        this.inventoryUse = inventoryUse;
+        this.rarity = rarity;
+        this.name = name;
+        this.description = description;
+        // TODO read item icon
+    }
+
 }

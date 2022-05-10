@@ -1,11 +1,12 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class InventoryManager : MonoBehaviour
 {
     // Variables related to the whole inventory
-    [SerializeField] private List<Item> _EveryItemList;
+    [SerializeField] public List<Item> _EveryItemList;
     [SerializeField] public List<Item> _PlayerItems; 
 
     //Variables related to the equipment of the player
@@ -15,33 +16,92 @@ public class InventoryManager : MonoBehaviour
         loadData();
     }
 
-    public void AssignEquipment(Item i)
+    public void AddToInventory(string id)
     {
+        Item i = null;
+        foreach(Item itm in _EveryItemList)
+        {
+            if(itm.id == id)
+            {
+                i = itm;
+                break;
+            }
+        }
+
+        _PlayerItems.Add(i);
+        saveData();
+    }
+
+    public void AssignEquipment(string id)
+    {
+        Item i = null;
+        foreach(Item itm in _PlayerItems)
+        {
+            if(itm.id == id)
+            {
+                i = itm;
+                _PlayerItems.Remove(itm);
+                break;
+            }
+        }
+
+        int slot = 0;
         switch(i.inventoryUse)
         {
             case Item.InventoryUse.SLOT1:
-                _PlayerEquipment[0] = i;
+                slot = 0;
                 break;
             case Item.InventoryUse.SLOT2:
-                _PlayerEquipment[1] = i;
+                slot = 1;
                 break;
             case Item.InventoryUse.SLOT3:
-                _PlayerEquipment[2] = i;
+                slot = 2;
                 break;
             case Item.InventoryUse.SLOT4:
-                _PlayerEquipment[3] = i;
+                slot = 3;
                 break;
-            case Item.InventoryUse.SLOT5:
-                _PlayerEquipment[4] = i;
-                break;
-            case Item.InventoryUse.SLOT6:
-                _PlayerEquipment[5] = i;
+            case Item.InventoryUse.ACCESORIES:
+                slot = 4;
                 break;
         }
+
+        if(_PlayerEquipment[slot] != null)
+        {
+            AddToInventory(_PlayerEquipment[slot].id);
+        }
+        _PlayerEquipment[slot] = i;
+
+        saveData();
     }
 
     public void loadData()
     {
+        _EveryItemList.Clear();
+        List<Dictionary<string, object>> data = CSVReader.Read("ItemDatabase");
+
+        for(int i = 0; i < data.Count; i++)
+        {
+            string id = data[i]["id"].ToString();
+
+            string itemName = data[i]["ItemName"].ToString();
+
+            Item.TypeOfReward typeOfReward;
+            Enum.TryParse(data[i]["typeOfReward"].ToString(), out typeOfReward);
+
+            Item.InventoryUse inventoryUse;
+            Enum.TryParse(data[i]["inventoryUse"].ToString(), out inventoryUse);
+
+            Item.Rarity rarity;
+            Enum.TryParse(data[i]["rarity"].ToString(), out rarity);
+
+            string description = data[i]["description"].ToString();
+
+            string iconPath = data[i]["icon"].ToString();
+            Item item = ScriptableObject.CreateInstance<Item>();
+            item.init(id, itemName, typeOfReward, inventoryUse, rarity, description, iconPath);
+            _EveryItemList.Add(item);
+        }
+
         string[] inventoryList = SaveDataController.Inventory.Split(";");
         foreach(string s in inventoryList)
         {
@@ -82,7 +142,12 @@ public class InventoryManager : MonoBehaviour
         SaveDataController.Equipment = "";
         for(int i = 0; i < _PlayerEquipment.Length - 1; i++)
         {
-            SaveDataController.Equipment += _PlayerEquipment[i].id + ";";
+            if(_PlayerEquipment[i] == null)
+            {
+                SaveDataController.Equipment += "None;";
+            }else{
+                SaveDataController.Equipment += _PlayerEquipment[i].id + ";";
+            }
         }
     }
 }
