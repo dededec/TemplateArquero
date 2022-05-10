@@ -5,11 +5,13 @@ using System;
 
 public class InventoryManager : MonoBehaviour
 {
-    // Variables related to the whole inventory
+    // LIST OF EVERY ITEM IN THE GAME, LOADED BY A CSV
     [SerializeField] public List<Item> _EveryItemList;
+
+    //INVENTORY
     [SerializeField] public List<Item> _PlayerItems; 
 
-    //Variables related to the equipment of the player
+    //EQUIPMENT OF THE PLAYER
     [SerializeField] private Item[] _PlayerEquipment = new Item[6];
 
     private void Awake() {
@@ -44,34 +46,49 @@ public class InventoryManager : MonoBehaviour
                 break;
             }
         }
+        if(i != null)
+        {    
+            int slot = 0;
+            switch(i.inventoryUse)
+            {
+                case Item.InventoryUse.SLOT1:
+                    slot = 0;
+                    break;
+                case Item.InventoryUse.SLOT2:
+                    slot = 1;
+                    break;
+                case Item.InventoryUse.SLOT3:
+                    slot = 2;
+                    break;
+                case Item.InventoryUse.SLOT4:
+                    slot = 3;
+                    break;
+                case Item.InventoryUse.ACCESORIES:
+                    slot = 4;
+                    break;
+            }
 
-        int slot = 0;
-        switch(i.inventoryUse)
-        {
-            case Item.InventoryUse.SLOT1:
-                slot = 0;
-                break;
-            case Item.InventoryUse.SLOT2:
-                slot = 1;
-                break;
-            case Item.InventoryUse.SLOT3:
-                slot = 2;
-                break;
-            case Item.InventoryUse.SLOT4:
-                slot = 3;
-                break;
-            case Item.InventoryUse.ACCESORIES:
-                slot = 4;
-                break;
+            if(_PlayerEquipment[slot] != null)
+            {
+                AddToInventory(_PlayerEquipment[slot].id);
+            }
+            _PlayerEquipment[slot] = i;
         }
-
-        if(_PlayerEquipment[slot] != null)
-        {
-            AddToInventory(_PlayerEquipment[slot].id);
-        }
-        _PlayerEquipment[slot] = i;
-
         saveData();
+    }
+
+    public void RemoveEquipment(string id)
+    {
+        int i = 0;
+        foreach(Item itm in _PlayerEquipment)
+        {
+            if(itm.id == id)
+            {
+                _PlayerEquipment[i] = null;
+                break;
+            }
+            i++;
+        }
     }
 
     public void loadData()
