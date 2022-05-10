@@ -20,25 +20,25 @@ public class SaveDataEditor : EditorWindow
         int height = 20;
         if (loaded)
         {
-            //Soft coins.
+            // Soft coins.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Soft Coins", GUILayout.Height(height), GUILayout.Width(200));
             saveData.softCoins = EditorGUILayout.IntField(saveData.softCoins, GUILayout.Height(height), GUILayout.Width(100));
             EditorGUILayout.EndHorizontal();
 
-            //Hard coins.
+            // Hard coins.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Hard Coins", GUILayout.Height(height), GUILayout.Width(200));
             saveData.hardCoins = EditorGUILayout.IntField(saveData.hardCoins, GUILayout.Height(height), GUILayout.Width(100));
             EditorGUILayout.EndHorizontal();
 
-            //Energy.
+            // Energy.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Energy", GUILayout.Height(height), GUILayout.Width(200));
             saveData.energy = EditorGUILayout.IntField(saveData.energy, GUILayout.Height(height), GUILayout.Width(100));
             EditorGUILayout.EndHorizontal();
 
-            //Last Connection.
+            // Last Connection.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Last Connection", GUILayout.Height(height), GUILayout.Width(200));
             saveData.lastConnection = EditorGUILayout.TextField(saveData.lastConnection, GUILayout.Height(height), GUILayout.Width(200)); 
@@ -48,7 +48,7 @@ public class SaveDataEditor : EditorWindow
             GUILayout.Label("Formato: dd/mm/yyyy hh:mm:ss", GUILayout.Height(height), GUILayout.Width(200));
             EditorGUILayout.EndHorizontal();
 
-            //Experience.
+            // Experience.
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Experience", GUILayout.Height(height), GUILayout.Width(200));
             saveData.experience = EditorGUILayout.IntField(saveData.experience, GUILayout.Height(height), GUILayout.Width(100));
@@ -73,6 +73,18 @@ public class SaveDataEditor : EditorWindow
             {
                 saveData.talentsList[i] = EditorGUILayout.IntField(saveData.talentsList[i], GUILayout.Height(height), GUILayout.Width(20));
             }
+            EditorGUILayout.EndHorizontal();
+
+            // Current World.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Current World", GUILayout.Height(height), GUILayout.Width(200));
+            saveData.currentWorld = EditorGUILayout.IntField(saveData.currentWorld, GUILayout.Height(height), GUILayout.Width(100));
+            EditorGUILayout.EndHorizontal();
+
+            // Highest Stage Reached.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Highest stage reached", GUILayout.Height(height), GUILayout.Width(200));
+            saveData.highestStageReached = EditorGUILayout.IntField(saveData.highestStageReached, GUILayout.Height(height), GUILayout.Width(100));
             EditorGUILayout.EndHorizontal();
 
             // //Ejemplo de variable bool

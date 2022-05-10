@@ -176,4 +176,34 @@ public class SaveDataController : MonoBehaviour
             SaveToFile();
         }
     }
+
+    public static int CurrentWorld
+    {
+        get 
+        {
+            CheckInitialized();
+            return saveData.currentWorld;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.currentWorld = value;
+            SaveToFile();
+        }
+    }
+
+    public static int HighestStageReached
+    {
+        get 
+        {
+            CheckInitialized();
+            return saveData.highestStageReached;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.highestStageReached = value;
+            SaveToFile();
+        }
+    }
 }

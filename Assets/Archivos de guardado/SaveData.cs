@@ -5,6 +5,7 @@ using UnityEngine;
 [System.Serializable]
 public class SaveData
 {
+    // Currency
     public int softCoins;
     public int hardCoins;
     public int energy;
@@ -13,10 +14,14 @@ public class SaveData
     // Last Time Connected: dd/mm/yyyy hh/mm/ss
     public string lastConnection;
 
-    //Array of talent
+    // Array of talent
     public int[] talentsList;
     public string inventory;
     public string equipment;
+
+    // Progress
+    public int currentWorld;
+    public int highestStageReached;
 
     // public bool boolExample;
     // public int intExample;

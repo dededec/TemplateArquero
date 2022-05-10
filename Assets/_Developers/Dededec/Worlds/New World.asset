@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae3a9f9dd18ddb6469a0a12dc44aa693, type: 3}
+  m_Name: New World
+  m_EditorClassIdentifier: 
+  name: asdasdas
+  index: 1
+  description: 
+  icon: {fileID: 0}
+  stages: 10
+  maxBosses: 2
+  maxEasyStages: 5
+  maxDifficultStages: 5
+  highestStageReached: 0
+  rewards: []

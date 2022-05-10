@@ -4,12 +4,14 @@ using UnityEngine;
 
 public class TestChapter : MonoBehaviour
 {
-    public Chapter chapter;
+    public World world;
 
     // Start is called before the first frame update
     void Start()
     {
-        chapter.rewards[0].reward.Invoke();
-        chapter.highestStageReached = 5;
+        // world.rewards[0].reward.Invoke();
+        // world.highestStageReached = 5;
+        StageManager.AssignWorld(world);
+        StageManager.Play();
     }
 }

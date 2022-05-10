@@ -5,8 +5,8 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-[CreateAssetMenu(fileName = "New Chapter", menuName = "Chapter")]
-public class Chapter : ScriptableObject
+[CreateAssetMenu(fileName = "New World", menuName = "World")]
+public class World : ScriptableObject
 {    
     [System.Serializable]
     public struct LevelAchievement
@@ -19,11 +19,11 @@ public class Chapter : ScriptableObject
     public string description;
     public Sprite icon;
 
+    public int index;
     public int stages;
-    public int highestStageReached;
-
-    // Referencia a escena de Unity?
-    public SceneAsset gameScene;
+    public int maxBosses;
+    public int maxEasyStages;
+    public int maxDifficultStages;
 
     // Referencia a recompensas de llegar al nivel tal y cual
     public List<LevelAchievement> rewards;
