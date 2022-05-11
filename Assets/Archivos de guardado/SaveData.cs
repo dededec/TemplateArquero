@@ -21,7 +21,7 @@ public class SaveData
 
     // Progress
     public int currentWorld;
-    public int highestStageReached;
+    public int[] highestStageReached;
 
     // public bool boolExample;
     // public int intExample;
@@ -37,6 +37,8 @@ public class SaveData
         talentsList = new int[12];
         inventory = "";
         equipment = "";
+        currentWorld = 0;
+        highestStageReached = new int[12];
         // boolArrayExample = new bool[6];
     }
 }

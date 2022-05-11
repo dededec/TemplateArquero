@@ -3,13 +3,42 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class StageManager
+public class WorldManager
 {
+    // #region Singleton
+
+    // private static WorldManager _instance;
+
+    // public static WorldManager Instance
+    // {
+    //     get
+    //     {
+    //         return _instance;
+    //     }
+    // }
+
+    // private void Awake()
+    // {
+    //     DontDestroyOnLoad(this);
+
+    //     if (_instance == null)
+    //     {
+    //         _instance = this;
+    //     }
+    //     else
+    //     {
+    //         Destroy(gameObject);
+    //     }
+    // }
+
+    // #endregion
+
     private const string EasyType = "_0_";
     private const string DifficultType = "_1_";
     private const string BossType = "_2_";
-
     private const float EasyProbability = 0.5f;
+
+    // [SerializeField] private static List<World> _worlds;
 
     private static int _worldIndex;
     public static int _worldStages;
@@ -32,10 +61,10 @@ public class StageManager
         _worldIndex = world.index;
         _worldStages = world.stages;
 
-        if(SaveDataController.CurrentWorld != _worldIndex)
+        if (SaveDataController.CurrentWorld != _worldIndex)
         {
             SaveDataController.CurrentWorld = _worldIndex;
-            SaveDataController.HighestStageReached = 0; // ! CAMBIAH
+            // SaveDataController.HighestStageReached = 0;
         }
 
         // ? Esto se podría hacer de otra forma?
@@ -43,8 +72,10 @@ public class StageManager
         _maxBosses = world.maxBosses;
         _maxEasyStages = world.maxEasyStages;
         _maxDifficultStages = world.maxDifficultStages;
-        _angelStage =  _worldIndex.ToString() + "_3_" + "0";
+        _angelStage = _worldIndex.ToString() + "_3_" + "0";
     }
+
+    // public static void AssignWorld(int index) => AssignWorld(_worlds[index]);
 
     public static void Play()
     {
@@ -63,24 +94,26 @@ public class StageManager
 
     public static void AdvanceStage()
     {
-        if (_currentStageNumber >= _worldStages-1)
+        _gameFlowController = GameObject.FindObjectOfType<GameFlowController>();
+        if (_gameFlowController == null)
+        {
+            Debug.LogError("Error: GameFlowController no encontrado.");
+            return;
+        }
+
+        if (_currentStageNumber >= _worldStages - 1)
         {
             // Llegamos al final del mundo
             Debug.Log("Se ha llegado al final del mundo.");
+            _gameFlowController.LoadScene("MainMenu");
         }
         else
         {
-            _gameFlowController = GameObject.FindObjectOfType<GameFlowController>();
-            if(_gameFlowController == null)
-            {
-                Debug.LogError("Error: GameFlowController no encontrado.");
-                return;
-            }
-
             ++_currentStageNumber;
-            if(_currentStageNumber > SaveDataController.HighestStageReached)
+            if (_currentStageNumber > SaveDataController.HighestStageReached[_worldIndex])
             {
-                SaveDataController.HighestStageReached = _currentStageNumber;
+                Debug.Log("Se actualiza el highest stage: (" + _worldIndex + ", " + _currentStageNumber + ")");
+                SaveDataController.HighestStageReached[_worldIndex] = _currentStageNumber;
             }
 
             var stageUnit = _currentStageNumber % 10;
@@ -101,7 +134,7 @@ public class StageManager
                 stageToLoad = pickStage();
             }
 
-            if(string.IsNullOrEmpty(stageToLoad))
+            if (string.IsNullOrEmpty(stageToLoad))
             {
                 Debug.LogError("Error: No hay stage que cargar.");
                 return;

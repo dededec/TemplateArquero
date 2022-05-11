@@ -192,7 +192,7 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
-    public static int HighestStageReached
+    public static int[] HighestStageReached
     {
         get 
         {

@@ -13,12 +13,11 @@ MonoBehaviour:
   m_Name: New World
   m_EditorClassIdentifier: 
   name: asdasdas
-  index: 1
   description: 
   icon: {fileID: 0}
+  index: 0
   stages: 10
   maxBosses: 2
   maxEasyStages: 5
   maxDifficultStages: 5
-  highestStageReached: 0
   rewards: []

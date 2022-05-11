@@ -8,6 +8,6 @@ public class SelectNextStage : MonoBehaviour
 {
     public void AdvanceStage()
     {
-        StageManager.AdvanceStage();
+        WorldManager.AdvanceStage();
     }
 }

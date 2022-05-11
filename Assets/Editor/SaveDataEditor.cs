@@ -83,8 +83,11 @@ public class SaveDataEditor : EditorWindow
 
             // Highest Stage Reached.
             EditorGUILayout.BeginHorizontal();
-            GUILayout.Label("Highest stage reached", GUILayout.Height(height), GUILayout.Width(200));
-            saveData.highestStageReached = EditorGUILayout.IntField(saveData.highestStageReached, GUILayout.Height(height), GUILayout.Width(100));
+            GUILayout.Label("Highest Stage Reached", GUILayout.Height(height), GUILayout.Width(200));
+            for (int i = 0; i < saveData.highestStageReached.Length; i++)
+            {
+                saveData.highestStageReached[i] = EditorGUILayout.IntField(saveData.highestStageReached[i], GUILayout.Height(height), GUILayout.Width(20));
+            }
             EditorGUILayout.EndHorizontal();
 
             // //Ejemplo de variable bool
