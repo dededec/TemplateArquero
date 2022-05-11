@@ -39,6 +39,8 @@ public class Item : ScriptableObject
     public Rarity rarity;
     public new string name;
     public string description;
+    public int level;
+    public float multiplier;
     public Sprite icon;
 
     public void init(string id, string name, TypeOfReward typeOfReward, InventoryUse inventoryUse, Rarity rarity, string description, string icon)
@@ -49,6 +51,8 @@ public class Item : ScriptableObject
         this.rarity = rarity;
         this.name = name;
         this.description = description;
+        // this.level = level;
+        // this.multiplier = multiplier;
         // TODO read item icon
     }
 

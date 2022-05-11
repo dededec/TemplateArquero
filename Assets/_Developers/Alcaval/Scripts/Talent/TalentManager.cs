@@ -36,7 +36,7 @@ public class TalentManager : MonoBehaviour
         if(userCanPay)
         {
             System.Random r = new System.Random();
-            int rTalentIndex = r.Next(0, _talentList.Length - 1);
+            int rTalentIndex = r.Next(0, _talentList.Length);
 
             _talentList[rTalentIndex].gainLevel();
 
@@ -73,7 +73,7 @@ public class TalentManager : MonoBehaviour
 
         int[] value = SaveDataController.TalentsList;
 
-        for(int i = 0; i < value.Length - 1; i++)
+        for(int i = 0; i < value.Length; i++)
         {
             _talentList[i].talentLevel = value[i];
         }
@@ -83,7 +83,7 @@ public class TalentManager : MonoBehaviour
     {
         int[] value = new int[12];
 
-        for(int i = 0; i < value.Length - 1; i++)
+        for(int i = 0; i < value.Length; i++)
         {
             value[i] = _talentList[i].talentLevel; 
         }
