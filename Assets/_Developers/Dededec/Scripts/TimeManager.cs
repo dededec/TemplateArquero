@@ -19,6 +19,19 @@ public class TimeManager : MonoBehaviour
         }
     }
 
+    public System.DateTime LastLoginRewardTime
+    {
+        get
+        {
+            return System.DateTime.Parse(SaveDataController.LastLoginRewardTime);
+        }
+
+        set
+        {
+            SaveDataController.LastLoginRewardTime = value.ToString();
+        }
+    }
+
     #endregion
 
     private void OnApplicationQuit()
@@ -29,5 +42,10 @@ public class TimeManager : MonoBehaviour
     public System.TimeSpan TimeSinceLastConnection()
     {
         return System.DateTime.Now - LastConnection;
+    }
+
+    public System.TimeSpan TimeSinceLastDailyLoginReward()
+    {
+        return System.DateTime.Now - LastLoginRewardTime;
     }
 }

@@ -23,6 +23,9 @@ public class SaveData
     public int currentWorld;
     public int[] highestStageReached;
 
+    // Daily Login Reward
+    public string lastLoginRewardTime;
+
     // public bool boolExample;
     // public int intExample;
     // public string stringExample;

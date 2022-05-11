@@ -54,6 +54,32 @@ public class WorldManager
 
     private static int _currentStageNumber;
 
+    public static int CurrentWorld
+    {
+        get
+        {
+            return SaveDataController.CurrentWorld;
+        }
+
+        set
+        {
+            SaveDataController.CurrentWorld = value;
+        }
+    }
+
+    public static int[] HighestStageReached
+    {
+        get
+        {
+            return SaveDataController.HighestStageReached;
+        }
+
+        set
+        {
+            SaveDataController.HighestStageReached = value;
+        }
+    }
+
     public static void AssignWorld(World world)
     {
         // Asignamos cosas del mundo
@@ -61,10 +87,10 @@ public class WorldManager
         _worldIndex = world.index;
         _worldStages = world.stages;
 
-        if (SaveDataController.CurrentWorld != _worldIndex)
+        if (CurrentWorld != _worldIndex)
         {
-            SaveDataController.CurrentWorld = _worldIndex;
-            // SaveDataController.HighestStageReached = 0;
+            CurrentWorld = _worldIndex;
+            // HighestStageReached = 0;
         }
 
         // ? Esto se podría hacer de otra forma?
@@ -110,10 +136,10 @@ public class WorldManager
         else
         {
             ++_currentStageNumber;
-            if (_currentStageNumber > SaveDataController.HighestStageReached[_worldIndex])
+            if (_currentStageNumber > HighestStageReached[_worldIndex])
             {
                 Debug.Log("Se actualiza el highest stage: (" + _worldIndex + ", " + _currentStageNumber + ")");
-                SaveDataController.HighestStageReached[_worldIndex] = _currentStageNumber;
+                HighestStageReached[_worldIndex] = _currentStageNumber;
             }
 
             var stageUnit = _currentStageNumber % 10;

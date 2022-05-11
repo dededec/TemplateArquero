@@ -57,6 +57,8 @@ public class SaveDataController : MonoBehaviour
         return outSb.ToString();
     }
 
+    #region Currency
+
     public static int SoftCoins
     {
         get 
@@ -102,6 +104,24 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
+    public static int Experience
+    {
+        get 
+        {
+            CheckInitialized();
+            return saveData.experience;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.experience = value;
+            SaveToFile();
+        }
+    }
+
+    #endregion
+
+
     public static string LastConnection
     {
         get
@@ -117,20 +137,9 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
-    public static int Experience
-    {
-        get 
-        {
-            CheckInitialized();
-            return saveData.experience;
-        }
-        set
-        {
-            CheckInitialized();
-            saveData.experience = value;
-            SaveToFile();
-        }
-    }
+    
+
+    #region Array of talents
 
     public static int[] TalentsList
     {
@@ -177,6 +186,10 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
+    #endregion
+
+    #region Progress
+
     public static int CurrentWorld
     {
         get 
@@ -203,6 +216,24 @@ public class SaveDataController : MonoBehaviour
         {
             CheckInitialized();
             saveData.highestStageReached = value;
+            SaveToFile();
+        }
+    }
+
+    #endregion
+
+
+    public static string LastLoginRewardTime
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.lastLoginRewardTime;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.lastLoginRewardTime = value;
             SaveToFile();
         }
     }
