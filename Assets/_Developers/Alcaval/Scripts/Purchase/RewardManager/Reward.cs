@@ -8,7 +8,19 @@ public class Reward
     #region Fields
  
     public string idItemRewarded;
-    public int ammount;
+    public int amount;
         
     #endregion
+
+    public Reward(string id, int amount)
+    {
+        this.idItemRewarded = id;
+        this.amount = amount;
+    }
+
+    public Reward()
+    {
+        this.idItemRewarded = "";
+        this.amount = 0;
+    }
 }

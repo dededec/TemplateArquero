@@ -15,15 +15,15 @@ public class RewardManager : MonoBehaviour
             switch(RewardedItem.typeOfReward)
             {
                 case Item.TypeOfReward.HARDCOIN:
-                    EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.ammount);
+                    EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.amount);
                     Debug.Log("Hardcoin rewarded");
                     break;
                 case Item.TypeOfReward.SOFTCOIN:
-                    EconomyManager.Add(EconomyManager.CoinType.SOFTCOIN, r.ammount);
+                    EconomyManager.Add(EconomyManager.CoinType.SOFTCOIN, r.amount);
                     Debug.Log("Softcoin rewarded");
                     break;
                 case Item.TypeOfReward.ENERGY:
-                    EconomyManager.Add(EconomyManager.CoinType.ENERGY, r.ammount);
+                    EconomyManager.Add(EconomyManager.CoinType.ENERGY, r.amount);
                     Debug.Log("Energy rewarded");
                     break;
                 case Item.TypeOfReward.EQUIPMENT:

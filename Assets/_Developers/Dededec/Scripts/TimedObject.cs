@@ -4,24 +4,24 @@ using UnityEngine;
 
 public abstract class TimedObject : MonoBehaviour
 {
-    /*
-    Qué necesito:
-    - El intervalo de tiempo entre el que sucede lo que tenga que suceder
-    - Una función abstracta en la que se introduzca el comportamiento que tiene
-    que suceder entre intervalos.
-    */
-
-    [SerializeField] protected float _intervalHours, _intervalMinutes, _intervalSeconds;
+    [Header("Interval Settings")]
+    [SerializeField] protected float _intervalDays;
+    [SerializeField] protected float _intervalHours;
+    [SerializeField] protected float _intervalMinutes; 
+    [SerializeField] protected float _intervalSeconds;
+    [SerializeField] protected TimeManager _timeManager;
     protected float _timeElapsed;
+    protected float _totalSeconds;
 
     private void Start() 
     {
-        _intervalSeconds += _intervalMinutes * 60f + _intervalHours * 24f * 60f;    
+        _totalSeconds = _intervalSeconds + _intervalMinutes * 60f + _intervalHours * 3600f + _intervalDays * 86400f;
+        Initialize();    
     }
 
     protected void Update() 
     {
-        if(_timeElapsed < _intervalSeconds)
+        if(_timeElapsed < _totalSeconds)
         {
             _timeElapsed += Time.deltaTime;
         }    
@@ -33,4 +33,5 @@ public abstract class TimedObject : MonoBehaviour
     }
 
     protected abstract void OnIntervalCompleted();
+    protected abstract void Initialize();
 }
