@@ -6,7 +6,6 @@ using System;
 
 /*
 * Once you have a GameObject in the scene with this script you can access all the functionalities of the inventory and the equipment  
-* In here we also do the loading and saving of all the data.
 * It is needed to provide a csv file called ItemDatabase following the example at "/Resources"
 */
 public class InventoryManager : MonoBehaviour
@@ -128,7 +127,6 @@ public class InventoryManager : MonoBehaviour
 
     public void loadData()
     {
-        
         _EveryItemList = _itemDatabase.GetInventoryItems();
 
         string[] inventoryList = SaveDataController.Inventory.Split(";");
@@ -150,7 +148,6 @@ public class InventoryManager : MonoBehaviour
         string[] equipmentList = SaveDataController.Equipment.Split(";");
         for(int j = 0; j < equipmentList.Length - 1; j++)
         {
-            print(j);
             string[] idLevelMult = equipmentList[j].Split("-");
             foreach(Item i in _EveryItemList)
             {

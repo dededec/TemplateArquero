@@ -3,3 +3,6 @@ id,ItemName,typeOfReward,inventoryUse,rarity,description,icon
 1,Casco,EQUIPMENT,SLOT2,COMMON,Refachero,path
 2,Peto,EQUIPMENT,SLOT1,COMMON,Tal,path
 3,Chanclas,EQUIPMENT,SLOT4,RARE,Facherin,path
+hc,Hardcoin,HARDCOIN,PAYMENT,NONE,Dinero,path
+sc,Softcoin,SOFTCOIN,PAYMENT,NONE,Dinero,path
+ec,Energy,ENERGY,PAYMENT,NONE,Dinero,path

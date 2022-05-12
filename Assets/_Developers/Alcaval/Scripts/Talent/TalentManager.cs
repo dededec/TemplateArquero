@@ -12,7 +12,7 @@ public class TalentManager : MonoBehaviour
 
     // ? TALENT ORDER: In case we have a spreadsheet to follow a talent order
     private List<Talent> _talentOrder = new List<Talent>();
-    public int _lastTalentObtainedIndex;
+    private int _timesTalentsUpgraded;
 
     [System.Serializable]
     public class Talent{
@@ -41,29 +41,6 @@ public class TalentManager : MonoBehaviour
             _talentList[rTalentIndex].gainLevel();
 
             saveData();    
-        }
-    }
-
-    public void GiveNextTalent()
-    {
-        bool userCanPay = true;
-        userCanPay = EconomyManager.Pay(_paymentMethod, price);
-
-        if(userCanPay)
-        {
-            _talentOrder[_lastTalentObtainedIndex].LastLevelGained = false;
-            _lastTalentObtainedIndex++;
-            _talentOrder[_lastTalentObtainedIndex].LastLevelGained = true;
-
-            foreach(Talent t in _talentList)
-            {
-                if(t.talentName == _talentOrder[_lastTalentObtainedIndex].talentName)
-                {
-                    t.gainLevel();
-                }
-            }
-
-            saveData();
         }
     }
 

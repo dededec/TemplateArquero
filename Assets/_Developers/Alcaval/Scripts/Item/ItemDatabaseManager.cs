@@ -10,7 +10,9 @@ public class ItemDatabaseManager : MonoBehaviour
     // LIST OF EVERY ITEM IN THE GAME, LOADED BY A CSV
     [SerializeField] private List<Item> _EveryItemList;
 
-    private void Awake() {
+    private void Awake() 
+    {
+        DontDestroyOnLoad(this);
         loadData();
     }
 
