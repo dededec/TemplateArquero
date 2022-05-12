@@ -3845,14 +3845,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1369255695}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6a20e1f7f8532b043ae25050b3070fe2, type: 3}
+  m_Script: {fileID: 11500000, guid: 1e5a078ac4b6a824b803cdc964e93276, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _intervalDays: 0
   _intervalHours: 0
   _intervalMinutes: 0
   _intervalSeconds: 5
-  _rewardManager: {fileID: 0}
   _timeManager: {fileID: 457736597}
+  _rewardManager: {fileID: 0}
 --- !u!1 &1407901043
 GameObject:
   m_ObjectHideFlags: 0
@@ -5067,11 +5068,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c091ab3f22004e54e86e21c625215938, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _timeLeft: 0
-  _timeToRecharge: 600
+  _intervalDays: 7
+  _intervalHours: 6
+  _intervalMinutes: 3
+  _intervalSeconds: 5
+  _timeManager: {fileID: 457736597}
   _energyRecharged: 1
   _maxEnergy: 20
-  _timeManager: {fileID: 457736597}
 --- !u!1 &2110444467
 GameObject:
   m_ObjectHideFlags: 0

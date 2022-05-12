@@ -222,18 +222,17 @@ public class SaveDataController : MonoBehaviour
 
     #endregion
 
-
-    public static string LastLoginRewardTime
+    public static int CurrentDailyLoginReward
     {
-        get
+        get 
         {
             CheckInitialized();
-            return saveData.lastLoginRewardTime;
+            return saveData.currentDailyLoginReward;
         }
         set
         {
             CheckInitialized();
-            saveData.lastLoginRewardTime = value;
+            saveData.currentDailyLoginReward = value;
             SaveToFile();
         }
     }

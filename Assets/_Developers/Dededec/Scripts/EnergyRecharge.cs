@@ -2,6 +2,48 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+public class EnergyRecharge : TimedObject
+{
+    [Header("Recharge Settings")]
+    [Tooltip("Amount of energy added when an interval is completed.")]
+    [SerializeField] private int _energyRecharged;
+
+    [Tooltip("Maximum energy obtained passively.")]
+    [SerializeField] private int _maxEnergy;
+
+    protected override void Initialize()
+    {
+        // Miramos cuantas veces se ha completado la recarga mientras no se contaba.
+        int timeLoops = (int) (_timeManager.TimeSinceLastConnection().TotalSeconds / _totalSeconds);
+        float resto = ((float)_timeManager.TimeSinceLastConnection().TotalSeconds) % _totalSeconds;
+
+        for(int i=0; i < timeLoops; ++i)
+        {
+            OnIntervalCompleted();
+        }
+
+        _timeElapsed = resto;
+    }
+
+    protected override void OnIntervalCompleted()
+    {
+        if(EconomyManager.Energy < _maxEnergy)
+        {
+            if(EconomyManager.Energy + _energyRecharged > _maxEnergy)
+            {
+                // Llenamos la energía al máximo sin pasarnos del límite
+                EconomyManager.Add(EconomyManager.CoinType.ENERGY, _maxEnergy - EconomyManager.Energy);
+            }
+            else
+            {
+                EconomyManager.Add(EconomyManager.CoinType.ENERGY, _energyRecharged);
+            }
+
+            Debug.Log("Energia: " + EconomyManager.Energy);
+        }
+    }
+}
+
 // public class EnergyRecharge : MonoBehaviour
 // {
 //     [Tooltip("Time left in seconds until energy recharges.")]
@@ -72,45 +114,3 @@ using UnityEngine;
 //         }
 //     }
 // }
-
-public class EnergyRecharge : TimedObject
-{
-    [Header("Recharge Settings")]
-    [Tooltip("Amount of energy added when an interval is completed.")]
-    [SerializeField] private int _energyRecharged;
-
-    [Tooltip("Maximum energy obtained passively.")]
-    [SerializeField] private int _maxEnergy;
-
-    protected override void Initialize()
-    {
-        // Miramos cuantas veces se ha completado la recarga mientras no se contaba.
-        int timeLoops = (int) (_timeManager.TimeSinceLastConnection().TotalSeconds / _totalSeconds);
-        float resto = ((float)_timeManager.TimeSinceLastConnection().TotalSeconds) % _totalSeconds;
-
-        for(int i=0; i < timeLoops; ++i)
-        {
-            OnIntervalCompleted();
-        }
-
-        _timeElapsed = resto;
-    }
-
-    protected override void OnIntervalCompleted()
-    {
-        if(EconomyManager.Energy < _maxEnergy)
-        {
-            if(EconomyManager.Energy + _energyRecharged > _maxEnergy)
-            {
-                // Llenamos la energía al máximo sin pasarnos del límite
-                EconomyManager.Add(EconomyManager.CoinType.ENERGY, _maxEnergy - EconomyManager.Energy);
-            }
-            else
-            {
-                EconomyManager.Add(EconomyManager.CoinType.ENERGY, _energyRecharged);
-            }
-
-            Debug.Log("Energia: " + EconomyManager.Energy);
-        }
-    }
-}
