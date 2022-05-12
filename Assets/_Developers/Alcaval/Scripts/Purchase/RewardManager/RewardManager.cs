@@ -4,12 +4,15 @@ using UnityEngine;
 
 public class RewardManager : MonoBehaviour
 {
+    [SerializeField] private ItemDatabaseManager _itemDatabaseManager;
+    [SerializeField] private InventoryManager _inventoryManager;
+
     public void GiveReward(List<Reward> rewards)
     {
         foreach(Reward r in rewards)
         {
-            Debug.Log(r.RewardedItem.name + " " + r.ammount);
-            switch(r.RewardedItem.typeOfReward)
+            Item RewardedItem = _itemDatabaseManager.GetItem(r.idItemRewarded);
+            switch(RewardedItem.typeOfReward)
             {
                 case Item.TypeOfReward.HARDCOIN:
                     EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.ammount);
@@ -25,6 +28,7 @@ public class RewardManager : MonoBehaviour
                     break;
                 case Item.TypeOfReward.EQUIPMENT:
                     // Añadir tal objeto al inventario por ejemplo un objeto random o algo
+                    _inventoryManager.AddToInventory(r.idItemRewarded);
                     Debug.Log("Other rewarded");
                     break;
             }

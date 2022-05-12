@@ -7,7 +7,7 @@ public class Reward
 {
     #region Fields
  
-    public Item RewardedItem;
+    public string idItemRewarded;
     public int ammount;
         
     #endregion

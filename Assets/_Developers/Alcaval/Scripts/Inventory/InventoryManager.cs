@@ -3,10 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+
+/*
+* Once you have a GameObject in the scene with this script you can access all the functionalities of the inventory and the equipment  
+* In here we also do the loading and saving of all the data.
+* It is needed to provide a csv file called ItemDatabase following the example at "/Resources"
+*/
 public class InventoryManager : MonoBehaviour
 {
-    // LIST OF EVERY ITEM IN THE GAME, LOADED BY A CSV
-    [SerializeField] public List<Item> _EveryItemList;
+    
+    [SerializeField] private ItemDatabaseManager _itemDatabase;
+    [SerializeField] private List<Item> _EveryItemList;
 
     //INVENTORY
     [SerializeField] public List<Item> _PlayerItems; 
@@ -18,6 +25,7 @@ public class InventoryManager : MonoBehaviour
         loadData();
     }
 
+    // * Call when button pressed to merge a piece of equipment with other two of the same type of item
     public void MergeItems(Item receptor, List<Item> items)
     {
         foreach(Item i in items)
@@ -35,6 +43,7 @@ public class InventoryManager : MonoBehaviour
         // ? Habria que decidir como se aumenta el multiplicador
         receptor.multiplier += 1;
     }
+
 
     public void LevelUp(Item receptor)
     {
@@ -119,31 +128,8 @@ public class InventoryManager : MonoBehaviour
 
     public void loadData()
     {
-        _EveryItemList.Clear();
-        List<Dictionary<string, object>> data = CSVReader.Read("ItemDatabase");
-
-        for(int i = 0; i < data.Count; i++)
-        {
-            string id = data[i]["id"].ToString();
-
-            string itemName = data[i]["ItemName"].ToString();
-
-            Item.TypeOfReward typeOfReward;
-            Enum.TryParse(data[i]["typeOfReward"].ToString(), out typeOfReward);
-
-            Item.InventoryUse inventoryUse;
-            Enum.TryParse(data[i]["inventoryUse"].ToString(), out inventoryUse);
-
-            Item.Rarity rarity;
-            Enum.TryParse(data[i]["rarity"].ToString(), out rarity);
-
-            string description = data[i]["description"].ToString();
-
-            string iconPath = data[i]["icon"].ToString();
-            Item item = ScriptableObject.CreateInstance<Item>();
-            item.init(id, itemName, typeOfReward, inventoryUse, rarity, description, iconPath);
-            _EveryItemList.Add(item);
-        }
+        
+        _EveryItemList = _itemDatabase.GetInventoryItems();
 
         string[] inventoryList = SaveDataController.Inventory.Split(";");
         foreach(string s in inventoryList)
