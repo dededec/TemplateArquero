@@ -4,21 +4,17 @@ using UnityEngine;
 
 public class TalentManager : MonoBehaviour
 {
-
     [SerializeField] private EconomyManager.CoinType _paymentMethod;
     [SerializeField] private int price = 100;
     // ? Talent list that we will have to save, or at least save its data somehow and load it back here
     [SerializeField] private Talent[] _talentList = new Talent[12];
-
-    // ? TALENT ORDER: In case we have a spreadsheet to follow a talent order
-    private List<Talent> _talentOrder = new List<Talent>();
+    [SerializeField] private int _maxLevel = 3;
     private int _timesTalentsUpgraded;
 
     [System.Serializable]
     public class Talent{
         [SerializeField] public string talentName;
         [SerializeField] public int talentLevel;
-        public bool LastLevelGained;
 
         public void gainLevel() => talentLevel++;
     }
@@ -31,23 +27,55 @@ public class TalentManager : MonoBehaviour
     public void GiveRandomTalent()
     {
         bool userCanPay = true;
-        userCanPay = EconomyManager.Pay(_paymentMethod, price);
-
-        if(userCanPay)
+        bool completed = true;
+        
+        foreach(Talent t in _talentList)
         {
-            System.Random r = new System.Random();
-            int rTalentIndex = r.Next(0, _talentList.Length);
+            if(t.talentLevel != _maxLevel)
+            {
+                completed = false;
+                break;
+            }
+        }
 
-            _talentList[rTalentIndex].gainLevel();
-
+        if(!completed) userCanPay = EconomyManager.Pay(_paymentMethod, price);
+        if(userCanPay && !completed)
+        {
+            bool upgraded = selectRandomTalent();
+            while(!upgraded) upgraded = selectRandomTalent();
             saveData();    
         }
     }
 
+    private bool selectRandomTalent()
+    {
+        float rand = Random.value;
+        System.Random r = new System.Random();
+        int rTalentIndex = 0;
+
+        if (rand <= .5f)
+        {
+            rTalentIndex = r.Next(0, 4);
+        }
+        else if(rand <= .8f)
+        {
+            rTalentIndex = r.Next(4, 8);
+        }
+        else
+        {
+            rTalentIndex = r.Next(8, 12);
+        }
+
+        if(_talentList[rTalentIndex].talentLevel < _maxLevel)
+        {
+            _talentList[rTalentIndex].gainLevel();
+            return true;
+        }
+        return false;
+    }   
+
     public void loadData()
     {
-        //TODO Load CSV of talent order in case we choose that route
-
         int[] value = SaveDataController.TalentsList;
 
         for(int i = 0; i < value.Length; i++)
