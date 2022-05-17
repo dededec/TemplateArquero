@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using UnityEngine.UI;
 
 
 /*
@@ -22,6 +23,7 @@ public class InventoryManager : MonoBehaviour
 
     private void Awake() {
         loadData();
+        setBag();
     }
 
     // * Call when button pressed to merge a piece of equipment with other two of the same type of item
@@ -64,6 +66,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         _PlayerItems.Add(i);
+        setBag();
         saveData();
     }
 
@@ -108,6 +111,7 @@ public class InventoryManager : MonoBehaviour
 
             _PlayerEquipment[slot] = i;
         }
+        setBag();
         saveData();
     }
 
@@ -182,5 +186,27 @@ public class InventoryManager : MonoBehaviour
                 SaveDataController.Equipment += _PlayerEquipment[i].id + "-" + _PlayerEquipment[i].level + "-" + _PlayerEquipment[i].multiplier +";";
             }
         }
+    }
+
+    [SerializeField] GameObject equipmentButton;
+    [SerializeField] GridLayoutGroup gridLayoutGroup;
+
+    private void setBag()
+    {
+        foreach(Transform t in gridLayoutGroup.transform)
+        {
+            Destroy(t.gameObject);
+        }
+
+        foreach(Item i in _PlayerItems)
+        {
+            GameObject btn;
+            btn = Instantiate(equipmentButton);
+            btn.GetComponent<Button>().onClick.AddListener(delegate { AssignEquipment(i.id); });
+            btn.transform.SetParent(gridLayoutGroup.transform);
+            btn.GetComponent<RectTransform>().localScale = Vector3.one;
+
+        }
+
     }
 }
