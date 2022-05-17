@@ -42,8 +42,12 @@ public class SaveData
         talentsList = new int[12];
         inventory = "";
         equipment = "";
+
         currentWorld = 0;
         highestStageReached = new int[12];
-        // boolArrayExample = new bool[6];
+
+        currentDailyLoginReward = 0;
+
+        isAchievementCompleted = new bool[15];
     }
 }

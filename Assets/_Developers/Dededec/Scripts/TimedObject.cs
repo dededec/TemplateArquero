@@ -37,5 +37,10 @@ public abstract class TimedObject : MonoBehaviour
     }
 
     protected abstract void OnIntervalCompleted();
+
+    
+    // <summary>
+    // Función ejecutada en el Start de TimedObject
+    // </summary>
     protected abstract void Initialize();
 }

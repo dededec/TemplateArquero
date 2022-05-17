@@ -236,4 +236,20 @@ public class SaveDataController : MonoBehaviour
             SaveToFile();
         }
     }
+
+    public static bool[] isAchievementCompleted
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.isAchievementCompleted;
+        }
+
+        set
+        {
+            CheckInitialized();
+            saveData.isAchievementCompleted = value;
+            SaveToFile();
+        }
+    }
 }

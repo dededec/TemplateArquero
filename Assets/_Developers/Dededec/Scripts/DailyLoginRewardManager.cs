@@ -10,6 +10,7 @@ public class DailyLoginRewardManager : TimedObject
     [Header("Reward Settings")]
     [SerializeField] private RewardManager _rewardManager;
     [SerializeField] private List<List<Reward>> _rewards;
+    private bool _isRewardGiven = false;
     
     private int CurrentDailyLoginReward
     {
@@ -26,13 +27,20 @@ public class DailyLoginRewardManager : TimedObject
 
     protected override void Initialize()
     {
+        /*
+        Esto puede que no haga falta
+        porque son siempre las mismas recompensas.
+        */
         ReadCSV();
 
         System.TimeSpan timeSpan = _timeManager.TimeSinceLastConnection();
+        // Miramos cuántos días han pasado para ver cuál le toca coger.
         if (timeSpan.TotalDays >= 1f)
         {
-            // Miramos cuántos días han pasado para ver cuál le toca coger.
-            CurrentDailyLoginReward += (int)timeSpan.TotalDays;
+            for(int i=0; i<timeSpan.TotalDays; ++i)
+            {
+                OnIntervalCompleted();
+            }
         }
     }
 
@@ -50,7 +58,10 @@ public class DailyLoginRewardManager : TimedObject
 
     public void GetDailyReward()
     {
+        if(_isRewardGiven) return;
+
         _rewardManager.GiveReward(_rewards[CurrentDailyLoginReward]);
+        _isRewardGiven = true;
     }
 
     private void ReadCSV()
@@ -82,4 +93,6 @@ public class DailyLoginRewardManager : TimedObject
             dailyLoginRewards.Add(new Reward(id, quantity));
         }
     }
+
+    
 }

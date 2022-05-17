@@ -90,6 +90,15 @@ public class SaveDataEditor : EditorWindow
             }
             EditorGUILayout.EndHorizontal();
 
+            // Completed Achievements.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Achievements", GUILayout.Height(height), GUILayout.Width(200));
+            for (int i = 0; i < saveData.isAchievementCompleted.Length; i++)
+            {
+                saveData.isAchievementCompleted[i] = EditorGUILayout.Toggle(saveData.isAchievementCompleted[i], GUILayout.Height(height), GUILayout.Width(20));
+            }
+            EditorGUILayout.EndHorizontal();
+
             // //Ejemplo de variable bool
             // EditorGUILayout.BeginHorizontal();
             // GUILayout.Label("bool Example", GUILayout.Height(height), GUILayout.Width(200));

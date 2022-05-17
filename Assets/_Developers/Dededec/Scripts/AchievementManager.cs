@@ -14,20 +14,22 @@ public class AchievementManager : MonoBehaviour
 
     private const string CSVFileName = "Achievements";
 
+    [SerializeField] private RewardManager _rewardManager;
+
     [SerializeField] private List<DailyQuestsManager.Quest> _achievements;
 
-    // private bool[] isAchievementCompleted
-    // {
-    //     get
-    //     {
-    //         return SaveDataController.CurrentDailyLoginReward;
-    //     }
+    private bool[] isAchievementCompleted
+    {
+        get
+        {
+            return SaveDataController.isAchievementCompleted;
+        }
 
-    //     set
-    //     {
-    //         SaveDataController.CurrentDailyLoginReward = value;
-    //     }
-    // }
+        set
+        {
+            SaveDataController.isAchievementCompleted = value;
+        }
+    }
 
     private void Start() 
     {
@@ -62,6 +64,32 @@ public class AchievementManager : MonoBehaviour
 
         //     dailyLoginRewards.Add(new Reward(id, quantity));
         // }
+    }
+
+    public void GiveReward(int index)
+    {
+        _rewardManager.GiveReward(_achievements[index].rewards);
+        isAchievementCompleted[index] = true;
+        
+        if(!find(isAchievementCompleted, false))
+        {
+            Debug.LogWarning("No quedan más logros que conseguir");
+        }
+         
+        // ? Si no hay más achievements, qué pasa? Se crean nuevos supongo.
+    }
+
+    private bool find(bool[] array, bool value)
+    {
+        for(int i=0, j=array.Length-1; i <= j; ++i, ++j)
+        {
+            if(array[i] == value || array[j] == value)
+            {
+                return true;
+            }
+        }
+
+        return false;
     }
 
 }
