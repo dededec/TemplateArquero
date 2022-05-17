@@ -16,7 +16,11 @@ public abstract class TimedObject : MonoBehaviour
     private void Start() 
     {
         _totalSeconds = _intervalSeconds + _intervalMinutes * 60f + _intervalHours * 3600f + _intervalDays * 86400f;
-        Initialize();    
+        Initialize();
+        /*
+        ? Debería meter aquí que si ha pasado tiempo desde
+        ? la ultima conexión se hagan OnIntervalCompleted las veces que haga falta?
+        */    
     }
 
     protected void Update() 

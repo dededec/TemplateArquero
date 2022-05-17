@@ -3,21 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class DailyMissionsManager : TimedObject
+// ! Cambiar a Quest en vez de Mission que se entiende mejor
+public class DailyQuestsManager : TimedObject
 {
-    public struct Mission
+    public struct Quest
     {
         // Algo que represente el objetivo a cumplir
-        UnityEvent OnMissionComplete;
+        UnityEvent OnQuestComplete;
         bool completed;
         List<Reward> rewards;
     }
 
-    [SerializeField] private List<Mission> _dailyMissions;
+    [SerializeField] private List<Quest> _dailyQuests;
     private int _currentDay;
 
     protected override void Initialize()
     {
+        /*
+        Necesitamos cargar las misiones, y si ha pasado un día desde la última
+        conexión el usuario puede hacer todas las misiones.
+        */
         throw new System.NotImplementedException();
     }
 
