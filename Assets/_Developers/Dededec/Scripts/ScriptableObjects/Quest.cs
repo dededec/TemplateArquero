@@ -7,20 +7,25 @@ using System.Threading;
 public class Quest : ScriptableObject
 {
 
+    public string id;
+
     // ! Algo que represente el objetivo a cumplir
-    public UnityAction questObjective;
+    public UnityAction OnQuestCompleted;
 
     public List<Reward> rewards;
+
+    public float progress;
 
     public Quest()
     {
         rewards = new List<Reward>();
-        // OnQuestComplete += QuestCompleted();
+        progress = 0f;
     }
 
-    public Quest(UnityAction a)
+    public float AddProgress(float a)
     {
-        questObjective += a;
+        progress += a;
+        return progress;
     }
 
 }
