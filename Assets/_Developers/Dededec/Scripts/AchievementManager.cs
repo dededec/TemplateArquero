@@ -79,6 +79,18 @@ public class AchievementManager : MonoBehaviour
         // ? Si no hay más achievements, qué pasa? Se crean nuevos supongo.
     }
 
+    public void updateProgress(int index, float progress)
+    {
+        foreach(string a in achievementData)
+        {
+            if(a.Split("-")[0] == _achievements[index].id)
+            {
+                a.Split("-")[1] = "" + _achievements[index].AddProgress(progress);
+
+            }
+        }
+    }
+
     private void loadData()
     {
         int index = 0;
