@@ -252,4 +252,20 @@ public class SaveDataController : MonoBehaviour
             SaveToFile();
         }
     }
+
+    public static string DailyQuests
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.dailyQuests;
+        }
+
+        set
+        {
+            CheckInitialized();
+            saveData.dailyQuests = value;
+            SaveToFile();
+        }
+    }
 }

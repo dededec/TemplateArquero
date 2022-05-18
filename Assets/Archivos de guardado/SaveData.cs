@@ -28,6 +28,7 @@ public class SaveData
 
     //public bool[] isAchievementCompleted;
     public string achievements;
+    public string dailyQuests;
 
     // public bool boolExample;
     // public int intExample;
@@ -49,6 +50,30 @@ public class SaveData
 
         currentDailyLoginReward = 0;
 
-        achievements = "a01-0;a02-0;a04-0;";
+        achievements = "";
+        for (int i = 1; i <= 5; ++i)
+        {
+            if (i < 10)
+            {
+                achievements += "a0" + i + "-0;";
+            }
+            else
+            {
+                achievements += "a" + i + "-0;";
+            }
+        }
+
+        dailyQuests = "";
+        for (int i = 1; i <= 20; ++i)
+        {
+            if (i < 10)
+            {
+                dailyQuests += "q0" + i + "-0;";
+            }
+            else
+            {
+                dailyQuests += "q" + i + "-0;";
+            }
+        }
     }
 }

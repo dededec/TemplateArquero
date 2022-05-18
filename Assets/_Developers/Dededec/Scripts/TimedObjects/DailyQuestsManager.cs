@@ -4,12 +4,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-// ! Cambiar a Quest en vez de Mission que se entiende mejor
 public class DailyQuestsManager : TimedObject
 {
     [SerializeField] private List<Quest> _dailyQuests;
     private List<bool> _isQuestDone;
     [SerializeField] private RewardManager _rewardManager;
+    private string[] questData = null;
+
+    public string DailyQuests
+    {
+        get
+        {
+            return SaveDataController.DailyQuests;
+        }
+
+        set
+        {
+            SaveDataController.DailyQuests = value;
+        }
+    }
 
 
     protected override void Initialize()
@@ -20,7 +33,7 @@ public class DailyQuestsManager : TimedObject
         */
 
         // ? ReadCSV();
-
+        questData = DailyQuests.Split(";");
         System.TimeSpan timeSpan = _timeManager.TimeSinceLastConnection();
         if (timeSpan.TotalDays >= 1f)
         {
@@ -32,18 +45,39 @@ public class DailyQuestsManager : TimedObject
     {
         // ? ¿Cambian las misiones?
 
-        // Se reinician las misiones.
-        for (int i = 0; i < _isQuestDone.Count; ++i)
+        foreach(var quest in _dailyQuests)
         {
-            _isQuestDone[i] = false;
+            quest.progress = 0;
         }
     }
 
-    public void QuestCompleted(int index)
+    public void SetProgress(string id, int progress)
     {
-        if(_isQuestDone[index]) return;
+        Quest quest = _dailyQuests.Find(q => q.id == id);
+        if(quest != null)
+        {
+            quest.progress = progress;
+            if(progress >= 100)
+            {
+                QuestCompleted(quest);
+            }
+        }
+    }
 
-        _rewardManager.GiveReward(_dailyQuests[index].rewards);
-        _isQuestDone[index] = true;
+    public void QuestCompleted(string id)
+    {
+        Quest quest = _dailyQuests.Find(quest => quest.id == id);
+        if(quest == null)
+        {
+            Debug.LogError("Error (QuestCompleted): Quest con id ( " + id + " ) no encontrada.");
+            return;
+        }
+        
+        QuestCompleted(quest);
+    }
+
+    public void QuestCompleted(Quest quest)
+    {
+        _rewardManager.GiveReward(quest.rewards);
     }
 }
