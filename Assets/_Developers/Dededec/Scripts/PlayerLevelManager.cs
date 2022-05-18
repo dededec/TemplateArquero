@@ -16,6 +16,7 @@ public class PlayerLevelManager : MonoBehaviour
 
     [Tooltip("Rewards awarded when reaching player level at position i.")]
     List<List<Reward>> _rewardsPerLevel;
+    [SerializeField] RewardManager _rewardManager;
 
     private int _lastLevelReached;
 
@@ -87,7 +88,7 @@ public class PlayerLevelManager : MonoBehaviour
 
         for (int i = aux; i <= _lastLevelReached; ++i)
         {
-            // ! RewardManager.GiveReward(_rewardsPerLevel[i]);
+            _rewardManager.GiveReward(_rewardsPerLevel[i]);
         }
 
         return;
