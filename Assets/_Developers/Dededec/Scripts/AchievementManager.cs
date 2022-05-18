@@ -16,7 +16,7 @@ public class AchievementManager : MonoBehaviour
 
     [SerializeField] private RewardManager _rewardManager;
 
-    [SerializeField] private List<DailyQuestsManager.Quest> _achievements;
+    [SerializeField] private List<Quest> _achievements;
 
     private bool[] isAchievementCompleted
     {

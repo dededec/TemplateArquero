@@ -7,21 +7,6 @@ using UnityEngine.Events;
 // ! Cambiar a Quest en vez de Mission que se entiende mejor
 public class DailyQuestsManager : TimedObject
 {
-    public class Quest
-    {
-        // Algo que represente el objetivo a cumplir
-
-        public UnityAction questObjective;
-        public bool completed;
-        public List<Reward> rewards;
-
-        public Quest()
-        {
-            rewards = new List<Reward>();
-            // OnQuestComplete += QuestCompleted();
-        }
-    }
-
     [SerializeField] private List<Quest> _dailyQuests;
     private List<bool> _isQuestDone;
     [SerializeField] private RewardManager _rewardManager;
