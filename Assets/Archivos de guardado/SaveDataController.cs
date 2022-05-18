@@ -237,18 +237,18 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
-    public static bool[] isAchievementCompleted
+    public static string Achievements
     {
         get
         {
             CheckInitialized();
-            return saveData.isAchievementCompleted;
+            return saveData.achievements;
         }
 
         set
         {
             CheckInitialized();
-            saveData.isAchievementCompleted = value;
+            saveData.achievements = value;
             SaveToFile();
         }
     }

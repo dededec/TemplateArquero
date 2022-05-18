@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System;
 
 public class AchievementManager : MonoBehaviour
 {
@@ -17,23 +18,14 @@ public class AchievementManager : MonoBehaviour
     [SerializeField] private RewardManager _rewardManager;
 
     [SerializeField] private List<Quest> _achievements;
-
-    private bool[] isAchievementCompleted
-    {
-        get
-        {
-            return SaveDataController.isAchievementCompleted;
-        }
-
-        set
-        {
-            SaveDataController.isAchievementCompleted = value;
-        }
-    }
+    private string[] achievementData = null;
+    string achievements = SaveDataController.Achievements;
 
     private void Start() 
     {
         ReadCSV();
+        achievementData = achievements.Split(";");
+        loadData();
     }
 
     private void ReadCSV()
@@ -69,14 +61,46 @@ public class AchievementManager : MonoBehaviour
     public void GiveReward(int index)
     {
         _rewardManager.GiveReward(_achievements[index].rewards);
-        isAchievementCompleted[index] = true;
-        
-        if(!find(isAchievementCompleted, false))
+        foreach(string a in achievementData)
         {
-            Debug.LogWarning("No quedan más logros que conseguir");
+            if(a.Split("-")[0] == _achievements[index].id)
+            {
+                a.Split("-")[1] = "100";
+            }
         }
+        saveData();
+        // isAchievementCompleted[index] = true;
+        
+        // if(!find(isAchievementCompleted, false))
+        // {
+        //     Debug.LogWarning("No quedan más logros que conseguir");
+        // }
          
         // ? Si no hay más achievements, qué pasa? Se crean nuevos supongo.
+    }
+
+    private void loadData()
+    {
+        int index = 0;
+        foreach(string a in achievementData)
+        {
+            if(a.Split("-")[0] == _achievements[index].id)
+            {
+                _achievements[index].progress = float.Parse(a.Split("-")[1]);
+            }
+            index++;
+        }
+    }
+
+    private void saveData()
+    {
+        string aux = "";
+        foreach(string s in achievementData)
+        {
+            aux += s + ";";
+        }
+
+        SaveDataController.Achievements = aux;
     }
 
     private bool find(bool[] array, bool value)

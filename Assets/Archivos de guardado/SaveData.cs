@@ -26,7 +26,8 @@ public class SaveData
     // Daily Login Reward
     public int currentDailyLoginReward;
 
-    public bool[] isAchievementCompleted;
+    //public bool[] isAchievementCompleted;
+    public string achievements;
 
     // public bool boolExample;
     // public int intExample;
@@ -48,6 +49,6 @@ public class SaveData
 
         currentDailyLoginReward = 0;
 
-        isAchievementCompleted = new bool[15];
+        achievements = "a01-0;a02-0;a04-0;";
     }
 }
