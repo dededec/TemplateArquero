@@ -5001,14 +5001,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c0cbed07f769c0f47ba256a9cb73a835, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _selector: {fileID: 1171920360}
-  _scrollScreens: {fileID: 1268612539}
-  _buttons:
-  - {fileID: 42761049}
-  - {fileID: 1440743489}
-  - {fileID: 719113872}
-  - {fileID: 795676560}
-  - {fileID: 779037330}
 --- !u!4 &1965381952
 Transform:
   m_ObjectHideFlags: 0
