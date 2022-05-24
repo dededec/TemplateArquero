@@ -20,7 +20,7 @@ public class CarController : MonoBehaviour
 
     [SerializeField] float driftFactor = 0.95f;
 
-    private Rigidbody2D carRB;
+    private Rigidbody carRB;
 
     //HealthThings
     public int maxHealth = 100;
@@ -45,7 +45,7 @@ public class CarController : MonoBehaviour
         {
             if(carRB == null)
             {
-                carRB = GetComponent<Rigidbody2D>();
+                carRB = GetComponent<Rigidbody>();
             }
             return carRB.velocity;
         }
@@ -53,7 +53,7 @@ public class CarController : MonoBehaviour
 
     private void Awake() 
     {
-        carRB = GetComponent<Rigidbody2D>();
+        carRB = GetComponent<Rigidbody>();
         _carMaterial.color = _originalCar;
         _enemyMaterial.color = _originalTurret;
     }
@@ -95,14 +95,11 @@ public class CarController : MonoBehaviour
 
     private void ApplyEngineForce()
     {
-        velocityUp = Vector2.Dot(transform.up, carRB.velocity);
+        velocityUp = Vector3.Dot(transform.forward, carRB.velocity);
 
         if(velocityUp > maxSpeed && accelerationInput > 0) return;
-        if(velocityUp < -maxSpeed && accelerationInput < 0)
-        {
+        if(velocityUp < -maxSpeed && accelerationInput < 0) return;  
 
-            return;  
-        } 
         if(carRB.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0) return;
 
         if(accelerationInput == 0)
@@ -114,9 +111,8 @@ public class CarController : MonoBehaviour
             carRB.drag = 0;
         }
 
-        Vector2 engineForce = transform.up * accelerationInput * accelerationFactor;
-
-        carRB.AddForce(engineForce, ForceMode2D.Force);
+        Vector3 engineForce = transform.forward * accelerationInput * accelerationFactor;
+        carRB.AddForce(engineForce, ForceMode.Force);
     }
 
     private void ApplySteering()
@@ -124,20 +120,22 @@ public class CarController : MonoBehaviour
         float minSpeed = (carRB.velocity.magnitude / 8);
         minSpeed = Mathf.Clamp01(minSpeed);
 
-        rotationAngle -= steeringInput * turnFactor * minSpeed;
+        rotationAngle += steeringInput * turnFactor * minSpeed;
 
-        carRB.MoveRotation(rotationAngle);
+        Quaternion quat = Quaternion.Euler(0,rotationAngle,0);
+
+        carRB.MoveRotation(quat);
     }
 
     private void KillOrthogonalVelocity()
     {
-        Vector2 forwardVelocity = transform.up * Vector2.Dot(carRB.velocity, transform.up);
-        Vector2 rightVelocity = transform.right * Vector2.Dot(carRB.velocity, transform.right);
+        Vector3 forwardVelocity = transform.forward * Vector3.Dot(carRB.velocity, transform.forward);
+        Vector3 rightVelocity = transform.right * Vector3.Dot(carRB.velocity, transform.right);
 
         carRB.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
-    private float GetLateralVelocity() { return Vector2.Dot(transform.right, carRB.velocity); }
+    private float GetLateralVelocity() { return Vector3.Dot(transform.right, carRB.velocity); }
 
     public bool isCarDrifting(out float latVelocity, out bool isDrifting)
     {
