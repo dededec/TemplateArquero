@@ -2,15 +2,20 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events;
+
 
 public class CarController : MonoBehaviour
 {
-    [SerializeField] private Slider life;
-    [SerializeField] private CMScreenshake cmscreenshake;
+    [Header("Controls")]
+    [SerializeField] private Joystick _joystick;
 
+    private Rigidbody carRB;
+    
     [SerializeField] private float accelerationFactor = 30f;
     [SerializeField] private float turnFactor = 3.5f;
     [SerializeField] private float maxSpeed = 20f;
+    [SerializeField] float driftFactor = 0.95f;
 
     private float accelerationInput = 0;
     private float steeringInput = 0;
@@ -18,16 +23,16 @@ public class CarController : MonoBehaviour
     private float velocityUp = 0;
     private bool backwards = false;
 
-    [SerializeField] float driftFactor = 0.95f;
+    // Pausa
+    private Vector3 _pausedVelocity;
+    private Vector3 _pausedAngularVelocity;
 
-    private Rigidbody carRB;
+    public UnityEvent MoveAbilities;
 
-    //HealthThings
-    public int maxHealth = 100;
-    public float currentHealth = 100f;
-
-    private float lifeMultiplier = 1f;
-    [SerializeField] private mainMenuController _mainMenuController;
+    [Header("UI/VFX")]
+    [SerializeField] private Slider life;
+    [SerializeField] private CMScreenshake cmscreenshake;
+    [SerializeField] private MainMenuController _mainMenuController;
     [SerializeField] private GameObject _gameOverMenu;
 
     [SerializeField] private Material _carMaterial;
@@ -36,6 +41,9 @@ public class CarController : MonoBehaviour
     [SerializeField] private Color _damageColor;
     [SerializeField] private AudioSource _damageAudio;
 
+    //HealthThings
+    public int maxHealth = 100;
+    public float currentHealth = 100f;
     private bool healingC = false;
 
 
@@ -51,19 +59,15 @@ public class CarController : MonoBehaviour
         }
     }
 
+    #region Life Cycle
+
     private void Awake() 
     {
         carRB = GetComponent<Rigidbody>();
         _carMaterial.color = _originalCar;
         _enemyMaterial.color = _originalTurret;
-    }
 
-    // Update is called once per frame
-    void Update()
-    {
-        GetInput();
-
-        if(currentHealth > 0 && !_mainMenuController.paused && !healingC) StartCoroutine(HealCoroutine());
+        GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 
     private void FixedUpdate() 
@@ -78,20 +82,40 @@ public class CarController : MonoBehaviour
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
+        MoveAbilities?.Invoke();
     }
 
-    private void GetInput()
+    private void OnDestroy() 
     {
-        steeringInput = Input.GetAxis("Horizontal");
-        accelerationInput = Input.GetAxis("Vertical");
-        if(accelerationInput > 0)
+        GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
+    }
+
+    private void onGameStateChanged(GameState newGameState)
+    {
+        switch(newGameState)
         {
-            backwards = false;
-        }
-        else{
-            backwards = true;
+            case GameState.Gameplay:
+            ResumeRigidbody();
+            break;
+            case GameState.Paused:
+            PauseRigidbody();
+            break;
+            default:
+            break;
         }
     }
+
+    // Update is called once per frame
+    void Update()
+    {
+        GetInput();
+
+        if(currentHealth > 0 && GameStateManager.instance.CurrentGameState == GameState.Gameplay && !healingC) StartCoroutine(HealCoroutine());
+    }
+
+    #endregion
+
+    #region Private Methods
 
     private void ApplyEngineForce()
     {
@@ -127,6 +151,42 @@ public class CarController : MonoBehaviour
         carRB.MoveRotation(quat);
     }
 
+    private void GetInput()
+    {
+        steeringInput = _joystick.Horizontal;
+        accelerationInput = _joystick.Vertical;
+        
+        // steeringInput = Input.GetAxis("Horizontal");
+        // accelerationInput = Input.GetAxis("Vertical");
+        if(accelerationInput > 0)
+        {
+            backwards = false;
+        }
+        else
+        {
+            backwards = true;
+        }
+    }
+
+    private float GetLateralVelocity() 
+    { 
+        return Vector3.Dot(transform.right, carRB.velocity); 
+    }
+
+    private IEnumerator HealCoroutine()
+    {   
+        if(!isCarDrifting(out float latVelocity, out bool isDrifting))
+        {
+            healingC = true;
+            yield return new WaitForSeconds(1f);
+            print("healing");
+            currentHealth += 1f;
+            life.value += 1f;
+            currentHealth = life.value;
+            healingC = false;
+        }
+    }
+
     private void KillOrthogonalVelocity()
     {
         Vector3 forwardVelocity = transform.forward * Vector3.Dot(carRB.velocity, transform.forward);
@@ -135,7 +195,39 @@ public class CarController : MonoBehaviour
         carRB.velocity = forwardVelocity + rightVelocity * driftFactor;
     }
 
-    private float GetLateralVelocity() { return Vector3.Dot(transform.right, carRB.velocity); }
+    private void PauseRigidbody() 
+    {
+        Debug.Log("Pause with velocity=" + carRB.velocity + " & angularVelocity=" + carRB.angularVelocity);
+        _pausedVelocity = carRB.velocity;
+        _pausedAngularVelocity = carRB.angularVelocity;
+        carRB.isKinematic = true;
+    }
+
+    private void ResumeRigidbody() 
+    {
+        carRB.isKinematic = false;
+        carRB.velocity = _pausedVelocity;
+        carRB.angularVelocity = _pausedAngularVelocity;
+        Debug.Log("Resume with velocity=" + carRB.velocity + " & angularVelocity=" + carRB.angularVelocity);
+    }
+
+    private IEnumerator takeDamageCoroutine()
+    {
+        //Se cambia el color
+        _carMaterial.color = _damageColor;
+        _enemyMaterial.color = _damageColor;
+        _damageAudio.Play();
+        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(false); // Radio
+        yield return new WaitForSeconds(0.5f);
+        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(true); // Radio
+        //Se vuelve a poner
+        _carMaterial.color = _originalCar;
+        _enemyMaterial.color = _originalTurret;
+    }
+
+    #endregion
+
+    #region Public Methods
 
     public bool isCarDrifting(out float latVelocity, out bool isDrifting)
     {
@@ -163,31 +255,6 @@ public class CarController : MonoBehaviour
         StartCoroutine(takeDamageCoroutine());
     }
 
-    IEnumerator HealCoroutine()
-    {   
-        if(!isCarDrifting(out float latVelocity, out bool isDrifting))
-        {
-            healingC = true;
-            yield return new WaitForSeconds(1f);
-            print("healing");
-            currentHealth += 1f;
-            life.value += 1f;
-            currentHealth = life.value;
-            healingC = false;
-        }
-    }
+    #endregion
 
-    IEnumerator takeDamageCoroutine()
-    {
-        //Se cambia el color
-        _carMaterial.color = _damageColor;
-        _enemyMaterial.color = _damageColor;
-        _damageAudio.Play();
-        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(false);
-        yield return new WaitForSeconds(0.5f);
-        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(true);
-        //Se vuelve a poner
-        _carMaterial.color = _originalCar;
-        _enemyMaterial.color = _originalTurret;
-    }
 }

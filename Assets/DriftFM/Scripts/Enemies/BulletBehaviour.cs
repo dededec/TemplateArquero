@@ -19,16 +19,46 @@ namespace LoopJam
         [Tooltip("Bullet speed when created.")]
 	    [SerializeField] private float _speed;
 	    [SerializeField] private float _lifeTime;
+    
+        private Rigidbody _rb;
+        private Vector3 _pausedVelocity;
+        private Vector3 _pausedAngularVelocity;
 
 	  
 	    #endregion
 	  
 	    #region LifeCycle
+
+        private void Awake() 
+        {
+            _rb = GetComponent<Rigidbody>();
+            GameStateManager.instance.onGameStateChanged += onGameStateChanged;
+        }
+
+        private void OnDestroy() 
+        {
+            GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
+        }
+
+        private void onGameStateChanged(GameState newGameState)
+        {
+            switch (GameStateManager.instance.CurrentGameState)
+            {
+                case GameState.Gameplay:
+                ResumeRigidbody();
+                break;
+                case GameState.Paused:
+                PauseRigidbody();
+                break;
+                default:
+                break;
+            }
+        }
 	  
         // Start, OnAwake, Update, etc
         private void OnEnable()   
         {
-            GetComponent<Rigidbody2D>().velocity = transform.right * _speed;
+            GetComponent<Rigidbody>().velocity = transform.forward * _speed;
             StartCoroutine(crDestroy());
         }
 
@@ -38,6 +68,20 @@ namespace LoopJam
         }
 
         #endregion
+
+        private void PauseRigidbody() 
+        {
+            _pausedVelocity = _rb.velocity;
+            _pausedAngularVelocity = _rb.angularVelocity;
+            _rb.isKinematic = true;
+        }
+
+        private void ResumeRigidbody() 
+        {
+            _rb.isKinematic = false;
+            _rb.velocity = _pausedVelocity;
+            _rb.angularVelocity = _pausedAngularVelocity;
+        }
 
         private IEnumerator crDestroy()
         {

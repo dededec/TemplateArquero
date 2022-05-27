@@ -27,6 +27,7 @@ public class GameStateManager
 
     public void SetState(GameState newGameState)
     {
+        Debug.Log("NewState: " + newGameState);
         if(newGameState == CurrentGameState)
             return;
         CurrentGameState = newGameState;

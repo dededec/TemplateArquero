@@ -8,4 +8,5 @@ public class Ability : ScriptableObject
     public new string name;
     public string description;
     public Sprite icon;
+
 }

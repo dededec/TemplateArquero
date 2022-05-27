@@ -7,6 +7,24 @@ public class PauseSystemController : MonoBehaviour
 {
     [SerializeField] private GameObject _pausedMenu;
     [SerializeField] private AudioSource _audiosource;
+
+    private void Update() 
+    {
+        if(Input.GetKeyDown(KeyCode.Escape))
+        {
+            var state = GameStateManager.instance.CurrentGameState;
+            if(state == GameState.Gameplay)
+            {
+                PauseGame();
+            }
+            else if(state == GameState.Paused)
+            {
+                ResumeGame();
+            }
+        }
+    }
+
+
     public void PauseGame()
     {
         _pausedMenu.SetActive(true);
@@ -34,20 +52,22 @@ public class PauseSystemController : MonoBehaviour
         else _audiosource.volume = 0f;
     }
 
-    #region Example of new way of pausing game in each of the scripts of the things we need to pause or resume
+    // #region Example of new way of pausing game in each of the scripts of the things we need to pause or resume
 
-    private void Awake() {
-        GameStateManager.instance.onGameStateChanged += onGameStateChanged;
-    }
+    // private void Awake() 
+    // {
+    //     GameStateManager.instance.onGameStateChanged += onGameStateChanged;
+    // }
 
-    private void OnDestroy() {
-        GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
-    }
+    // private void OnDestroy() 
+    // {
+    //     GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
+    // }
 
-    private void onGameStateChanged(GameState newGameState)
-    {
-        enabled = newGameState == GameState.Gameplay;
-    }
+    // private void onGameStateChanged(GameState newGameState)
+    // {
+    //     enabled = newGameState == GameState.Gameplay;
+    // }
         
-    #endregion
+    // #endregion
 }

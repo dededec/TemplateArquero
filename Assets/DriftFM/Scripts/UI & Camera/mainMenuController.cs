@@ -2,25 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class mainMenuController : MonoBehaviour
+public class MainMenuController : MonoBehaviour
 {
     [SerializeField] private GameFlowController gfc;
     [SerializeField] private GameObject pausedCanvas;
     public bool paused = false;
     public int scene = 0;
-
-
-    private void Update() {
-        if(scene > 0)
-        {
-            if(Input.GetKeyDown(KeyCode.Escape))
-            {
-                paused = true;
-                pausedCanvas.SetActive(true);
-                Time.timeScale = 0;
-            }
-        }
-    }
 
     public void loadGame()
     {
