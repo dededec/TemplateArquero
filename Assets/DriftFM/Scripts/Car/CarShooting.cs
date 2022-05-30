@@ -11,6 +11,7 @@ public class CarShooting : MonoBehaviour
     [SerializeField] private float _shotCadence;
 
     public UnityEvent ShotAbilities;
+    [SerializeField] private AbilityManager _abilities;
 
     private void Start() 
     {
@@ -33,9 +34,14 @@ public class CarShooting : MonoBehaviour
         }
     }
 
+    public void Shoot(Vector3 position, Quaternion rotation)
+    {
+        Instantiate(_bullet, position, rotation);
+    }
+
     private void shoot()
     {   
         GameObject bullet = Instantiate(_bullet, transform.position + transform.forward, transform.rotation);
-        ShotAbilities?.Invoke();
+        _abilities.Shoot();
     }
 }

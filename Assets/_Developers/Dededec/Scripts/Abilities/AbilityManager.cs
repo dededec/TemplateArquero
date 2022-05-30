@@ -4,51 +4,75 @@ using UnityEngine;
 using System;
 
 public class AbilityManager : MonoBehaviour
-{
-    /*
-    array de booleanos que dicen si tiene x habilidad o no
-    luego vemos que es cada booleano.
-    */
-    
-    /*
-    El nombre de la habilidad es para identificarlo desde el editor.
-    */
-    [System.Serializable]
-    public class Habilidad
-    {
-        public string name;
-        public bool _hasAbility;
-    }
+{    
 
-    [SerializeField] private List<Habilidad> _habilidades;
-    private Dictionary<string, Action> _funciones;
+    [Header("Shooting Abilities")]
+    /*
+    Indice - Función:
+    0 - TripleShot
+    1 - 
+    2 - 
+    */
+    [SerializeField] private List<bool> _hasShotAbility;
+    [SerializeField] private CarShooting _shooting;
+
+    private int _shotAbilityNumber = 20;
+
 
     private void Awake() 
     {
-        _funciones = new Dictionary<string, Action>();
-        _funciones.Add("1", Habilidad1);
-
-        // _funciones["1"].Invoke(); // ! Esto furula
+        for(int i=0; i<_shotAbilityNumber; ++i)
+        {
+            _hasShotAbility.Add(false);
+        }
     }
 
-    private List<Habilidad> FindAbilities()
+    public void Shoot()
     {
-        return _habilidades.FindAll(b => b._hasAbility == true);
+        for(int i = 0; i< _hasShotAbility.Count; ++i)
+        {
+            if(_hasShotAbility[i])
+            {
+                UseAbility(i);
+            }
+        }
+    }
+
+    private void UseAbility(int index)
+    {
+        switch(index)
+        {
+            case 0:
+            TripleShot();
+            break;
+            case 1:
+            LateralShot();
+            break;
+            default:
+            Debug.LogError("Indice de habilidad " + index + " no válido.");
+            break;
+        }
+    }
+
+    private List<bool> FindAbilities()
+    {
+        return _hasShotAbility.FindAll(b => b == true);
     }
 
     public void SetAbility(int index)
     {
-        _habilidades[index]._hasAbility = true;
+        _hasShotAbility[index] = true;
     }
 
-    public void SetAbility(string name)
+    private void TripleShot()
     {
-        var hab = _habilidades.Find(h => h.name == name);
-        hab._hasAbility = true;
+        _shooting.Shoot(_shooting.transform.position + 3 * _shooting.transform.forward, _shooting.transform.rotation);
+        _shooting.Shoot(_shooting.transform.position + 2 * _shooting.transform.forward, _shooting.transform.rotation);
     }
 
-    private void Habilidad1()
+    private void LateralShot()
     {
-        Debug.Log("Habilidad1");
+        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
+        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
     }
 }

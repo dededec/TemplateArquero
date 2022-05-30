@@ -155,9 +155,7 @@ public class CarController : MonoBehaviour
     {
         steeringInput = _joystick.Horizontal;
         accelerationInput = _joystick.Vertical;
-        
-        // steeringInput = Input.GetAxis("Horizontal");
-        // accelerationInput = Input.GetAxis("Vertical");
+    
         if(accelerationInput > 0)
         {
             backwards = false;
@@ -179,7 +177,7 @@ public class CarController : MonoBehaviour
         {
             healingC = true;
             yield return new WaitForSeconds(1f);
-            print("healing");
+            print("Healing.");
             currentHealth += 1f;
             life.value += 1f;
             currentHealth = life.value;
