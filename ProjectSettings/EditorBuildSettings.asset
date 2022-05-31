@@ -6,14 +6,17 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Developers/Alcaval/Scenes/Game 1.unity
+    guid: a5f673d3978ca944c8b8ac77f542179d
+  - enabled: 1
     path: Assets/TemplateArquero/Scenes/example_InventoryProducts.unity
     guid: 52a15c43e34820f4798db411c457296e
   - enabled: 1
     path: Assets/TemplateArquero/Scenes/example_MainMenu.unity
     guid: 7b2e22adaeb34c1469e43980619313c9
-  - enabled: 1
-    path: Assets/TemplateArquero/Scenes/SampleScene.unity
-    guid: 99c9720ab356a0642a771bea13969a05
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   - enabled: 1
     path: Assets/TemplateArquero/Scenes/example_World0/Easy/0_0_0.unity
     guid: 3b0791b747234fd4cba5d38b4ee98a1b

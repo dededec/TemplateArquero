@@ -154,7 +154,7 @@ public class CarController : MonoBehaviour
     private void GetInput()
     {
         steeringInput = _joystick.Horizontal;
-        accelerationInput = _joystick.Vertical;
+        //accelerationInput = 1;
     
         if(accelerationInput > 0)
         {
@@ -164,6 +164,21 @@ public class CarController : MonoBehaviour
         {
             backwards = true;
         }
+    }
+
+    public void engineUP()
+    {
+        accelerationInput = 1;
+    }
+
+    public void engineBACK()
+    {
+        accelerationInput = -1;
+    }
+
+    public void frenada()
+    {
+        accelerationInput = 0;
     }
 
     private float GetLateralVelocity() 
