@@ -5,6 +5,24 @@ using System;
 
 public class AbilityManager : MonoBehaviour
 {    
+    [Serializable]
+    public class AbilityElement
+    {
+        public Ability _ability;
+        public bool _hasAbility;
+
+        public AbilityElement()
+        {
+            _ability = null;
+            _hasAbility = false;
+        }
+
+        public AbilityElement(Ability ability, bool hasAbility)
+        {
+            _ability = ability;
+            _hasAbility = hasAbility;
+        }
+    }
 
     [Header("Shooting Abilities")]
     /*
@@ -13,25 +31,22 @@ public class AbilityManager : MonoBehaviour
     1 - 
     2 - 
     */
-    [SerializeField] private List<bool> _hasShotAbility;
+    [SerializeField] private List<AbilityElement> _abilities;
     [SerializeField] private CarShooting _shooting;
-
-    private int _shotAbilityNumber = 20;
-
 
     private void Awake() 
     {
-        for(int i=0; i<_shotAbilityNumber; ++i)
+        for(int i=0; i < 20; ++i)
         {
-            _hasShotAbility.Add(false);
+            _abilities.Add(new AbilityElement());
         }
     }
 
     public void Shoot()
     {
-        for(int i = 0; i< _hasShotAbility.Count; ++i)
+        for(int i = 0; i< _abilities.Count; ++i)
         {
-            if(_hasShotAbility[i])
+            if(_abilities[i]._hasAbility)
             {
                 UseAbility(i);
             }
@@ -54,15 +69,35 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
-    private List<bool> FindAbilities()
+    #region Auxiliary Methods
+
+    public List<AbilityElement> FindAbilities(bool value)
     {
-        return _hasShotAbility.FindAll(b => b == true);
+        return _abilities.FindAll(b => b._hasAbility == value);
+    }
+
+    public List<int> FindAbilitiesIndex(bool value)
+    {
+        List<int> result = new List<int>();
+        for(int i=0; i < _abilities.Count; ++i)
+        {
+            if(_abilities[i]._hasAbility == value)
+            {
+                result.Add(i);
+            }
+        }
+
+        return result;
     }
 
     public void SetAbility(int index)
     {
-        _hasShotAbility[index] = true;
+        _abilities[index]._hasAbility = true;
     }
+
+    #endregion
+
+    #region Abilities
 
     private void TripleShot()
     {
@@ -75,4 +110,6 @@ public class AbilityManager : MonoBehaviour
         _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
         _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
     }
+
+    #endregion
 }

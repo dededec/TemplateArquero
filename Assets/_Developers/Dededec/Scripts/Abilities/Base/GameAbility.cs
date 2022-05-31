@@ -27,7 +27,7 @@ public class GameAbility : Ability
             }
             else
             {
-                shooting.ShotAbilities.AddListener(Activate);
+                // shooting.ShotAbilities.AddListener(Activate);
             }
             break;
             

@@ -3,15 +3,45 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class FollowingEnemy : MonoBehaviour
+public class FollowingEnemy : EnemyBase
 {
-    [SerializeField] private NavMeshAgent _agent;
-    [SerializeField] private Transform _player;
-    [SerializeField] private float _timeToRecalculate;
+    [SerializeField] protected NavMeshAgent _agent;
+    [SerializeField] protected Transform _player;
+    [SerializeField] protected float _timeToRecalculate;
 
-    private void Start() 
+    #region Virtual Methods
+    
+    protected virtual void Start() 
     {
         StartCoroutine(crFollowPlayer());
+    }
+
+    #endregion
+
+
+    private void Update() 
+    {
+        if(Input.GetKeyDown(KeyCode.Space))
+        {
+            Destroy(this.gameObject);
+        }
+    }
+
+    #region Base Methods
+
+    protected override void onGameStateChanged(GameState newGameState)
+    {
+        switch (GameStateManager.instance.CurrentGameState)
+        {
+            case GameState.Gameplay:
+            _agent.isStopped = false;
+            break;
+            case GameState.Paused:
+            _agent.isStopped = true;
+            break;
+            default:
+            break;
+        }
     }
 
     private IEnumerator crFollowPlayer()
@@ -28,4 +58,6 @@ public class FollowingEnemy : MonoBehaviour
             }
         }
     }
+
+    #endregion
 }

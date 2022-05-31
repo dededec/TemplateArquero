@@ -16,7 +16,7 @@ public class ShotAbility : Ability
         else
         {
             shooting = GameObject.FindGameObjectWithTag("Car").GetComponent<CarShooting>();
-            shooting.ShotAbilities.AddListener(Activate);
+            // shooting.ShotAbilities.AddListener(Activate);
         }
     }
 

@@ -9,8 +9,6 @@ public class CarShooting : MonoBehaviour
     [SerializeField] private MainMenuController _mainMenuController;
     [SerializeField] private GameObject _bullet;
     [SerializeField] private float _shotCadence;
-
-    public UnityEvent ShotAbilities;
     [SerializeField] private AbilityManager _abilities;
 
     private void Start() 

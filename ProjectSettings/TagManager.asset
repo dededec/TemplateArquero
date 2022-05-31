@@ -6,6 +6,10 @@ TagManager:
   tags:
   - InGameLevelText
   - InGameLevelBar
+  - Enemy
+  - UI
+  - Car
+  - LevelFlow
   layers:
   - Default
   - TransparentFX
