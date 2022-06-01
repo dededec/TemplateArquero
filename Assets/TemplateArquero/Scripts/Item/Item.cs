@@ -34,12 +34,13 @@ public class Item : ScriptableObject
     }
 
     public string id;
+    public new string name;
+    public string description;
     public TypeOfReward typeOfReward;
     public InventoryUse inventoryUse;
     public Rarity rarity;
-    public new string name;
-    public string description;
     public int level;
+    public string stats;
     public float multiplier;
     public Sprite icon;
 

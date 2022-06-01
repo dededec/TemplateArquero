@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 685953918685205266}
   m_Layer: 0
   m_Name: '@InventoryManager'
-  m_TagString: Untagged
+  m_TagString: InventoryManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -47,10 +47,12 @@ MonoBehaviour:
   _itemDatabase: {fileID: 0}
   _EveryItemList: []
   _PlayerItems: []
-  _PlayerEquipment:
+  _playerEquipment:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  equipmentButton: {fileID: 0}
+  gridLayoutGroup: {fileID: 0}

@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6717429125506532957}
   m_Layer: 0
   m_Name: '@TalentManager'
-  m_TagString: Untagged
+  m_TagString: TalentManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,29 +46,29 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _paymentMethod: 1
   price: 100
-  _talentList:
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
-  - talentName: 
-    talentLevel: 0
+  _talents:
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
+  - name: 
+    level: 0
   _maxLevel: 3

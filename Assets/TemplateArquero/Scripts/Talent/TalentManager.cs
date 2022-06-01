@@ -4,31 +4,62 @@ using UnityEngine;
 
 public class TalentManager : MonoBehaviour
 {
+
+    #region Singleton
+
+    private static TalentManager _instance;
+
+    public static TalentManager Instance
+    {
+        get
+        {
+            return _instance;
+        }
+    }
+
+    private void AwakeSingleton()
+    {
+        DontDestroyOnLoad(this);
+
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion
+
     [SerializeField] private EconomyManager.CoinType _paymentMethod;
     [SerializeField] private int price = 100;
     // ? Talent list that we will have to save, or at least save its data somehow and load it back here
-    [SerializeField] private Talent[] _talentList = new Talent[12];
+    [SerializeField] private Talent[] _talents = new Talent[12];
     [SerializeField] private int _maxLevel = 3;
     private int _timesTalentsUpgraded;
 
     [System.Serializable]
-    public class Talent{
-        [SerializeField] public string talentName;
-        [SerializeField] public int talentLevel;
+    public class Talent
+    {
+        [SerializeField] public string name;
+        [SerializeField] public int level;
 
-        public void gainLevel() => talentLevel++;
+        public void gainLevel() => level++;
     }
 
     public Talent[] Talents
     {
         get
         {
-            return _talentList;
+            return _talents;
         }
     }
 
     private void Awake() 
     {
+        AwakeSingleton();
         loadData();    
     }
 
@@ -37,9 +68,9 @@ public class TalentManager : MonoBehaviour
         bool userCanPay = true;
         bool completed = true;
         
-        foreach(Talent t in _talentList)
+        foreach(Talent t in _talents)
         {
-            if(t.talentLevel != _maxLevel)
+            if(t.level != _maxLevel)
             {
                 completed = false;
                 break;
@@ -74,9 +105,9 @@ public class TalentManager : MonoBehaviour
             rTalentIndex = r.Next(8, 12);
         }
 
-        if(_talentList[rTalentIndex].talentLevel < _maxLevel)
+        if(_talents[rTalentIndex].level < _maxLevel)
         {
-            _talentList[rTalentIndex].gainLevel();
+            _talents[rTalentIndex].gainLevel();
             return true;
         }
         return false;
@@ -88,7 +119,7 @@ public class TalentManager : MonoBehaviour
 
         for(int i = 0; i < value.Length; i++)
         {
-            _talentList[i].talentLevel = value[i];
+            _talents[i].level = value[i];
         }
     }
 
@@ -98,7 +129,7 @@ public class TalentManager : MonoBehaviour
 
         for(int i = 0; i < value.Length; i++)
         {
-            value[i] = _talentList[i].talentLevel; 
+            value[i] = _talents[i].level; 
         }
 
         SaveDataController.TalentsList = value;
@@ -107,9 +138,9 @@ public class TalentManager : MonoBehaviour
     public int GetTimesTalentsUpgraded()
     {
         _timesTalentsUpgraded = 0;
-        foreach(Talent t in _talentList)
+        foreach(Talent t in _talents)
         {
-            _timesTalentsUpgraded += t.talentLevel;
+            _timesTalentsUpgraded += t.level;
         }
         return _timesTalentsUpgraded;
     }
