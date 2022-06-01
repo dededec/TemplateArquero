@@ -7,7 +7,7 @@ public class TalentManager : MonoBehaviour
     [SerializeField] private EconomyManager.CoinType _paymentMethod;
     [SerializeField] private int price = 100;
     // ? Talent list that we will have to save, or at least save its data somehow and load it back here
-    [SerializeField] private Talent[] _talentList = new Talent[12];
+    [SerializeField] public Talent[] _talentList = new Talent[12];
     [SerializeField] private int _maxLevel = 3;
     private int _timesTalentsUpgraded;
 
@@ -94,5 +94,15 @@ public class TalentManager : MonoBehaviour
         }
 
         SaveDataController.TalentsList = value;
+    }
+
+    public int GetTimesTalentsUpgraded()
+    {
+        _timesTalentsUpgraded = 0;
+        foreach(Talent t in _talentList)
+        {
+            _timesTalentsUpgraded += t.talentLevel;
+        }
+        return _timesTalentsUpgraded;
     }
 }
