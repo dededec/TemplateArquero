@@ -19,7 +19,15 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] public List<Item> _PlayerItems; 
 
     //EQUIPMENT OF THE PLAYER
-    [SerializeField] private Item[] _PlayerEquipment = new Item[6];
+    [SerializeField] private Item[] _playerEquipment = new Item[6];
+
+    public Item[] Equipment
+    {
+        get
+        {
+            return _playerEquipment;
+        }
+    }
 
     private void Awake() {
         loadData();
@@ -104,12 +112,12 @@ public class InventoryManager : MonoBehaviour
                     break;
             }
 
-            if(_PlayerEquipment[slot] != null)
+            if(_playerEquipment[slot] != null)
             {
-                AddToInventory(_PlayerEquipment[slot].id);
+                AddToInventory(_playerEquipment[slot].id);
             }
 
-            _PlayerEquipment[slot] = i;
+            _playerEquipment[slot] = i;
         }
         setBag();
         saveData();
@@ -118,11 +126,11 @@ public class InventoryManager : MonoBehaviour
     public void RemoveEquipment(string id)
     {
         int i = 0;
-        foreach(Item itm in _PlayerEquipment)
+        foreach(Item itm in _playerEquipment)
         {
             if(itm.id == id)
             {
-                _PlayerEquipment[i] = null;
+                _playerEquipment[i] = null;
                 break;
             }
             i++;
@@ -159,7 +167,7 @@ public class InventoryManager : MonoBehaviour
                 {
                     i.level = Convert.ToInt32(idLevelMult[1]);
                     i.multiplier = float.Parse(idLevelMult[2]);
-                    _PlayerEquipment[j] = i;
+                    _playerEquipment[j] = i;
                     break;
                 }
             }
@@ -177,13 +185,13 @@ public class InventoryManager : MonoBehaviour
         }
 
         SaveDataController.Equipment = "";
-        for(int i = 0; i < _PlayerEquipment.Length; i++)
+        for(int i = 0; i < _playerEquipment.Length; i++)
         {
-            if(_PlayerEquipment[i] == null)
+            if(_playerEquipment[i] == null)
             {
                 SaveDataController.Equipment += "None;";
             }else{
-                SaveDataController.Equipment += _PlayerEquipment[i].id + "-" + _PlayerEquipment[i].level + "-" + _PlayerEquipment[i].multiplier +";";
+                SaveDataController.Equipment += _playerEquipment[i].id + "-" + _playerEquipment[i].level + "-" + _playerEquipment[i].multiplier +";";
             }
         }
     }
