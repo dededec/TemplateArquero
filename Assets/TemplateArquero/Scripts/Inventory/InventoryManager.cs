@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 using UnityEngine.UI;
+using TMPro;
+using System.IO;
 
 
 /*
@@ -32,6 +34,7 @@ public class InventoryManager : MonoBehaviour
     private void Awake() {
         loadData();
         setBag();
+        setEquipment();
     }
 
     // * Call when button pressed to merge a piece of equipment with other two of the same type of item
@@ -78,6 +81,8 @@ public class InventoryManager : MonoBehaviour
         saveData();
     }
 
+    [SerializeField] private GameObject EquipmentPanels;
+
     public void AssignEquipment(string id)
     {
         Item i = null;
@@ -92,6 +97,8 @@ public class InventoryManager : MonoBehaviour
         }
         if(i != null)
         {    
+            var tex = Resources.Load<Texture2D>(i.name);
+            var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
             int slot = 0;
             switch(i.inventoryUse)
             {
@@ -111,6 +118,8 @@ public class InventoryManager : MonoBehaviour
                     slot = 4;
                     break;
             }
+
+            EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite = sprite;
 
             if(_playerEquipment[slot] != null)
             {
@@ -171,6 +180,7 @@ public class InventoryManager : MonoBehaviour
                     break;
                 }
             }
+            
         }
 
         // TODO Habria que asignar en la escena en el canvas el equipamiento y el inventario
@@ -212,9 +222,49 @@ public class InventoryManager : MonoBehaviour
             btn = Instantiate(equipmentButton);
             btn.GetComponent<Button>().onClick.AddListener(delegate { AssignEquipment(i.id); });
             btn.transform.SetParent(gridLayoutGroup.transform);
+            print(i.name);
+
+            var tex = Resources.Load<Texture2D>(i.name);
+            var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
+            print(tex.name);
+            btn.GetComponentInChildren<Image>().sprite = sprite;
+            
+            //btn.GetComponentInChildren<TextMeshProUGUI>().text = i.name;
             btn.GetComponent<RectTransform>().localScale = Vector3.one;
 
         }
 
+    }
+
+    private void setEquipment()
+    {
+        int slot = 0;
+        foreach(Item i in _playerEquipment)
+        {
+            if(i != null)
+            {
+                var tex = Resources.Load<Texture2D>(i.name);
+                var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
+                switch(i.inventoryUse)
+                {
+                    case Item.InventoryUse.SLOT1:
+                        slot = 0;
+                        break;
+                    case Item.InventoryUse.SLOT2:
+                        slot = 1;
+                        break;
+                    case Item.InventoryUse.SLOT3:
+                        slot = 2;
+                        break;
+                    case Item.InventoryUse.SLOT4:
+                        slot = 3;
+                        break;
+                    case Item.InventoryUse.ACCESORIES:
+                        slot = 4;
+                        break;
+                }
+                EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite = sprite;
+            }
+        }
     }
 }

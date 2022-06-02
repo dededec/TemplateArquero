@@ -69,6 +69,5 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         currentPage = page;
         if(currentPage != 2) _car.SetActive(false);
         panelLocation = newLocation;
-        print(currentPage + " jeje ");
     }
 }
