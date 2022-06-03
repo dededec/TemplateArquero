@@ -4,18 +4,34 @@ using UnityEngine;
 
 public class TrailController : MonoBehaviour
 {
+    private CarController _carController;
     [SerializeField] private TrailRenderer _trailRendererLeft;
     [SerializeField] private TrailRenderer _trailRendererRight;
     [SerializeField] private float _lifeTime = 3f;
 
     private void Awake() 
     {
+        _carController = GetComponent<CarController>();
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 
     private void OnDestroy() 
     {
         GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
+    }
+
+    private void Update()
+    {
+        if(_carController.isCarDrifting(out float latVelocity, out bool isDrifting))
+        {
+            _trailRendererLeft.emitting = true;
+            _trailRendererRight.emitting = true;
+        }
+        else
+        {
+            _trailRendererLeft.emitting = false;
+            _trailRendererRight.emitting = false;
+        }
     }
 
     private void onGameStateChanged(GameState newGameState)

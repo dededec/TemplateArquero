@@ -95,6 +95,56 @@ public class AbilityManager : MonoBehaviour
         _abilities[index]._hasAbility = true;
     }
 
+    public void PickNewAbility()
+    {
+        var abilities = SublistAbilities();
+        /*
+        Habría que hacer una UI y asignar las cosas de cada habilidad.
+        Cada habilidad en la UI es un botón, que al pulsarse te da la 
+        habilidad pulsada.
+        */
+    }
+
+    public List<AbilityElement> SublistAbilities()
+    {
+        var indexes = FindAbilitiesIndex(false);
+        List<AbilityElement> result = new List<AbilityElement>();
+        int[] abilities;
+
+        // Elegimos tres indices al azar.
+        if(indexes.Count >= 3)
+        {
+            abilities = new int[3];
+            for(int i=0; i<3; ++i)
+            {
+                int random = -1;
+                do
+                {
+                    random = UnityEngine.Random.Range(0, indexes.Count);
+                }while(find(abilities, random));
+                
+                abilities[i] = random;
+                result.Add(_abilities[i]);
+            }
+        }
+        else if(indexes.Count > 0)
+        {
+            abilities = new int[indexes.Count];
+            for(int i=0; i<indexes.Count; ++i)
+            {
+                abilities[i] = indexes[i];
+                result.Add(_abilities[i]);
+            }
+        }
+
+        return result;
+    }
+
+    public bool find(int[] array, int target) 
+    {
+        return Array.Exists(array, x => x == target);
+    }
+
     #endregion
 
     #region Abilities

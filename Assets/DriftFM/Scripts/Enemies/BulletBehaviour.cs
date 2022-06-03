@@ -19,6 +19,7 @@ namespace LoopJam
         [Tooltip("Bullet speed when created.")]
 	    [SerializeField] private float _speed;
 	    [SerializeField] private float _lifeTime;
+        [SerializeField] private float _damageDealt;
     
         private Rigidbody _rb;
         private Vector3 _pausedVelocity;
@@ -93,10 +94,15 @@ namespace LoopJam
         {
             if(other.gameObject.tag == "Car")
             {
-                other.gameObject.GetComponent<CarController>().takeDamage(20f);
+                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20f);
             }    
             
             gameObject.SetActive(false);
+        }
+
+        public void IncreaseDamage(int amount)
+        {
+            _damageDealt += amount;
         }
     }
 }

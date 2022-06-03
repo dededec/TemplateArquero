@@ -1912,8 +1912,40 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainMenuController: {fileID: 1615313828}
   _bullet: {fileID: 105967311760150768, guid: d2b8e1d34ed11674d9684a3aa9e5b58a, type: 3}
-  _shotCadence: 2
+  _attackSpeed: 0
   _abilities: {fileID: 1522889661}
+--- !u!82 &1522889665 stripped
+AudioSource:
+  m_CorrespondingSourceObject: {fileID: 1123374906, guid: f4abad250467a2945a67031f2f384e04,
+    type: 3}
+  m_PrefabInstance: {fileID: 1522889655}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1522889668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1522889660}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3ad0b198c0df834783304ca6cbf59a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _cmScreenshake: {fileID: 0}
+  _mainMenuController: {fileID: 0}
+  _carController: {fileID: 1522889656}
+  _gameOverMenu: {fileID: 2051985974}
+  _carMaterial: {fileID: 2100000, guid: f18314a5098e0cb4895aad38f625dbe5, type: 2}
+  _originalCar: {r: 0.80392164, g: 0.7803922, b: 0.76470596, a: 0}
+  _damageColor: {r: 1, g: 0, b: 0, a: 0}
+  _damageAudio: {fileID: 1522889665}
+  _healthSlider: {fileID: 1349208395}
+  maxHealth: 100
+  damageReductionStill: 0
+  damageReductionMoving: 0
+  dropHealing: 0
+  levelUpHealing: 0
 --- !u!1 &1615313826
 GameObject:
   m_ObjectHideFlags: 0

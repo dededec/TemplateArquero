@@ -82,7 +82,7 @@ public class PlayerBulletBehaviour : MonoBehaviour
     {
         if(other.gameObject.tag == "Car")
         {
-            other.gameObject.GetComponent<CarController>().takeDamage(20f);
+            other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20f);
         }    
         
         gameObject.SetActive(false);
