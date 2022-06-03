@@ -21,7 +21,7 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] public List<Item> _PlayerItems; 
 
     //EQUIPMENT OF THE PLAYER
-    [SerializeField] private Item[] _playerEquipment = new Item[6];
+    [SerializeField] public Item[] _playerEquipment = new Item[6];
 
     public Item[] Equipment
     {
@@ -244,7 +244,9 @@ public class InventoryManager : MonoBehaviour
             if(i != null)
             {
                 var tex = Resources.Load<Texture2D>(i.name);
+                tex.name = i.name;
                 var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
+                sprite.name = i.name;
                 switch(i.inventoryUse)
                 {
                     case Item.InventoryUse.SLOT1:
