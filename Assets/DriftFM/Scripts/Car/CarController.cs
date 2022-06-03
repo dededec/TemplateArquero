@@ -29,24 +29,6 @@ public class CarController : MonoBehaviour
 
     public UnityEvent MoveAbilities;
 
-
-    // [SerializeField] private Slider health;
-    // [SerializeField] private CMScreenshake cmscreenshake;
-    // [SerializeField] private MainMenuController _mainMenuController;
-    // [SerializeField] private GameObject _gameOverMenu;
-
-    // [SerializeField] private Material _carMaterial;
-    // [SerializeField] private Material _enemyMaterial;
-    // [SerializeField] private Color _originalCar, _originalTurret;
-    // [SerializeField] private Color _damageColor;
-    // [SerializeField] private AudioSource _damageAudio;
-
-    // //HealthThings
-    // public int maxHealth = 100;
-    // public float currentHealth = 100f;
-    // private bool healingC = false;
-
-
     public Vector3 Velocity
     {
         get
@@ -64,21 +46,11 @@ public class CarController : MonoBehaviour
     private void Awake() 
     {
         _carRB = GetComponent<Rigidbody>();
-        // _carMaterial.color = _originalCar;
-        // _enemyMaterial.color = _originalTurret;
-
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 
     private void FixedUpdate() 
     {
-        // if(currentHealth <= 0)
-        // {
-        //     gameObject.SetActive(false);
-        //     _gameOverMenu.SetActive(true);
-        //     //Time.timeScale = 0;
-        // }
-
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
@@ -109,8 +81,6 @@ public class CarController : MonoBehaviour
     void Update()
     {
         GetInput();
-
-        // if(currentHealth > 0 && GameStateManager.instance.CurrentGameState == GameState.Gameplay && !healingC) StartCoroutine(HealCoroutine());
     }
 
     #endregion
@@ -186,20 +156,6 @@ public class CarController : MonoBehaviour
         return Vector3.Dot(transform.right, _carRB.velocity); 
     }
 
-    // private IEnumerator HealCoroutine()
-    // {   
-    //     if(!isCarDrifting(out float latVelocity, out bool isDrifting))
-    //     {
-    //         healingC = true;
-    //         yield return new WaitForSeconds(1f);
-    //         print("Healing.");
-    //         currentHealth += 1f;
-    //         health.value += 1f;
-    //         currentHealth = health.value;
-    //         healingC = false;
-    //     }
-    // }
-
     private void KillOrthogonalVelocity()
     {
         Vector3 forwardVelocity = transform.forward * Vector3.Dot(_carRB.velocity, transform.forward);
@@ -223,20 +179,6 @@ public class CarController : MonoBehaviour
         _carRB.angularVelocity = _pausedAngularVelocity;
         Debug.Log("Resume with velocity=" + _carRB.velocity + " & angularVelocity=" + _carRB.angularVelocity);
     }
-
-    // private IEnumerator takeDamageCoroutine()
-    // {
-    //     //Se cambia el color
-    //     _carMaterial.color = _damageColor;
-    //     _enemyMaterial.color = _damageColor;
-    //     _damageAudio.Play();
-    //     _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(false); // Radio
-    //     yield return new WaitForSeconds(0.5f);
-    //     _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(true); // Radio
-    //     //Se vuelve a poner
-    //     _carMaterial.color = _originalCar;
-    //     _enemyMaterial.color = _originalTurret;
-    // }
 
     #endregion
 
@@ -268,18 +210,7 @@ public class CarController : MonoBehaviour
     {
         accelerationFactor += amount;
         maxSpeed += amount;
-    }
-
-    // public void takeDamage(float value)
-    // {
-    //     cmscreenshake.ShakeCamera(8, 0.5f);
-    //     health.value -= value;
-    //     currentHealth -= value;
-    //     print(health.value + " " + currentHealth);
-    //     StartCoroutine(takeDamageCoroutine());
-    // }
-
-    
+    }    
 
     #endregion
 

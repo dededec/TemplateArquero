@@ -78,13 +78,12 @@ public class PlayerBulletBehaviour : MonoBehaviour
         gameObject.SetActive(false);
     }
     
-    private void OnCollisionEnter2D(Collision2D other) 
+    private void OnTriggerEnter(Collider other) 
     {
-        if(other.gameObject.tag == "Car")
+        if(other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20f);
+            other.gameObject.GetComponent<EnemyBase>().TakeDamage(20);
+            gameObject.SetActive(false);
         }    
-        
-        gameObject.SetActive(false);
     }
 }

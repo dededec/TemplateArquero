@@ -6,6 +6,8 @@ public class LevelFlow : MonoBehaviour
 {
     [SerializeField] private Transform _enemyHolder;
     [SerializeField] private List<EnemyBase> _enemies;
+    [SerializeField] private InGameCoinCountController _coinCounter;
+    [SerializeField] private InGameLevelProgression _levelprogression;
 
     private void Start()
     {
@@ -24,6 +26,10 @@ public class LevelFlow : MonoBehaviour
     public void DeleteEnemy(EnemyBase enemy)
     {
         _enemies.Remove(enemy);
+        // Subir soft coins
+        _coinCounter.AddCoinAmount(enemy.SoftCoinDrop);
+        _levelprogression.AddExperience(enemy.Experience);
+        
         if(_enemies.Count <= 0)
         {
             // Se han eliminado a todos los enemigos.

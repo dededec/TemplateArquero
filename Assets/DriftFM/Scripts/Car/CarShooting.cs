@@ -23,7 +23,7 @@ public class CarShooting : MonoBehaviour
         {
             shoot();
             
-            for(float i=0; i<=_attackSpeed; i+=Time.deltaTime)
+            for(float i=0; i<=1/_attackSpeed; i+=Time.deltaTime)
             {
                 do
                 {

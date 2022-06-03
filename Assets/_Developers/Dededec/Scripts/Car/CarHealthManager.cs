@@ -21,15 +21,15 @@ public class CarHealthManager : MonoBehaviour
     //HealthThings
     [Header("Stats")]
     public int maxHealth = 100;
-    public float damageReductionStill;
-    public float damageReductionMoving;
-    public float dropHealing;
-    public float levelUpHealing;
-    private float _currentHealth = 100f;
+    public int damageReductionStill;
+    public int damageReductionMoving;
+    public int dropHealing;
+    public int levelUpHealing;
+    private int _currentHealth = 100;
     private bool _isHealing = false;
 
 
-    public float CurrentHealth
+    public int CurrentHealth
     {
         get
         {
@@ -57,7 +57,7 @@ public class CarHealthManager : MonoBehaviour
         }
     }
 
-    public void TakeDamage(float value)
+    public void TakeDamage(int value)
     {
         _cmScreenshake.ShakeCamera(8, 0.5f);
         
@@ -91,7 +91,7 @@ public class CarHealthManager : MonoBehaviour
         Heal(dropHealing);
     }
 
-    private void Heal(float amount)
+    private void Heal(int amount)
     {
         if(amount < 0 ) return;
         CurrentHealth += amount;
@@ -110,7 +110,7 @@ public class CarHealthManager : MonoBehaviour
                 }while(GameStateManager.instance.CurrentGameState == GameState.Paused);
             }
             print("Healing.");
-            CurrentHealth += 1f;
+            CurrentHealth += 1;
             _isHealing = false;
         }
     }

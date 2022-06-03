@@ -9,12 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 831a6890538ac704996988665a1874d4, type: 3}
-  m_Name: Triple
+  m_Script: {fileID: 11500000, guid: 9f736b5555a532549969e0ca71e9dfbd, type: 3}
+  m_Name: Ability2
   m_EditorClassIdentifier: 
-  name: 
-  description: 
-  icon: {fileID: 0}
-  OneExec: 0
-  shooting: {fileID: 0}
-  Bullet: {fileID: 105967311760150768, guid: d2b8e1d34ed11674d9684a3aa9e5b58a, type: 3}
+  name: Lateral Shot
+  description: "Dispara para los lados es f\xE1cil de entender."
+  icon: {fileID: 21300000, guid: c615706690ca87043ad593475e6db7ec, type: 3}

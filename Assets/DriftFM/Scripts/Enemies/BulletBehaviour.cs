@@ -94,7 +94,7 @@ namespace LoopJam
         {
             if(other.gameObject.tag == "Car")
             {
-                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20f);
+                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20);
             }    
             
             gameObject.SetActive(false);

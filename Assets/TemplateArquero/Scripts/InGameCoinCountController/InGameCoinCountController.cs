@@ -8,7 +8,7 @@ public class InGameCoinCountController : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _coinCountText;
 
-    public void AddCoinAmmount(int coinAmmount)
+    public void AddCoinAmount(int coinAmmount)
     {
         int coins = Int32.Parse(_coinCountText.text);
         coins += coinAmmount;

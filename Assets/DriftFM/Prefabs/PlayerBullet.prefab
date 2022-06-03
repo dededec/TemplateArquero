@@ -94,8 +94,8 @@ CapsuleCollider:
   m_Material: {fileID: 0}
   m_IsTrigger: 1
   m_Enabled: 1
-  m_Radius: 0.5000001
-  m_Height: 2.0000005
+  m_Radius: 0.9224289
+  m_Height: 2.901544
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &9137070188984581116
@@ -107,8 +107,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 458144413565701466}
-  - component: {fileID: 6835139362390322000}
   - component: {fileID: 4048021366418569934}
+  - component: {fileID: 2327669723988385581}
   m_Layer: 0
   m_Name: PlayerBullet
   m_TagString: Enemy
@@ -132,20 +132,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &6835139362390322000
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9137070188984581116}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 68d5f114ca234f44eb778f4d17a4c820, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _speed: 35
-  _lifeTime: 5
 --- !u!54 &4048021366418569934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -162,3 +148,17 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2327669723988385581
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9137070188984581116}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4252d9bf1002e249b756b12cc9a0665, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _speed: 35
+  _lifeTime: 10

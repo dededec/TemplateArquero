@@ -11,35 +11,17 @@ public class AngelBehaviour : MonoBehaviour
     void Start()
     {
         _playerAbilities = GameObject.FindGameObjectWithTag("Car").GetComponent<AbilityManager>();
-
-        var indexes = _playerAbilities.FindAbilitiesIndex(false);
-        int[] abilities = new int[3];
-
-        // Elegimos tres indices al azar.
-        if(indexes.Count >= 3)
+        if(_playerAbilities == null)
         {
-            for(int i=0; i<3; ++i)
-            {
-                int random = -1;
-                do
-                {
-                    random = UnityEngine.Random.Range(0, indexes.Count);
-                }while(find(abilities, random));
-
-                abilities[i] = random;
-            }
-        }
-        else if(indexes.Count > 0)
-        {
-            for(int i=0; i<indexes.Count; ++i)
-            {
-                abilities[i] = indexes[i];
-            }
+            Debug.LogError("AbilityManager no encontrado.");
         }
     }
 
-    public bool find(int[] array, int target) 
+    private void OnCollisionEnter(Collision other) 
     {
-        return Array.Exists(array, x => x == target);
+        if(other.gameObject.tag == "Car")
+        {
+            _playerAbilities.PickNewAbility();
+        }
     }
 }
