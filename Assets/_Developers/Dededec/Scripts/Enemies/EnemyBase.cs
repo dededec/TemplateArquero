@@ -43,7 +43,7 @@ public class EnemyBase : MonoBehaviour
         if(_health <= 0)
         {
             // Destruir cositas
-            Destroy(this.gameObject);
+            _flow.DeleteEnemy(this);
         }
     }
 
@@ -56,7 +56,6 @@ public class EnemyBase : MonoBehaviour
 
     private void OnDestroy() 
     {
-        _flow.DeleteEnemy(this);
         GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
 
         if(_extraDrop)

@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f736b5555a532549969e0ca71e9dfbd, type: 3}
   m_Name: Ability2
   m_EditorClassIdentifier: 
-  name: Lateral Shot
+  name: Lateral Triple Shot
   description: "Dispara para los lados es f\xE1cil de entender."
   icon: {fileID: 21300000, guid: c615706690ca87043ad593475e6db7ec, type: 3}

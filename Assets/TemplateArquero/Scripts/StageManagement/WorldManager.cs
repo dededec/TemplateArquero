@@ -101,8 +101,6 @@ public class WorldManager
         _angelStage = _worldIndex.ToString() + "_3_" + "0";
     }
 
-    // public static void AssignWorld(int index) => AssignWorld(_worlds[index]);
-
     public static void Play()
     {
         if (_usedStages == null)

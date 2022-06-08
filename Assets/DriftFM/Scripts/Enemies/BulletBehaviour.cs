@@ -19,9 +19,9 @@ namespace LoopJam
         [Tooltip("Bullet speed when created.")]
 	    [SerializeField] private float _speed;
 	    [SerializeField] private float _lifeTime;
-        [SerializeField] private float _damageDealt;
+        [SerializeField] private int _damageDealt;
     
-        private Rigidbody _rb;
+        [SerializeField] private Rigidbody _rb;
         private Vector3 _pausedVelocity;
         private Vector3 _pausedAngularVelocity;
 
@@ -32,7 +32,11 @@ namespace LoopJam
 
         private void Awake() 
         {
-            _rb = GetComponent<Rigidbody>();
+            if(_rb == null)
+            {
+                _rb = transform.parent.gameObject.GetComponent<Rigidbody>();
+            }
+
             GameStateManager.instance.onGameStateChanged += onGameStateChanged;
         }
 
@@ -59,7 +63,7 @@ namespace LoopJam
         // Start, OnAwake, Update, etc
         private void OnEnable()   
         {
-            GetComponent<Rigidbody>().velocity = transform.forward * _speed;
+            _rb.velocity = transform.forward * _speed;
             StartCoroutine(crDestroy());
         }
 
@@ -90,14 +94,17 @@ namespace LoopJam
             gameObject.SetActive(false);
         }
 
-        private void OnCollisionEnter2D(Collision2D other) 
+        private void OnTriggerEnter(Collider other)
         {
+            Debug.Log("Collision with: " + other.gameObject.name);
             if(other.gameObject.tag == "Car")
             {
-                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(20);
+                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(_damageDealt);
+            }
+            else if(other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
+            {
+                gameObject.SetActive(false);
             }    
-            
-            gameObject.SetActive(false);
         }
 
         public void IncreaseDamage(int amount)

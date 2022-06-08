@@ -26,6 +26,35 @@ public class AbilityManager : MonoBehaviour
         }
     }
 
+    #region Singleton
+
+    private static AbilityManager _instance;
+    public static AbilityManager instance
+    {
+        get 
+        {
+            if(_instance == null)
+                _instance = new AbilityManager();
+            return _instance;
+        }
+    }
+
+    private void Awake()
+    {
+        DontDestroyOnLoad(this);
+
+        if (_instance == null)
+        {
+            _instance = this;
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
+
+    #endregion
+
     /*
     Indice - Función:
     0 - TripleShot
@@ -43,37 +72,30 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private TMP_Text[] _names;
     [SerializeField] private TMP_Text[] _descriptions;
 
-    public void Shoot()
-    {
-        for(int i = 0; i< _abilities.Count; ++i)
-        {
-            if(_abilities[i].hasAbility)
-            {
-                UseAbility(i);
-            }
-        }
-    }
+    #region Properties
 
-    private void UseAbility(int index)
+    public static List<AbilityElement> Abilities
     {
-        switch(index)
+        get
         {
-            case 0:
-            TripleShot();
-            break;
-            case 1:
-            LateralShot();
-            break;
-            default:
-            Debug.LogWarning("Indice de habilidad " + index + " no tiene habilidad asignada.");
-            break;
+            return instance._abilities;
+        }
+
+        set
+        {
+            instance._abilities = value;
         }
     }
+    
+    #endregion
 
     #region Public Methods
 
     public void PickNewAbility()
     {
+        // Parar control del jugador
+        GameStateManager.instance.SetState(GameState.Paused);
+
         List<AbilityElement> abilitiesToChoose = SublistAbilities();
 
         _abilityPickUI.SetActive(true);
@@ -96,7 +118,25 @@ public class AbilityManager : MonoBehaviour
             _abilityPickUI.SetActive(false);
         }
         element.hasAbility = true;
+
+        // Devolver control
+        GameStateManager.instance.SetState(GameState.Gameplay);
     }
+
+    public void UseAbilities(int inicio, int fin)
+    {
+        for(int i = inicio; i < fin; ++i)
+        {
+            if(_abilities[i].hasAbility)
+            {
+                UseAbility(i);
+            }
+        }
+    }
+
+    public void ShootAbilities() => UseAbilities(0, 5);
+    public void OnHitAbilities() => UseAbilities(5, 10);
+    
 
     public List<AbilityElement> SublistAbilities()
     {
@@ -156,20 +196,45 @@ public class AbilityManager : MonoBehaviour
         return result;
     }
 
+    private void UseAbility(int index)
+    {
+        switch(index)
+        {
+            case 0:
+            TripleShot();
+            break;
+            case 1:
+            LateralTripleShot();
+            break;
+            case 2:
+            AngleTripleShot();
+            break;
+            default:
+            Debug.LogWarning("Indice de habilidad " + index + " no tiene habilidad asignada.");
+            break;
+        }
+    }
+
     #endregion
 
     #region Abilities
 
     private void TripleShot()
     {
-        _shooting.Shoot(_shooting.transform.position + 3 * _shooting.transform.forward, _shooting.transform.rotation);
-        _shooting.Shoot(_shooting.transform.position + 2 * _shooting.transform.forward, _shooting.transform.rotation);
+        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward);
+        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward);
     }
 
-    private void LateralShot()
+    private void LateralTripleShot()
     {
-        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
-        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward, _shooting.transform.rotation);
+        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * 90));
+        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * -90));
+    }
+
+    private void AngleTripleShot()
+    {
+        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * 45));
+        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * -45));
     }
 
     #endregion

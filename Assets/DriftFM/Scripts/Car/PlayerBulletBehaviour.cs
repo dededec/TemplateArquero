@@ -4,7 +4,9 @@ using UnityEngine;
 
 public class PlayerBulletBehaviour : MonoBehaviour
 {
-#region Fields
+    #region Fields
+
+    // private AbilityManager _abilities;
 
     [Tooltip("Bullet speed when created.")]
 	[SerializeField] private float _speed;
@@ -82,8 +84,10 @@ public class PlayerBulletBehaviour : MonoBehaviour
     {
         if(other.gameObject.tag == "Enemy")
         {
-            other.gameObject.GetComponent<EnemyBase>().TakeDamage(20);
-            gameObject.SetActive(false);
+            var enemyBase = other.gameObject.GetComponent<EnemyBase>();
+            // ! Aqui habria que llamar a un script que contenga las estadisticas del jugador
+            enemyBase.TakeDamage(20);
+            AbilityManager.instance.OnHitAbilities();
         }    
     }
 }

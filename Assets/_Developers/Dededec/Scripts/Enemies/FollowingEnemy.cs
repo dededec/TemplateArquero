@@ -46,7 +46,7 @@ public class FollowingEnemy : EnemyBase
 
     private IEnumerator crFollowPlayer()
     {
-        while(true)
+        while(_flow.isPlayerAlive)
         {
             _agent.SetDestination(_player.position);
             for(float i=0; i<= _timeToRecalculate; i+=Time.deltaTime)
@@ -57,6 +57,8 @@ public class FollowingEnemy : EnemyBase
                 }while(GameStateManager.instance.CurrentGameState == GameState.Paused);
             }
         }
+
+        _agent.isStopped = true;
     }
 
     #endregion

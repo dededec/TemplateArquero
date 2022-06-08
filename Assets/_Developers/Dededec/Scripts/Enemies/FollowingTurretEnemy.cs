@@ -16,7 +16,7 @@ public class FollowingTurretEnemy : FollowingEnemy
 
     private IEnumerator crShoot()
     {
-        while(true)
+        while(_flow.isPlayerAlive)
         {
             Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position - transform.position));
             for(float i=0; i<= _timeToRecalculate; i+=Time.deltaTime)

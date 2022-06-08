@@ -7,11 +7,12 @@ public class CarHealthManager : MonoBehaviour
 {
     [Header("Dependencies")]
     [SerializeField] private CMScreenshake _cmScreenshake;
-    [SerializeField] private MainMenuController _mainMenuController;
     [SerializeField] private CarController _carController;
+    [SerializeField] private LevelFlow _levelFlow;
 
     [Header("UI/VFX")]
     [SerializeField] private GameObject _gameOverMenu;
+    [SerializeField] private GameObject _gameplayUI;
     [SerializeField] private Material _carMaterial;
     [SerializeField] private Color _originalCar;
     [SerializeField] private Color _damageColor;
@@ -19,13 +20,13 @@ public class CarHealthManager : MonoBehaviour
     [SerializeField] private Slider _healthSlider;
 
     //HealthThings
-    [Header("Stats")]
-    public int maxHealth = 100;
-    public int damageReductionStill;
-    public int damageReductionMoving;
-    public int dropHealing;
-    public int levelUpHealing;
-    private int _currentHealth = 100;
+    // [Header("Stats")]
+    // public int maxHealth = 100;
+    // public int damageReductionStill;
+    // public int damageReductionMoving;
+    // public int dropHealing;
+    // public int levelUpHealing;
+    // private int _currentHealth = 100;
     private bool _isHealing = false;
 
 
@@ -33,13 +34,13 @@ public class CarHealthManager : MonoBehaviour
     {
         get
         {
-            return _currentHealth;
+            return PlayerStats.instance.currentHealth;
         }
 
         set
         {
-            _currentHealth = value;
-            _healthSlider.value = _currentHealth;
+            PlayerStats.instance.currentHealth = value;
+            _healthSlider.value = PlayerStats.instance.currentHealth;
         }
     }
     
@@ -63,32 +64,37 @@ public class CarHealthManager : MonoBehaviour
         
         if(_carController.IsMoving())
         {
-            value -= damageReductionMoving;
+            value -= PlayerStats.instance.damageReductionMoving;
         }
         else
         {
-            value -= damageReductionStill;
+            value -= PlayerStats.instance.damageReductionStill;
         }
 
         CurrentHealth -= value;
 
         if(CurrentHealth <= 0)
         {
+            _levelFlow.PlayerDeath();
+            Destroy(AbilityManager.instance);
             gameObject.SetActive(false);
+            _gameplayUI.SetActive(false);
             _gameOverMenu.SetActive(true);
         }
-
-        StartCoroutine(takeDamageCoroutine());
+        else
+        {
+            StartCoroutine(takeDamageCoroutine());
+        }   
     }
 
     public void LevelUp()
     {
-        Heal(levelUpHealing);
+        Heal(PlayerStats.instance.levelUpHealing);
     }
 
     public void OnDropPickup()
     {
-        Heal(dropHealing);
+        Heal(PlayerStats.instance.dropHealing);
     }
 
     private void Heal(int amount)
@@ -109,7 +115,7 @@ public class CarHealthManager : MonoBehaviour
                     yield return null;
                 }while(GameStateManager.instance.CurrentGameState == GameState.Paused);
             }
-            print("Healing.");
+            // print("Healing.");
             CurrentHealth += 1;
             _isHealing = false;
         }
@@ -120,9 +126,7 @@ public class CarHealthManager : MonoBehaviour
         //Se cambia el color
         _carMaterial.color = _damageColor;
         _damageAudio.Play();
-        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(false); // Radio
         yield return new WaitForSeconds(0.5f);
-        _mainMenuController.gameObject.transform.GetChild(0).gameObject.SetActive(true); // Radio
         //Se vuelve a poner
         _carMaterial.color = _originalCar;
     }

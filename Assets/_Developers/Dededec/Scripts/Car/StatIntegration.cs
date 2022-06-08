@@ -11,28 +11,37 @@ public class StatIntegration : MonoBehaviour
     */
     
     [Header("Managers")]
+    // [SerializeField] private AbilityManager _abilityManager;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private TalentManager _talentManager;
 
     [Header("Player")]
     [SerializeField] private GameObject _player;
-    [SerializeField] private CarController _carController;
-    [SerializeField] private CarHealthManager _carHealthManager;
-    [SerializeField] private CarShooting _carShooting;
+    [SerializeField] private CarController _controller;
+    [SerializeField] private CarHealthManager _healthManager;
+    [SerializeField] private CarShooting _shooting;
 
-    private void Awake() 
+    private float _equipmentBoost = 1f;
+    private float _heroBoost = 1f;
+    private int _dropsPerMinute = 0;
+
+    /*
+    Tanto TalentManager como InventoryManager dependen de Awake, así que usando Start aquí
+    aseguramos que se inicialicen correctamente.
+    */
+    private void Start() 
     {
         _talentManager = GameObject.FindGameObjectWithTag("TalentManager").GetComponent<TalentManager>();
         _inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
 
-        foreach(var element in _inventoryManager.Equipment)
-        {
-            proccessEquipment(element);
-        }
-
         foreach(var talent in _talentManager.Talents)
         {
             proccessTalent(talent);
+        }
+
+        foreach(var element in _inventoryManager.Equipment)
+        {
+            proccessEquipment(element);
         }
     }
 
@@ -70,8 +79,8 @@ public class StatIntegration : MonoBehaviour
             levelUpHealing(talent.level);
             break;
 
-            case "StartSkill":
-            startSkillTalent(talent.level);
+            case "StartAbility":
+            startAbilityTalent(talent.level);
             break;
 
             // ---------------------------------
@@ -110,16 +119,17 @@ public class StatIntegration : MonoBehaviour
         {
             // string con formato stat:valor
             string[] aux = stat.Split(":");
-            int amount = int.Parse(aux[1]);
+            float amount = float.Parse(aux[1]);
+            int increase = (int) (amount * _equipmentBoost);
             
             switch(aux[0].ToLower())
             {
                 case "speed":
-                increaseSpeed(amount);
+                increaseSpeed(increase);
                 break;
 
                 case "damage":
-                increaseDamage(amount);
+                increaseDamage(increase);
                 break;
                 
                 default:
@@ -128,50 +138,55 @@ public class StatIntegration : MonoBehaviour
         }
     }
 
+    private void processHero()
+    {
+        
+    }
+
     #region Talents
 
     private void carMaxHealthTalent(int level)
     {
-        _carHealthManager.maxHealth += level * 10;
+        PlayerStats.instance.maxHealth += level * 10;
     }
 
     private void carDamageTalent(int level)
     {
-        _carShooting.IncreaseDamage(level * 10);
+        // PlayerStats.instance.IncreaseDamage(level * 10);
     }
 
     private void dropHealingTalent(int level)
     {
-        _carHealthManager.dropHealing += level * 10;
+        PlayerStats.instance.dropHealing += level * 10;
     }
 
     private void damageReductionStillTalent(int level)
     {
-        _carHealthManager.damageReductionStill += level * 10;
+        PlayerStats.instance.damageReductionStill += level * 10;
     }
 
     // --------------------------------------------------------
 
     private void damageReductionMovingTalent(int level)
     {
-        _carHealthManager.damageReductionMoving += level * 10;
+        PlayerStats.instance.damageReductionMoving += level * 10;
     }
 
     private void attackSpeedTalent(int level)
     {
-        _carShooting.IncreaseAttackSpeed(level * 10);
+        // PlayerStats.instance.IncreaseAttackSpeed(level * 10);
     }
 
     private void levelUpHealing(int level)
     {
-        _carHealthManager.levelUpHealing += level * 10;
+        PlayerStats.instance.levelUpHealing += level * 10;
     }
 
-    private void startSkillTalent(int level)
+    private void startAbilityTalent(int level)
     {
         if(level > 0)
         {
-            // ! DAR HABILIDAD
+            AbilityManager.instance.PickNewAbility();
         }
     }
 
@@ -179,28 +194,27 @@ public class StatIntegration : MonoBehaviour
 
     private void randomDropsTalent(int level)
     {
-        if(level > 0)
-        {
-            // ! HABILITAR DROPS
-        }
+        _dropsPerMinute = level * 2;
     }
 
     private void EquipmentBoostTalent(int level)
     {
-        // ! COGER CADA STAT QUE SUBE Y SUBIRLAS UN POQUITÍN
         /*
-            Como ya hemos procesado el equipamiento, habría que averiguar
-            cuánto subir.
+        En Arquero, la habilidad va de nivel 1 a 10,
+        con incrementos del 3% en cada nivel (Nivel 1 te incrementa un 3%, 
+        al 10 te incrementa el 30%)
         */
-        // foreach(var element in _inventoryManager.Equipment)
-        // {
-        //     proccessEquipment(element);
-        // }
+        _equipmentBoost += level * 0.3f;
     }
 
     private void HeroBoostTalent(int level)
     {
-        // ! COGER STATS DEL HÉROE Y SUBIRLOS USANDO LEVEL.
+        /*
+        En Arquero, la habilidad va de nivel 1 a 10,
+        con incrementos del 4% en cada nivel (Nivel 1 te incrementa un 4%, 
+        al 10 te incrementa el 40%)
+        */
+        _heroBoost += level * 0.4f;
     }
 
     #endregion
@@ -209,12 +223,12 @@ public class StatIntegration : MonoBehaviour
 
     private void increaseSpeed(int amount)
     {
-        _carController.IncreaseSpeed(amount);
+        _controller.IncreaseSpeed(amount);
     }
 
     private void increaseDamage(int amount)
     {
-        _carShooting.IncreaseDamage(amount);
+        _shooting.IncreaseDamage(amount);
     }
 
     #endregion

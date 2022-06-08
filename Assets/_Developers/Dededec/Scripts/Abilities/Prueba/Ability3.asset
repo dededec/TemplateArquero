@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f736b5555a532549969e0ca71e9dfbd, type: 3}
   m_Name: Ability3
   m_EditorClassIdentifier: 
-  name: Heal
+  name: Angle Triple Shot
   description: Ya no quiero veneno
   icon: {fileID: 21300000, guid: 7927b9032dc11e841af3f9a1353d7ecd, type: 3}

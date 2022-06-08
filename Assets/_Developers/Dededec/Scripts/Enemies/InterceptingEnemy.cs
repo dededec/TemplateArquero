@@ -9,6 +9,10 @@ public class InterceptingEnemy : EnemyBase
     [SerializeField] private Transform _player;
     [SerializeField] private float _timeToRecalculate;
     [SerializeField] private float _interceptSpeed = 25f;
+
+    // Pausa
+    private Vector3 _pausedVelocity;
+    private Vector3 _pausedAngularVelocity;
     
     // Start is called before the first frame update
     private void Start()
@@ -60,8 +64,30 @@ public class InterceptingEnemy : EnemyBase
 
     protected override void onGameStateChanged(GameState newGameState)
     {
-        
+        switch (GameStateManager.instance.CurrentGameState)
+        {
+            case GameState.Gameplay:
+            ResumeRigidbody();
+            break;
+            case GameState.Paused:
+            PauseRigidbody();
+            break;
+            default:
+            break;
+        }
     }
 
+    private void PauseRigidbody() 
+    {
+        _pausedVelocity = _rb.velocity;
+        _pausedAngularVelocity = _rb.angularVelocity;
+        _rb.isKinematic = true;
+    }
 
+    private void ResumeRigidbody() 
+    {
+        _rb.isKinematic = false;
+        _rb.velocity = _pausedVelocity;
+        _rb.angularVelocity = _pausedAngularVelocity;
+    }
 }

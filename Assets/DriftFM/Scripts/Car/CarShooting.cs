@@ -9,8 +9,11 @@ public class CarShooting : MonoBehaviour
 
     [SerializeField] private MainMenuController _mainMenuController;
     [SerializeField] private GameObject _bullet;
-    [SerializeField] private float _attackSpeed;
-    [SerializeField] private AbilityManager _abilities;
+
+    [Header("Autoaim")]
+    [SerializeField] private LayerMask _enemyLayer;
+    [SerializeField] private float _angleThreshold;
+    [SerializeField] private float _detectionRadius;
 
     private void Start() 
     {
@@ -23,7 +26,7 @@ public class CarShooting : MonoBehaviour
         {
             shoot();
             
-            for(float i=0; i<=1/_attackSpeed; i+=Time.deltaTime)
+            for(float i=0; i<=1/PlayerStats.instance.attackSpeed; i+=Time.deltaTime)
             {
                 do
                 {
@@ -35,22 +38,58 @@ public class CarShooting : MonoBehaviour
 
     private void shoot()
     {   
-        GameObject bullet = Instantiate(_bullet, transform.position + transform.forward, transform.rotation);
-        _abilities.Shoot();
+        GameObject bullet = Instantiate(_bullet, transform.position + transform.forward, autoAimRotation());
+        AbilityManager.instance.ShootAbilities();
+    }
+
+    private Quaternion autoAimRotation()
+    {
+        Collider[] hitColliders = Physics.OverlapSphere(transform.position, _detectionRadius, _enemyLayer);
+        if(hitColliders.Length == 0)
+        {
+            return transform.rotation;
+        }
+
+        float minAngle = Mathf.Infinity;
+        Collider closest = null;
+        foreach(var collider in hitColliders)
+        {
+            float angle = Vector3.Angle(transform.forward, collider.transform.position - transform.position);
+            if(angle < minAngle)
+            {
+                minAngle = angle;
+                closest = collider;
+            }
+        }
+
+        if(minAngle < _angleThreshold)
+        {
+            return Quaternion.LookRotation(closest.transform.position - transform.position, Vector3.up);
+        }
+        else
+        {
+            return transform.rotation;
+        }
+
     }
 
     public void Shoot(Vector3 position, Quaternion rotation)
     {
-        Instantiate(_bullet, position, rotation);
+        GameObject bullet = Instantiate(_bullet, position, rotation);
+    }
+
+    public void Shoot(Vector3 position)
+    {
+        Shoot(position, autoAimRotation());
     }
 
     public void IncreaseDamage(int amount)
     {
-        _bullet.GetComponent<BulletBehaviour>().IncreaseDamage(amount);
+        // _bullet.GetComponent<BulletBehaviour>().IncreaseDamage(amount);
     }
 
     public void IncreaseAttackSpeed(int amount)
     {
-        _attackSpeed += amount;
+        PlayerStats.instance.attackSpeed += amount;
     }
 }

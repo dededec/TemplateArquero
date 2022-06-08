@@ -9,12 +9,13 @@ public class CarController : MonoBehaviour
 {
     [Header("Controls")]
     [SerializeField] private Joystick _joystick;
+    [SerializeField] private Button _accelerateButton;
 
     private Rigidbody _carRB;
     
-    [SerializeField] private float accelerationFactor = 30f;
+    // [SerializeField] private float accelerationFactor = 30f;
     [SerializeField] private float turnFactor = 3.5f;
-    [SerializeField] private float maxSpeed = 20f;
+    // [SerializeField] private float maxSpeed = 20f;
     [SerializeField] float driftFactor = 0.95f;
 
     private float accelerationInput = 0;
@@ -26,8 +27,6 @@ public class CarController : MonoBehaviour
     // Pausa
     private Vector3 _pausedVelocity;
     private Vector3 _pausedAngularVelocity;
-
-    public UnityEvent MoveAbilities;
 
     public Vector3 Velocity
     {
@@ -54,7 +53,6 @@ public class CarController : MonoBehaviour
         ApplyEngineForce();
         KillOrthogonalVelocity();
         ApplySteering();
-        MoveAbilities?.Invoke();
     }
 
     private void OnDestroy() 
@@ -91,10 +89,10 @@ public class CarController : MonoBehaviour
     {
         velocityUp = Vector3.Dot(transform.forward, _carRB.velocity);
 
-        if(velocityUp > maxSpeed && accelerationInput > 0) return;
-        if(velocityUp < -maxSpeed && accelerationInput < 0) return;  
+        if(velocityUp > PlayerStats.instance.maxSpeed && accelerationInput > 0) return;
+        if(velocityUp < -PlayerStats.instance.maxSpeed && accelerationInput < 0) return;  
 
-        if(_carRB.velocity.sqrMagnitude > maxSpeed * maxSpeed && accelerationInput > 0) return;
+        if(_carRB.velocity.sqrMagnitude > PlayerStats.instance.maxSpeed * PlayerStats.instance.maxSpeed && accelerationInput > 0) return;
 
         if(accelerationInput == 0)
         {
@@ -105,7 +103,7 @@ public class CarController : MonoBehaviour
             _carRB.drag = 0;
         }
 
-        Vector3 engineForce = transform.forward * accelerationInput * accelerationFactor;
+        Vector3 engineForce = transform.forward * accelerationInput * PlayerStats.instance.accelerationFactor;
         _carRB.AddForce(engineForce, ForceMode.Force);
     }
 
@@ -208,8 +206,8 @@ public class CarController : MonoBehaviour
 
     public void IncreaseSpeed(int amount)
     {
-        accelerationFactor += amount;
-        maxSpeed += amount;
+        PlayerStats.instance.accelerationFactor += amount;
+        PlayerStats.instance.maxSpeed += amount;
     }    
 
     #endregion
