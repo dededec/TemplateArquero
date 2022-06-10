@@ -44,7 +44,7 @@ public class Item : ScriptableObject
     public float multiplier;
     public Sprite icon;
 
-    public void init(string id, string name, TypeOfReward typeOfReward, InventoryUse inventoryUse, Rarity rarity, string description, string icon)
+    public void init(string id, string name, TypeOfReward typeOfReward, InventoryUse inventoryUse, Rarity rarity, string description, string stats)
     {
         this.id = id;
         this.typeOfReward = typeOfReward;
@@ -52,6 +52,9 @@ public class Item : ScriptableObject
         this.rarity = rarity;
         this.name = name;
         this.description = description;
+        // var tex = Resources.Load<Texture2D>(name);
+        // icon = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
+        // icon.name = name;
         // this.level = level;
         // this.multiplier = multiplier;
         // TODO read item icon

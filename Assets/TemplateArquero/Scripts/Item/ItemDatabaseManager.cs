@@ -13,14 +13,13 @@ public class ItemDatabaseManager : MonoBehaviour
     private void Awake() 
     {
         DontDestroyOnLoad(this);
-        loadData();
+        //loadData();
     }
 
     public void loadData()
     {
         _EveryItemList.Clear();
         List<Dictionary<string, object>> data = CSVReader.Read("ItemDatabase");
-
         for(int i = 0; i < data.Count; i++)
         {
             string id = data[i]["id"].ToString();
@@ -38,9 +37,17 @@ public class ItemDatabaseManager : MonoBehaviour
 
             string description = data[i]["description"].ToString();
 
-            string iconPath = data[i]["icon"].ToString();
+            string[] stats = new string[]{"accelerationFactor", "maxSpeed", "attackSpeed", "attackDamage", "maxHealth", "damageReductionStill"};
+            string cStats = "";
+            foreach(string s in stats)
+            {
+                cStats += data[i][s].ToString() + ";";
+            }
+
+            //string iconPath = data[i]["icon"].ToString();
             Item item = ScriptableObject.CreateInstance<Item>();
-            item.init(id, itemName, typeOfReward, inventoryUse, rarity, description, iconPath);
+
+            item.init(id, itemName, typeOfReward, inventoryUse, rarity, description, cStats);
             _EveryItemList.Add(item);
         }
     }
@@ -62,9 +69,9 @@ public class ItemDatabaseManager : MonoBehaviour
     public List<Item> GetInventoryItems()
     {
         List<Item> aux = new List<Item>();
-
         foreach(Item i in _EveryItemList)
         {
+
             if(i.inventoryUse != Item.InventoryUse.PAYMENT) aux.Add(i);
         }
 

@@ -2,24 +2,54 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class EquipmentInfoDisplay : MonoBehaviour
 {
     [SerializeField] private GameObject _equipmentMessage;
+    [SerializeField] private GameObject equipButton;
     [SerializeField] private InventoryManager _inventory;
 
-    public void SetEquipmentMessage()
+    public void SetEquipmentMessage(bool equipped)
     {
         Item currentItem = null;
-        foreach(Item i in _inventory._playerEquipment)
+        if(gameObject.GetComponent<Image>().sprite.name != "blank")
         {
-            print(gameObject.GetComponent<Image>().sprite.name);
-            if(i.name == gameObject.GetComponent<Image>().sprite.name)
+            if(equipped)
             {
-                currentItem = i;
-                break;
+                foreach(Item i in _inventory._playerEquipment)
+                {
+                    print("Nombre del gameobject: " + gameObject.GetComponent<Image>().sprite.name);
+                    if(i != null && i.name == gameObject.GetComponent<Image>().sprite.name)
+                    {
+                        currentItem = i;
+                        break;
+                    }
+                }
+                equipButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+                equipButton.gameObject.GetComponent<Button>().onClick.AddListener(delegate { _inventory.RemoveEquipment(currentItem.id); });
+            } 
+            else
+            {
+                foreach(Item i in _inventory._PlayerItems)
+                {
+                    print("Nombre del gameobject: " + gameObject.GetComponent<Image>().sprite.name);
+                    if(i != null && i.name == gameObject.GetComponent<Image>().sprite.name)
+                    {
+                        currentItem = i;
+                        break;
+                    }
+                }
+                equipButton.gameObject.GetComponent<Button>().onClick.RemoveAllListeners();
+                equipButton.gameObject.GetComponent<Button>().onClick.AddListener(delegate { _inventory.AssignEquipment(currentItem.id); });
             }
         }
+        else
+        {
+
+        }
+
+        print(currentItem);
 
         if(currentItem != null)
         {
@@ -32,7 +62,22 @@ public class EquipmentInfoDisplay : MonoBehaviour
                     _equipmentMessage.transform.GetChild(i).GetComponent<Image>().sprite = sprite;
                 }
             }
-            print("se deberia printar las cosas");
+
+            TextMeshProUGUI[] texts = _equipmentMessage.GetComponentsInChildren<TextMeshProUGUI>();
+            foreach(TextMeshProUGUI text in texts)
+            {
+                if(text.gameObject.name == "Name") text.text = currentItem.name;
+                if(text.gameObject.name == "Equip")
+                {
+                    if(equipped) text.text = "Unequip";
+                    else text.text = "Equip";
+                }
+
+                if(text.gameObject.name == "Stats")
+                {
+                    text.text = currentItem.stats;
+                }
+            }
         }
     }
 }

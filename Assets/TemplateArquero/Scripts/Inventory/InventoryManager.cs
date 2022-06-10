@@ -22,6 +22,7 @@ public class InventoryManager : MonoBehaviour
 
     //EQUIPMENT OF THE PLAYER
     [SerializeField] public Item[] _playerEquipment = new Item[6];
+    [SerializeField] private Sprite blank;
 
     public Item[] Equipment
     {
@@ -32,9 +33,15 @@ public class InventoryManager : MonoBehaviour
     }
 
     private void Awake() {
+        _itemDatabase.loadData();
         loadData();
         setBag();
         setEquipment();
+        blank = EquipmentPanels.transform.GetChild(0).GetChild(0).GetComponent<Image>().sprite;
+        var tex = Resources.Load<Texture2D>("Blank");
+        var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
+        blank = sprite;
+        blank.name = "blank";
     }
 
     // * Call when button pressed to merge a piece of equipment with other two of the same type of item
@@ -120,6 +127,7 @@ public class InventoryManager : MonoBehaviour
             }
 
             EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite = sprite;
+            EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite.name = i.name;
 
             if(_playerEquipment[slot] != null)
             {
@@ -130,6 +138,7 @@ public class InventoryManager : MonoBehaviour
         }
         setBag();
         saveData();
+        
     }
 
     public void RemoveEquipment(string id)
@@ -140,6 +149,28 @@ public class InventoryManager : MonoBehaviour
             if(itm.id == id)
             {
                 _playerEquipment[i] = null;
+
+                int slot = 0;
+                switch(itm.inventoryUse)
+                {
+                    case Item.InventoryUse.SLOT1:
+                        slot = 0;
+                        break;
+                    case Item.InventoryUse.SLOT2:
+                        slot = 1;
+                        break;
+                    case Item.InventoryUse.SLOT3:
+                        slot = 2;
+                        break;
+                    case Item.InventoryUse.SLOT4:
+                        slot = 3;
+                        break;
+                    case Item.InventoryUse.ACCESORIES:
+                        slot = 4;
+                        break;
+                }
+                EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite = blank;
+                AddToInventory(itm.id);
                 break;
             }
             i++;
@@ -220,17 +251,18 @@ public class InventoryManager : MonoBehaviour
         {
             GameObject btn;
             btn = Instantiate(equipmentButton);
-            btn.GetComponent<Button>().onClick.AddListener(delegate { AssignEquipment(i.id); });
+            //btn.GetComponent<Button>().onClick.AddListener(delegate { AssignEquipment(i.id); });
+            btn.GetComponent<Button>().onClick.AddListener(delegate { });
             btn.transform.SetParent(gridLayoutGroup.transform);
-            print(i.name);
 
             var tex = Resources.Load<Texture2D>(i.name);
             var sprite = Sprite.Create(tex, new Rect(0.0f,0.0f,tex.width,tex.height), new Vector2(0.5f,0.5f), 100.0f);
-            print(tex.name);
             btn.GetComponentInChildren<Image>().sprite = sprite;
+            btn.GetComponentInChildren<Image>().sprite.name = i.name;
             
             //btn.GetComponentInChildren<TextMeshProUGUI>().text = i.name;
             btn.GetComponent<RectTransform>().localScale = Vector3.one;
+            btn.GetComponent<RectTransform>().anchoredPosition3D = new Vector3(btn.transform.position.x, btn.transform.position.y, 0);
 
         }
 
@@ -266,6 +298,8 @@ public class InventoryManager : MonoBehaviour
                         break;
                 }
                 EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite = sprite;
+                EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().name = i.name;
+                EquipmentPanels.transform.GetChild(slot).GetChild(0).GetComponent<Image>().sprite.name = i.name;
             }
         }
     }

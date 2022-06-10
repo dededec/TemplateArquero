@@ -10,6 +10,7 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     public float easing = 0.5f;
     public int totalPages = 5;
     private int currentPage = 3;
+    [SerializeField] private Camera mainCamera;
 
     // Start is called before the first frame update
     void Start(){
@@ -17,19 +18,19 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
     }
     public void OnDrag(PointerEventData data){
         float difference = data.pressPosition.x - data.position.x;
-        transform.position = panelLocation - new Vector3(difference, 0, 0);
+        transform.position = panelLocation - new Vector3(difference/50, 0, 0);
     }
     public void OnEndDrag(PointerEventData data){  
-        float percentage = (data.pressPosition.x - data.position.x) / Screen.width;
+        float percentage = (data.pressPosition.x - data.position.x)/50 / ((mainCamera.orthographicSize * 2f) * mainCamera.aspect);
         if(Mathf.Abs(percentage) >= percentThreshold){
             if(currentPage == 2) _car.SetActive(false);
             Vector3 newLocation = panelLocation;
             if(percentage > 0 && currentPage < totalPages){
                 currentPage++;
-                newLocation += new Vector3(-Screen.width, 0, 0);
+                newLocation += new Vector3(-(mainCamera.orthographicSize * 2f) * mainCamera.aspect, 0, 0);
             }else if(percentage < 0 && currentPage > 1){
                 currentPage--;
-                newLocation += new Vector3(Screen.width, 0, 0);
+                newLocation += new Vector3((mainCamera.orthographicSize * 2f) * mainCamera.aspect, 0, 0);
             }
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
             panelLocation = newLocation;
@@ -58,12 +59,12 @@ public class PageSwiper : MonoBehaviour, IDragHandler, IEndDragHandler{
         
         if(page > currentPage)
         {
-            newLocation += new Vector3(Screen.width * -movements, 0, 0);
+            newLocation += new Vector3(((mainCamera.orthographicSize * 2f) * mainCamera.aspect) * -movements, 0, 0);
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
         }
         else
         {
-            newLocation += new Vector3(Screen.width * movements, 0, 0);
+            newLocation += new Vector3(((mainCamera.orthographicSize * 2f) * mainCamera.aspect) * movements, 0, 0);
             StartCoroutine(SmoothMove(transform.position, newLocation, easing));
         }
         currentPage = page;

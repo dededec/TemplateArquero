@@ -4,15 +4,7 @@ using UnityEngine;
 
 public class EquipmentController : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    private PlayerStats _playerStats = PlayerStats.instance;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField] private InventoryManager _inventory;
 }
