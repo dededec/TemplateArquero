@@ -19,14 +19,7 @@ public class CarHealthManager : MonoBehaviour
     [SerializeField] private AudioSource _damageAudio;
     [SerializeField] private Slider _healthSlider;
 
-    //HealthThings
-    // [Header("Stats")]
-    // public int maxHealth = 100;
-    // public int damageReductionStill;
-    // public int damageReductionMoving;
-    // public int dropHealing;
-    // public int levelUpHealing;
-    // private int _currentHealth = 100;
+
     private bool _isHealing = false;
 
 

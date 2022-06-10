@@ -21,18 +21,19 @@ public class PlayerStats
     }
 
     // Movement
-    public float accelerationFactor = 30f;
-    public float maxSpeed = 20f;
+    public float accelerationFactor  = 25f;
+    public float maxSpeed            = 20f;
 
     // Combat
-    public float attackSpeed;
-    public int attackDamage;
+    public float attackSpeed         = 0.5f;
+    public int attackDamage          = 5;
     
     // Health and Defense
-    public int maxHealth = 100;
-    public int damageReductionStill;
-    public int damageReductionMoving;
-    public int dropHealing;
-    public int levelUpHealing;
-    public int currentHealth = 100;
+    public int maxHealth             = 100;
+    public int currentHealth         = 100;
+
+    public int damageReductionStill  = 0;
+    public int damageReductionMoving = 0;
+    public int dropHealing           = 0;
+    public int levelUpHealing        = 0;
 }

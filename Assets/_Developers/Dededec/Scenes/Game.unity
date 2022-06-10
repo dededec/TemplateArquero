@@ -1434,7 +1434,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &602046539
 GameObject:
@@ -1469,7 +1469,7 @@ Transform:
   - {fileID: 282372869}
   - {fileID: 931581204}
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &680839139
 PrefabInstance:
@@ -1807,6 +1807,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1aa9405d72d73df45acabc1b181df036, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _rewardManager: {fileID: 0}
   _exitDoor: {fileID: 1358598433}
   _enemyHolder: {fileID: 1233080814}
   _enemies: []
@@ -1826,7 +1827,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &802757060
 GameObject:
@@ -1979,7 +1980,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: -22.875, y: 0, z: 0}
 --- !u!1 &852751938
 GameObject:
@@ -2553,7 +2554,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &931581203
 GameObject:
@@ -3261,7 +3262,7 @@ Transform:
   - {fileID: 1647469123}
   - {fileID: 4005380606666998637}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1288265676
 GameObject:
@@ -3578,7 +3579,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
 --- !u!4 &1362905029 stripped
 Transform:
@@ -3586,54 +3587,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1751378508}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1514702808
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1514702810}
-  - component: {fileID: 1514702809}
-  m_Layer: 0
-  m_Name: '@TurretPool'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1514702809
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514702808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 73ffcc8e72ae135429ed2488a7cd1bfb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 843526491789848575, guid: 32b75f094f11aa2458d06516915b963d,
-    type: 3}
-  amountToPool: 100
---- !u!4 &1514702810
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1514702808}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1522889655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3828,7 +3781,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _mainMenuController: {fileID: 0}
   _bullet: {fileID: 9137070188984581116, guid: e3ed23e0cbe503c4cba5acc08658470b, type: 3}
-  _attackSpeed: 5
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
@@ -3862,11 +3814,6 @@ MonoBehaviour:
   _damageColor: {r: 1, g: 0, b: 0, a: 0}
   _damageAudio: {fileID: 1522889665}
   _healthSlider: {fileID: 1349208395}
-  maxHealth: 100
-  damageReductionStill: 0
-  damageReductionMoving: 0
-  dropHealing: 0
-  levelUpHealing: 0
 --- !u!114 &1522889669
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3879,7 +3826,27 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 077c2af003190ec4782d67cff54fc17d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _abilities: []
+  _abilities:
+  - ability: {fileID: 11400000, guid: 435a934cded3d1143be13a0790244ce5, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: 951a461f425d9d94fa125eda3ddeea07, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: acffc402308a0f34fa649171f6d465b3, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: c558155d83b3aea43b5961d6fd0ae7ad, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: b1a19dc1251f04742a1f8bf9e5aae70b, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: 435a934cded3d1143be13a0790244ce5, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: 435a934cded3d1143be13a0790244ce5, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: 435a934cded3d1143be13a0790244ce5, type: 2}
+    hasAbility: 0
+  - ability: {fileID: 11400000, guid: 4f184e25983e5584db2ae49a697ef9b8, type: 2}
+    hasAbility: 1
+  - ability: {fileID: 11400000, guid: 2b97bb4733a70394096a12cd9d3d60a0, type: 2}
+    hasAbility: 0
   _shooting: {fileID: 1522889663}
   _movement: {fileID: 1522889656}
   _abilityPickUI: {fileID: 1925422698}
@@ -4092,7 +4059,7 @@ RectTransform:
   - {fileID: 524821628}
   - {fileID: 358443487}
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -4512,55 +4479,6 @@ RectTransform:
     type: 3}
   m_PrefabInstance: {fileID: 1648352419}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &1651813441
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 1651813443}
-  - component: {fileID: 1651813442}
-  m_Layer: 0
-  m_Name: '@TurretSpawner'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &1651813442
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651813441}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a1f3dd16cb8dccc44af11e9a22337f10, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerTransform: {fileID: 1522889657}
-  _playerController: {fileID: 1522889656}
-  _maxDistance: 20
-  _minDistance: 10
-  _timeToSpawn: 1
---- !u!4 &1651813443
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1651813441}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!224 &1736882972 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2542634159010280784, guid: 120fa515ca8e5304ba7f27d2be6db1e7,
@@ -4857,7 +4775,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7789179, y: 1}
+    m_SensorSize: {x: 1.7788699, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -4880,7 +4798,7 @@ Transform:
   m_Children:
   - {fileID: 1914582671}
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 73.307, y: 0, z: 0}
 --- !u!1 &1908101253
 GameObject:
@@ -5313,7 +5231,7 @@ PrefabInstance:
     - target: {fileID: 8945594073458511823, guid: 62dbfd8a80a6a96478bd49f3309affc9,
         type: 3}
       propertyPath: m_RootOrder
-      value: 5
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 8945594073458511823, guid: 62dbfd8a80a6a96478bd49f3309affc9,
         type: 3}
@@ -5463,54 +5381,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
---- !u!1 &2005142325
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 2005142327}
-  - component: {fileID: 2005142326}
-  m_Layer: 0
-  m_Name: '@BulletPool'
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!114 &2005142326
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005142325}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 60f2714b44a942a46a07f3a6a1523f53, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  pooledObjects: []
-  objectToPool: {fileID: 105967311760150768, guid: d2b8e1d34ed11674d9684a3aa9e5b58a,
-    type: 3}
-  amountToPool: 100
---- !u!4 &2005142327
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2005142325}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2036960037
 GameObject:
   m_ObjectHideFlags: 0
@@ -5592,7 +5462,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2048828062
 GameObject:
@@ -6279,7 +6149,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4005380606183307585
 GameObject:
@@ -6446,13 +6316,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 96fa2c4af137be54f99ab962dcae29da, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 0
-  _health: 0
+  _maxHealth: 100
+  _health: 100
   _softCoinDrop: 10
-  _experienceDrop: 5
-  _extraDrop: 0
+  _itemDrop: []
   _agent: {fileID: 4005380606666998636}
   _player: {fileID: 1522889657}
   _timeToRecalculate: 0.5
-  _timeToShoot: 1
+  _timeToShoot: 5
   _bullet: {fileID: 105967311760150768, guid: d2b8e1d34ed11674d9684a3aa9e5b58a, type: 3}

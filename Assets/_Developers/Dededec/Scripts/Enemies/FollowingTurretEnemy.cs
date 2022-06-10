@@ -11,6 +11,10 @@ public class FollowingTurretEnemy : FollowingEnemy
     protected override void Start()
     {
         base.Start();
+        if(_flow == null)
+        {
+            Debug.Log("Flow es null.");
+        }
         StartCoroutine(crShoot());
     }
 
@@ -19,7 +23,7 @@ public class FollowingTurretEnemy : FollowingEnemy
         while(_flow.isPlayerAlive)
         {
             Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position - transform.position));
-            for(float i=0; i<= _timeToRecalculate; i+=Time.deltaTime)
+            for(float i=0; i<= _timeToShoot; i+=Time.deltaTime)
             {
                 do
                 {

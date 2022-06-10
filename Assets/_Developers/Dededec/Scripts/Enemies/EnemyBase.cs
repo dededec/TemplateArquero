@@ -10,11 +10,12 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected int _health;
     [SerializeField] protected static LevelFlow _flow;
     [SerializeField] protected int _softCoinDrop;
-    [SerializeField] protected int _experienceDrop;
 
     [Header("Extra drops")]
-    [SerializeField] protected bool _extraDrop;
-    // ? ¿Cómo represento los drops?
+    [SerializeField] protected Item[] _itemDrop;
+
+    private Coroutine _poisonCoroutine = null;
+    private Coroutine _burnCoroutine = null;
 
     public int SoftCoinDrop
     {
@@ -24,11 +25,11 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    public int Experience
+    public Item[] ItemDrop
     {
         get
         {
-            return _experienceDrop;
+            return _itemDrop;
         }
     }
 
@@ -57,11 +58,6 @@ public class EnemyBase : MonoBehaviour
     private void OnDestroy() 
     {
         GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
-
-        if(_extraDrop)
-        {
-            Debug.Log("Se dropean cosas extra");
-        }
         
         dropSoftCoin();
     }
@@ -77,4 +73,68 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected virtual void onGameStateChanged(GameState newGameState){}
+
+    #region Cosas de los venenos y las quemaduras
+
+    public void ApplySpark() 
+    {
+        /*
+        Ver enemigos a menos de x distancia (con OverlapSphere)
+        y dañarlos en PlayerStats.attackDamage * 0.25f
+
+        Limitar: Solo se puede un rayo por enemigo por "tick"
+        Podríamos hacer una coroutine que, si se puede, lance el rayo
+        espere el tiempo del tick (2/7 segundos) y ponga disponible el spark
+        de nuevo.
+        */
+        Debug.Log("Spark");
+    }
+
+    public void ApplyFreeze()
+    {
+        /*
+        Ni idea de cómo meterlo la verdad
+        */
+        Debug.Log("Freeze");
+    }
+
+    public void ApplyPoison() 
+    {
+        if(_poisonCoroutine == null)
+        {
+            _poisonCoroutine = StartCoroutine(crApplyPoison());
+        }
+    }
+    private IEnumerator crApplyPoison()
+    {
+        int damage = (int)((float) PlayerStats.instance.attackDamage * 0.35f);
+        while(_health > 0)
+        {
+            yield return new WaitForSeconds(1f);
+            TakeDamage(damage);
+        }
+        _poisonCoroutine = null;
+    }
+
+    public void ApplyBurn()
+    {
+        if(_burnCoroutine == null)
+        {
+            _burnCoroutine = StartCoroutine(crApplyBurn());
+        }
+    }
+    private IEnumerator crApplyBurn()
+    {
+        float duracion = 2f;
+        int damage = (int)((float) PlayerStats.instance.attackDamage * 0.18f);
+        for(float i = 0f; i < duracion && _health > 0; i += Time.deltaTime)
+        {
+            yield return new WaitForSeconds(0.25f);
+            TakeDamage(damage);
+        }
+
+        _burnCoroutine = null;
+    }
+
+    #endregion
 }

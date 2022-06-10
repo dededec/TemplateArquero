@@ -85,9 +85,12 @@ public class PlayerBulletBehaviour : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             var enemyBase = other.gameObject.GetComponent<EnemyBase>();
-            // ! Aqui habria que llamar a un script que contenga las estadisticas del jugador
-            enemyBase.TakeDamage(20);
-            AbilityManager.instance.OnHitAbilities();
+            enemyBase.TakeDamage(PlayerStats.instance.attackDamage);
+            AbilityManager.instance.OnHitAbilities(enemyBase);
+            if(!AbilityManager.instance.HasAbility("Rebote"))
+            {
+                Destroy(gameObject);
+            }
         }    
     }
 }

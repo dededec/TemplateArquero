@@ -56,11 +56,17 @@ public class AbilityManager : MonoBehaviour
     #endregion
 
     /*
-    Indice - Función:
-    0 - TripleShot
-    1 - 
-    2 - 
+    Orden de habilidades:
+    [x, y].- Modificadores de disparo
+    [x, y].- Modificadores de impacto (rebote en pared, en enemigos, etc)
+    [x, y].- Habilidades elementales de disparo (balas de veneno y cosas así)
+    [x, y].- Habilidades elementales de estela de drift 
+    [x, y].- Habilidades que solo se llaman una vez al conseguirse (aumento de estadísticas, heal, etc)
+    [x, y].- Mejoras de stats si se limpia una sala sin recibir daño
+
+    -------------------------
     */
+
     [SerializeField] private List<AbilityElement> _abilities;
     [SerializeField] private CarShooting _shooting;
     [SerializeField] private CarController _movement;
@@ -71,6 +77,11 @@ public class AbilityManager : MonoBehaviour
     [SerializeField] private Image[] _icons;
     [SerializeField] private TMP_Text[] _names;
     [SerializeField] private TMP_Text[] _descriptions;
+
+    /*
+    Si se stackean habilidades:
+    
+    */
 
     #region Properties
 
@@ -123,21 +134,41 @@ public class AbilityManager : MonoBehaviour
         GameStateManager.instance.SetState(GameState.Gameplay);
     }
 
-    public void UseAbilities(int inicio, int fin)
+    public void UseAbilities(int inicio, int fin, EnemyBase target = null)
     {
         for(int i = inicio; i < fin; ++i)
         {
             if(_abilities[i].hasAbility)
             {
-                UseAbility(i);
+                UseAbility(i, target);
             }
         }
     }
 
-    public void ShootAbilities() => UseAbilities(0, 5);
-    public void OnHitAbilities() => UseAbilities(5, 10);
+    public void ShootAbilities() => UseAbilities(0, 8);
     
+    public void OnHitAbilities(EnemyBase target)
+    {
+        Debug.Log("OnHitAbilities");
+        UseAbilities(8, 10, target);
+    }
 
+    public bool HasAbility(string name)
+    { 
+        var ab = _abilities.Find(ab => ab.ability.name == name);
+        if(ab == null)
+        {
+            Debug.Log("Habilidad no encontrada, nombre: " + name);
+            return false;
+        }
+        else
+        {
+            return ab.hasAbility;
+        }
+    }
+
+    public bool HasAbility(int index) => _abilities[index].hasAbility;        
+    
     public List<AbilityElement> SublistAbilities()
     {
         var indexes = FindAbilitiesIndex(false);
@@ -195,8 +226,8 @@ public class AbilityManager : MonoBehaviour
 
         return result;
     }
-
-    private void UseAbility(int index)
+ 
+    private void UseAbility(int index, EnemyBase target = null)
     {
         switch(index)
         {
@@ -209,6 +240,19 @@ public class AbilityManager : MonoBehaviour
             case 2:
             AngleTripleShot();
             break;
+
+            //... case 7: break;
+            
+            case 8:
+            ApplySpark(target);
+            break;
+            case 9:
+            ApplyPoison(target);
+            break;
+            case 10:
+            ApplyBurn(target);
+            break;
+
             default:
             Debug.LogWarning("Indice de habilidad " + index + " no tiene habilidad asignada.");
             break;
@@ -218,6 +262,8 @@ public class AbilityManager : MonoBehaviour
     #endregion
 
     #region Abilities
+
+    #region Shot Modifiers
 
     private void TripleShot()
     {
@@ -236,6 +282,32 @@ public class AbilityManager : MonoBehaviour
         _shooting.Shoot(_shooting.transform.position + _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * 45));
         _shooting.Shoot(_shooting.transform.position - _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * -45));
     }
+
+    #endregion
+
+    #region OnHitAbilities
+
+    private void ApplySpark(EnemyBase enemy)
+    {
+        enemy.ApplySpark();
+    }
+
+    private void ApplyFreeze(EnemyBase enemy)
+    {
+        enemy.ApplyFreeze();
+    }
+
+    private void ApplyPoison(EnemyBase enemy)
+    {
+        enemy.ApplyPoison();
+    }
+
+    private void ApplyBurn(EnemyBase enemy)
+    {
+        enemy.ApplyBurn();
+    }
+
+    #endregion
 
     #endregion
 }
