@@ -101,7 +101,7 @@ public static class EconomyManager
                 result = Energy >= amount;
                 break;
         }
-
+        onValuesChanged();
         return result;
     }
 
@@ -119,6 +119,7 @@ public static class EconomyManager
                 Energy = AddInternal(Energy, amount);
                 break;
         }
+        onValuesChanged();
     }
 
     private static int PayInternal(int currency, int amount)
@@ -137,5 +138,8 @@ public static class EconomyManager
         currency += amount;
         return currency;
     }
+
+    public delegate void OnValuesChanged();
+    public static event OnValuesChanged onValuesChanged;
 
 }

@@ -40,6 +40,7 @@ public class SaveData
         softCoins = 0;
         hardCoins = 0;
         experience = 0;
+        energy = 20;
         lastConnection = System.DateTime.Now.ToString();
         talentsList = new int[12];
         inventory = "";
