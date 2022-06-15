@@ -37,7 +37,7 @@ public class TalentManager : MonoBehaviour
     [SerializeField] private int price = 100;
     // ? Talent list that we will have to save, or at least save its data somehow and load it back here
     [SerializeField] private Talent[] _talents = new Talent[12];
-    [SerializeField] private int _maxLevel = 3;
+    [SerializeField] public int[] _maxLevel = new int[12]{3,3,3,3,3,3,3,3,3,3,3,3};
     private int _timesTalentsUpgraded;
 
     [System.Serializable]
@@ -67,14 +67,17 @@ public class TalentManager : MonoBehaviour
     {
         bool userCanPay = true;
         bool completed = true;
+
+        int i = 0;
         
         foreach(Talent t in _talents)
         {
-            if(t.level != _maxLevel)
+            if(t.level != _maxLevel[i])
             {
                 completed = false;
                 break;
             }
+            i++;
         }
 
         if(!completed) userCanPay = EconomyManager.Pay(_paymentMethod, price);
@@ -105,7 +108,7 @@ public class TalentManager : MonoBehaviour
             rTalentIndex = r.Next(8, 12);
         }
 
-        if(_talents[rTalentIndex].level < _maxLevel)
+        if(_talents[rTalentIndex].level < _maxLevel[rTalentIndex])
         {
             _talents[rTalentIndex].gainLevel();
             return true;

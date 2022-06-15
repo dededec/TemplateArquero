@@ -41,7 +41,7 @@ public class ItemDatabaseManager : MonoBehaviour
             string cStats = "";
             foreach(string s in stats)
             {
-                cStats += data[i][s].ToString() + ";";
+                cStats += s + ":" + data[i][s].ToString() + ";";
             }
 
             //string iconPath = data[i]["icon"].ToString();
