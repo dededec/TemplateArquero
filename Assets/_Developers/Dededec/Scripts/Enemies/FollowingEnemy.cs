@@ -5,6 +5,7 @@ using UnityEngine.AI;
 
 public class FollowingEnemy : EnemyBase
 {
+    [Header("Following Settings")]
     [SerializeField] protected NavMeshAgent _agent;
     [SerializeField] protected Transform _player;
     [SerializeField] protected float _timeToRecalculate;
@@ -13,6 +14,7 @@ public class FollowingEnemy : EnemyBase
     
     protected virtual void Start() 
     {
+        _player = GameObject.FindGameObjectWithTag("Car").transform;
         StartCoroutine(crFollowPlayer());
     }
 
@@ -21,6 +23,7 @@ public class FollowingEnemy : EnemyBase
 
     private void Update() 
     {
+        base.Update();
         if(Input.GetKeyDown(KeyCode.Space))
         {
             Destroy(this.gameObject);
@@ -46,6 +49,8 @@ public class FollowingEnemy : EnemyBase
 
     private IEnumerator crFollowPlayer()
     {
+        _animator.SetBool("IsMoving", true);
+        yield return new WaitForSeconds(3f);
         while(_flow.isPlayerAlive)
         {
             _agent.SetDestination(_player.position);
@@ -59,6 +64,7 @@ public class FollowingEnemy : EnemyBase
         }
 
         _agent.isStopped = true;
+        _animator.SetBool("IsMoving", false);
     }
 
     #endregion

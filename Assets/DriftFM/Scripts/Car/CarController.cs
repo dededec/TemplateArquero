@@ -28,6 +28,9 @@ public class CarController : MonoBehaviour
     private Vector3 _pausedVelocity;
     private Vector3 _pausedAngularVelocity;
 
+    private float _timeStuck;
+    private Coroutine _unstuckCoroutine;
+
     public Vector3 Velocity
     {
         get
@@ -147,6 +150,7 @@ public class CarController : MonoBehaviour
     public void frenada()
     {
         accelerationInput = 0;
+        _carRB.angularVelocity = Vector3.zero;
     }
 
     private float GetLateralVelocity() 
@@ -211,5 +215,34 @@ public class CarController : MonoBehaviour
     }    
 
     #endregion
+
+    // private void OnCollisionStay(Collision other) 
+    // {
+    //     if(other.gameObject.tag != "Wall") return;
+
+    //     _timeStuck += Time.deltaTime;  
+    //     if(_timeStuck > 0.75f)
+    //     {
+    //         if(_unstuckCoroutine == null)
+    //         {
+    //             _unstuckCoroutine = StartCoroutine(crUnstuck());
+    //         }
+    //     }  
+    // }
+
+    // private void OnCollisionExit(Collision other) 
+    // {
+    //     Debug.Log("SALE DE STUCK");
+    //     _timeStuck = 0f;    
+    // }
+
+    // private IEnumerator crUnstuck()
+    // {
+    //     Vector3 engineForce = (Vector3.zero-transform.position) * 20f;
+    //     _carRB.AddForce(engineForce, ForceMode.Force);
+    //     yield return new WaitForSeconds(1f);
+    //     _carRB.velocity = Vector3.zero;
+    //     _unstuckCoroutine = null;
+    // }
 
 }

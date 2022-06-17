@@ -86,6 +86,8 @@ public class CarShooting : MonoBehaviour
     public void IncreaseDamage(int amount)
     {
         // _bullet.GetComponent<BulletBehaviour>().IncreaseDamage(amount);
+        PlayerStats.instance.attackDamage += amount;
+
     }
 
     public void IncreaseAttackSpeed(int amount)

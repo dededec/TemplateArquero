@@ -149,7 +149,6 @@ public class AbilityManager : MonoBehaviour
     
     public void OnHitAbilities(EnemyBase target)
     {
-        Debug.Log("OnHitAbilities");
         UseAbilities(8, 10, target);
     }
 

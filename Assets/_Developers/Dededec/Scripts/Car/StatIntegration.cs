@@ -140,7 +140,9 @@ public class StatIntegration : MonoBehaviour
 
     private void processHero()
     {
-        
+        /*
+        Stats y skin
+        */
     }
 
     #region Talents

@@ -12,6 +12,7 @@ TagManager:
   - LevelFlow
   - InventoryManager
   - TalentManager
+  - Wall
   layers:
   - Default
   - TransparentFX

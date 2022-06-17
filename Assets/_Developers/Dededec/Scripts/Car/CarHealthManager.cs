@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class CarHealthManager : MonoBehaviour
 {
+    private bool _isInvincible = false;
+
     [Header("Dependencies")]
     [SerializeField] private CMScreenshake _cmScreenshake;
     [SerializeField] private CarController _carController;
@@ -53,6 +55,8 @@ public class CarHealthManager : MonoBehaviour
 
     public void TakeDamage(int value)
     {
+        if(_isInvincible) return;
+
         _cmScreenshake.ShakeCamera(8, 0.5f);
         
         if(_carController.IsMoving())
@@ -116,11 +120,14 @@ public class CarHealthManager : MonoBehaviour
 
     private IEnumerator takeDamageCoroutine()
     {
+        _isInvincible = true;
         //Se cambia el color
         _carMaterial.color = _damageColor;
         _damageAudio.Play();
         yield return new WaitForSeconds(0.5f);
         //Se vuelve a poner
         _carMaterial.color = _originalCar;
+        yield return new WaitForSeconds(0.5f);
+        _isInvincible = false;
     }
 }

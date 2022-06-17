@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
+using UnityEngine.UI;
 
 public class EnemyBase : MonoBehaviour
 {
@@ -11,11 +12,16 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected static LevelFlow _flow;
     [SerializeField] protected int _softCoinDrop;
 
+    [SerializeField] protected Animator _animator;
+
     [Header("Extra drops")]
     [SerializeField] protected Item[] _itemDrop;
 
     private Coroutine _poisonCoroutine = null;
     private Coroutine _burnCoroutine = null;
+
+    [SerializeField] private Camera _mainCamera;
+    [SerializeField] protected Image _healthSlider;
 
     public int SoftCoinDrop
     {
@@ -33,6 +39,42 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
+    #region Life Cycle
+
+    protected void Awake() 
+    {
+        gameObject.tag = "Enemy";
+        _health = _maxHealth;
+        _mainCamera = Camera.main;
+        _animator = GetComponentInChildren<Animator>();
+        GameStateManager.instance.onGameStateChanged += onGameStateChanged;
+    }
+
+    protected void Update() 
+    {
+        // Offset position above object bbox (in world space)
+        float offsetPosZ = transform.position.z + 1.5f;
+        float offsetPosY = transform.position.y + 1.5f;
+
+        // Final position of marker above GameObject in world space
+        Vector3 offsetPos = new Vector3(transform.position.x, offsetPosY, offsetPosZ);
+
+        // Calculate *screen* position (note, not a canvas/recttransform position)
+        Vector2 screenPoint = _mainCamera.WorldToScreenPoint(offsetPos);
+
+        // Set
+        _healthSlider.GetComponent<RectTransform>().position = screenPoint;
+    }
+
+    private void OnDestroy() 
+    {
+        GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
+        
+        dropSoftCoin();
+    }
+
+    #endregion
+
     public void AssignLevelFlow(LevelFlow flow)
     {
         _flow = flow;
@@ -41,25 +83,29 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         _health -= amount;
+        _healthSlider.fillAmount = (float)_health/(float)_maxHealth;
         if(_health <= 0)
         {
             // Destruir cositas
+            _animator.SetTrigger("IsDead");
             _flow.DeleteEnemy(this);
+        }
+        else
+        {
+            _animator.SetTrigger("IsDamaged");
+            StartCoroutine(crDamageTaken());
         }
     }
 
-    private void Awake() 
+    private IEnumerator crDamageTaken()
     {
-        gameObject.tag = "Enemy";
-        _health = _maxHealth;
-        GameStateManager.instance.onGameStateChanged += onGameStateChanged;
-    }
-
-    private void OnDestroy() 
-    {
-        GameStateManager.instance.onGameStateChanged -= onGameStateChanged;
-        
-        dropSoftCoin();
+        var mat = GetComponentInChildren<Renderer>().material;
+        for(float i=0; i<0.5f; i += Time.deltaTime)
+        {
+            mat.color = mat.color == Color.white ? mat.color = Color.red : mat.color = Color.white;
+            yield return null;
+        }
+        mat.color = Color.white;
     }
 
     private void dropSoftCoin()

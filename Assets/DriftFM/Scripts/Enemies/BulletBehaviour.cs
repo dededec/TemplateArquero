@@ -96,7 +96,6 @@ namespace LoopJam
 
         private void OnTriggerEnter(Collider other)
         {
-            Debug.Log("Collision with: " + other.gameObject.name);
             if(other.gameObject.tag == "Car")
             {
                 other.gameObject.GetComponent<CarHealthManager>().TakeDamage(_damageDealt);

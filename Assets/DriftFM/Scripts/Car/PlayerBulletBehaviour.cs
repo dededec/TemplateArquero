@@ -91,6 +91,13 @@ public class PlayerBulletBehaviour : MonoBehaviour
             {
                 Destroy(gameObject);
             }
-        }    
+        }   
+        else if(other.gameObject.tag == "Wall")
+        {
+            if(!AbilityManager.instance.HasAbility("Rebote"))
+            {
+                Destroy(gameObject);
+            }
+        }
     }
 }
