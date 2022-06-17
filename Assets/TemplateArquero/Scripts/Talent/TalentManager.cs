@@ -37,7 +37,7 @@ public class TalentManager : MonoBehaviour
     [SerializeField] private int price = 100;
     // ? Talent list that we will have to save, or at least save its data somehow and load it back here
     [SerializeField] private Talent[] _talents = new Talent[12];
-    [SerializeField] public int[] _maxLevel = new int[12]{3,3,3,3,3,3,3,3,3,3,3,3};
+    [SerializeField] public int[] _maxLevel;
     private int _timesTalentsUpgraded;
 
     [System.Serializable]
@@ -61,6 +61,7 @@ public class TalentManager : MonoBehaviour
     {
         AwakeSingleton();
         loadData();    
+        _maxLevel = new int[12]{3,3,3,3,3,3,3,3,3,3,3,3};
     }
 
     public void GiveRandomTalent()

@@ -15,7 +15,7 @@ public class TalentsController : MonoBehaviour
     {
         for(int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = _talentManager.Talents[i].level + "";
+            transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = _talentManager.Talents[i].level + "";
         }
         int aux = _talentManager.GetTimesTalentsUpgraded(); 
         float mod = 1f + aux/10f;
@@ -28,7 +28,7 @@ public class TalentsController : MonoBehaviour
         _talentManager.GiveRandomTalent(); 
         for(int i = 0; i < transform.childCount; i++)
         {
-            transform.GetChild(i).GetChild(0).GetComponent<TextMeshProUGUI>().text = _talentManager.Talents[i].level + "";
+            transform.GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>().text = _talentManager.Talents[i].level + "";
         }
 
         int aux = _talentManager.GetTimesTalentsUpgraded(); 
