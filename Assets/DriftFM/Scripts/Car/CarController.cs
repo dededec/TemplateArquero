@@ -47,7 +47,9 @@ public class CarController : MonoBehaviour
 
     private void Awake() 
     {
-        _carRB = GetComponent<Rigidbody>();
+        _carRB = gameObject.GetComponent<Rigidbody>();
+        _joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
+        _accelerateButton = GameObject.FindGameObjectWithTag("AccelerateButton").GetComponent<Button>();
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 

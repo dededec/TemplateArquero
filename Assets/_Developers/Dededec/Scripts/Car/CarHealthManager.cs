@@ -8,7 +8,7 @@ public class CarHealthManager : MonoBehaviour
     private bool _isInvincible = false;
 
     [Header("Dependencies")]
-    [SerializeField] private CMScreenshake _cmScreenshake;
+    //[SerializeField] private CMScreenshake _cmScreenshake;
     [SerializeField] private CarController _carController;
     [SerializeField] private LevelFlow _levelFlow;
 
@@ -41,8 +41,11 @@ public class CarHealthManager : MonoBehaviour
     
     private void Awake() 
     {
+        _healthSlider = GameObject.FindGameObjectWithTag("HealthBar").GetComponent<Slider>();
+        _healthSlider.gameObject.transform.parent.parent.gameObject.SetActive(false);
         _carController = GetComponent<CarController>();
         _carMaterial.color = _originalCar;
+        _levelFlow = GameObject.FindGameObjectWithTag("LevelFlow").GetComponent<LevelFlow>();
     }
 
     private void Update()
@@ -50,6 +53,7 @@ public class CarHealthManager : MonoBehaviour
         if(CurrentHealth > 0 && GameStateManager.instance.CurrentGameState == GameState.Gameplay && !_isHealing)
         {
             StartCoroutine(HealCoroutine());
+            
         }
     }
 
@@ -57,7 +61,7 @@ public class CarHealthManager : MonoBehaviour
     {
         if(_isInvincible) return;
 
-        _cmScreenshake.ShakeCamera(8, 0.5f);
+        //_cmScreenshake.ShakeCamera(8, 0.5f);
         
         if(_carController.IsMoving())
         {

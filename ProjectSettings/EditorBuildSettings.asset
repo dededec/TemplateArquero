@@ -6,9 +6,12 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/_Developers/Dededec/Scenes/World1/Easy/1_0_5.unity
+    guid: 1d234aaa4227215449faa556bd2a0cb5
+  - enabled: 0
     path: Assets/_Developers/Alcaval/Scenes/MainMenu.unity
     guid: 30e7a27061d8599418ba823ec8816ab6
-  - enabled: 1
+  - enabled: 0
     path: Assets/_Developers/Dededec/Scenes/Game.unity
     guid: ca4cd3cac3ba1644eb60d30f16f2c437
   - enabled: 0

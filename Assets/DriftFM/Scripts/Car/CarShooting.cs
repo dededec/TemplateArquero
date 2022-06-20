@@ -6,8 +6,6 @@ using LoopJam;
 
 public class CarShooting : MonoBehaviour
 {
-
-    [SerializeField] private MainMenuController _mainMenuController;
     [SerializeField] private GameObject _bullet;
 
     [Header("Autoaim")]

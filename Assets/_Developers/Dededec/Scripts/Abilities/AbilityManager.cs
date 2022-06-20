@@ -51,6 +51,16 @@ public class AbilityManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        _abilityPickUI = GameObject.FindGameObjectWithTag("AbilityUI");
+        _abilityPickUI.SetActive(false);
+        for(int i = 0; i < 3; i++)
+        {
+            _buttons[i] = _abilityPickUI.transform.GetChild(1).GetChild(i).GetComponent<Button>();
+            _icons[i] = _abilityPickUI.transform.GetChild(1).GetChild(i).GetChild(0).GetComponent<Image>();
+            _names[i] = _abilityPickUI.transform.GetChild(1).GetChild(i).GetChild(1).GetComponent<TextMeshProUGUI>();
+            _descriptions[i] = _abilityPickUI.transform.GetChild(1).GetChild(i).GetChild(2).GetComponent<TextMeshProUGUI>();
+        }
     }
 
     #endregion

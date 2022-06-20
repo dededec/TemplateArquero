@@ -85,6 +85,8 @@ public class PlayerBulletBehaviour : MonoBehaviour
         if(other.gameObject.tag == "Enemy")
         {
             var enemyBase = other.gameObject.GetComponent<EnemyBase>();
+            Debug.Log(other.transform.parent.name);
+            Debug.Log(PlayerStats.instance.attackDamage);
             enemyBase.TakeDamage(PlayerStats.instance.attackDamage);
             AbilityManager.instance.OnHitAbilities(enemyBase);
             if(!AbilityManager.instance.HasAbility("Rebote"))
