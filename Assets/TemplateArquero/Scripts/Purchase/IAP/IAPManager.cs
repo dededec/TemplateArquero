@@ -23,6 +23,8 @@ public class IAPManager : MonoBehaviour
             if(IAPr.idProduct == product.definition.id)
             {
                 _rewardManager.GiveReward(IAPr.rewards);
+
+                GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("BuyOrWatchVideo");
             }
         }
     }

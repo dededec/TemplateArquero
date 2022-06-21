@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.18028334, g: 0.22571328, b: 0.3069217, a: 1}
+  m_IndirectSpecularColor: {r: 0.18028378, g: 0.22571412, b: 0.30692285, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5855,7 +5855,7 @@ GameObject:
   - component: {fileID: 439190459}
   m_Layer: 0
   m_Name: '@DailyManager'
-  m_TagString: Untagged
+  m_TagString: DailyManager
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5893,6 +5893,7 @@ MonoBehaviour:
   _intervalSeconds: 0
   _timeManager: {fileID: 1161796651}
   _rewardManager: {fileID: 1934261530}
+  _questManager: {fileID: 439190459}
 --- !u!114 &439190459
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5910,8 +5911,12 @@ MonoBehaviour:
   _intervalMinutes: 0
   _intervalSeconds: 0
   _timeManager: {fileID: 1161796651}
-  _dailyQuests: []
+  _dailyQuests:
+  - {fileID: 11400000, guid: 50c95f07e9aeb8a4d9ef2b55d688ef28, type: 2}
+  - {fileID: 11400000, guid: b763281468fce114782a68b4c738899f, type: 2}
   _rewardManager: {fileID: 1934261530}
+  _enemiesDefeated: 0
+  _levelsPlayed: 0
 --- !u!1 &449580900
 GameObject:
   m_ObjectHideFlags: 0
@@ -10194,8 +10199,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 758510935}
   m_HandleRect: {fileID: 0}
   m_Direction: 0
-  m_Value: 0.99761164
-  m_Size: 0.4190699
+  m_Value: 0.9976117
+  m_Size: 0.45490012
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

@@ -6,34 +6,54 @@ using UnityEngine.Events;
 
 public class DailyQuestsManager : TimedObject
 {
-    [SerializeField] private List<Quest> _dailyQuests;
-    private List<bool> _isQuestDone;
-    [SerializeField] private RewardManager _rewardManager;
-    private string[] questData = null;
+    // private static DailyQuestsManager _instance;
+    // public static DailyQuestsManager instance
+    // {
+    //     get 
+    //     {
+    //         if(_instance == null)
+    //             _instance = new DailyQuestsManager();
+    //         return _instance;
+    //     }
+    // }
 
-    public string DailyQuests
+    [SerializeField] private List<Quest> _dailyQuests = new List<Quest>();
+    [SerializeField] private RewardManager _rewardManager;
+
+    [Header("Control variables")]
+    [SerializeField] private int _enemiesDefeated = 0;
+    [SerializeField] private int _levelsPlayed = 0;
+
+    public bool[] CompletedDailyQuests
     {
         get
         {
-            return SaveDataController.DailyQuests;
+            return SaveDataController.CompletedDailyQuests;
         }
 
         set
         {
-            SaveDataController.DailyQuests = value;
+            SaveDataController.CompletedDailyQuests = value;
         }
     }
 
+    public bool[] ReclaimedDailyQuests
+    {
+        get
+        {
+            return SaveDataController.ReclaimedDailyQuests;
+        }
+
+        set
+        {
+            SaveDataController.ReclaimedDailyQuests = value;
+        }
+    }
+
+    #region Protected Methods
 
     protected override void Initialize()
     {
-        /*
-        ¿Necesitamos cargar las misiones?, y si ha pasado un día desde la última
-        conexión el usuario puede hacer todas las misiones.
-        */
-
-        // ? ReadCSV();
-        questData = DailyQuests.Split(";");
         System.TimeSpan timeSpan = _timeManager.TimeSinceLastConnection();
         if (timeSpan.TotalDays >= 1f)
         {
@@ -49,10 +69,21 @@ public class DailyQuestsManager : TimedObject
         {
             quest.progress = 0;
         }
+
+        for(int i=0; i < CompletedDailyQuests.Length; ++i)
+        {
+            CompletedDailyQuests[i] = false;
+            ReclaimedDailyQuests[i] = false;
+        }
     }
+
+    #endregion
+
+    #region Quest control Methods
 
     public void SetProgress(string id, int progress)
     {
+        Debug.Log("id: " + id + " DailyQuest: " + (_dailyQuests.Count));
         Quest quest = _dailyQuests.Find(q => q.id == id);
         if(quest != null)
         {
@@ -64,20 +95,80 @@ public class DailyQuestsManager : TimedObject
         }
     }
 
-    public void QuestCompleted(string id)
-    {
-        Quest quest = _dailyQuests.Find(quest => quest.id == id);
-        if(quest == null)
-        {
-            Debug.LogError("Error (QuestCompleted): Quest con id ( " + id + " ) no encontrada.");
-            return;
-        }
-        
-        QuestCompleted(quest);
+    public void QuestCompleted(Quest quest)
+    {   
+        int index = _dailyQuests.FindIndex(q => q == quest);
+        if(CompletedDailyQuests[index]) return;
+
+        CompletedDailyQuests[index] = true;
     }
 
-    public void QuestCompleted(Quest quest)
+    public void QuestReclaimed(Quest quest)
     {
+        int index = _dailyQuests.FindIndex(q => q == quest);
+        if(!CompletedDailyQuests[index] || ReclaimedDailyQuests[index]) return;
+
+        ReclaimedDailyQuests[index] = true;
         _rewardManager.GiveReward(quest.rewards);
     }
+
+    #endregion
+
+    #region Quest Specific Methods
+
+    /*
+    Logearse al juego
+    Jugar dos fases normales
+    Mejorar equipamiento
+    Mejorar Heroe
+    Comprar X pack de cosas
+    Abrir cofre de oro
+    Abrir cofre de obsidiana
+    Comprar una cosa
+    Fusionar un equipamiento
+    Ver un video o comprar algo
+    */
+
+    public void resetControlVariables()
+    {
+        _enemiesDefeated = 0;
+        _levelsPlayed = 0;
+    }
+
+    public void ProgressQuest(string id)
+    {
+        switch(id)
+        {
+            case "BuyOrWatchVideo":
+            case "CarUpgrade":
+            case "EquipmentUpgrade":
+            case "EquipmentFuse":
+            case "GoldChestOpen":
+            case "Login":
+            case "ObsidianChestOpen":
+            SetProgress(id, 100);
+            break;
+            
+            case "DefeatEnemies":
+            _enemiesDefeated++;
+            if(_enemiesDefeated >= 3)
+            {
+                SetProgress("DefeatEnemies", Lerp(0, 100, _enemiesDefeated/3));
+            }
+            break;
+
+            case "PlayedLevels":
+            _levelsPlayed++;
+            if(_levelsPlayed > 2)
+            {
+                SetProgress("PlayedLevels", Lerp(0, 100, _enemiesDefeated/2));
+            }
+            break;
+        }
+    }
+    #endregion
+
+
+    private int Lerp(int a, int b, float t) => (int) Mathf.Lerp(a,b,t);
+
 }

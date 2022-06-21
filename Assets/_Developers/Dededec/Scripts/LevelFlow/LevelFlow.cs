@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class LevelFlow : MonoBehaviour
 {   
+    [SerializeField] private DailyQuestsManager _questManager;
     [SerializeField] private RewardManager _rewardManager;
     [SerializeField] private ExitDoor _exitDoor;
     [SerializeField] private Transform _enemyHolder;
@@ -26,7 +27,8 @@ public class LevelFlow : MonoBehaviour
                 _enemies.Add(_enemyHolder.GetChild(i).GetComponent<EnemyBase>());
             }
         }
-
+        
+        _questManager = GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>();
         _enemies[0].AssignLevelFlow(this);
     }
 
@@ -39,6 +41,7 @@ public class LevelFlow : MonoBehaviour
         {
             _accItem.Add(new Reward(item.id, 1));
         }
+        _questManager.ProgressQuest("DefeatEnemies");
         Destroy(enemy.gameObject);
         
         if(_enemies.Count <= 0)

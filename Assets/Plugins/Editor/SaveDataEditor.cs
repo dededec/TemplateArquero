@@ -96,6 +96,28 @@ public class SaveDataEditor : EditorWindow
             saveData.achievements = EditorGUILayout.TextField(saveData.achievements, GUILayout.Height(height), GUILayout.Width(200)); 
             EditorGUILayout.EndHorizontal();
 
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Daily Quests", GUILayout.Height(height * 1.5f), GUILayout.Width(200));
+            EditorGUILayout.EndHorizontal();
+
+            // Completed Daily Missions.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Completed Daily Quests", GUILayout.Height(height), GUILayout.Width(200));
+            for (int i = 0; i < saveData.completedDailyQuests.Length; i++)
+            {
+                saveData.completedDailyQuests[i] = EditorGUILayout.Toggle(saveData.completedDailyQuests[i], GUILayout.Height(height), GUILayout.Width(20));
+            }
+            EditorGUILayout.EndHorizontal();
+
+            // Reclaimed Daily Missions.
+            EditorGUILayout.BeginHorizontal();
+            GUILayout.Label("Reclaimed Daily Quests", GUILayout.Height(height), GUILayout.Width(200));
+            for (int i = 0; i < saveData.reclaimedDailyQuests.Length; i++)
+            {
+                saveData.reclaimedDailyQuests[i] = EditorGUILayout.Toggle(saveData.reclaimedDailyQuests[i], GUILayout.Height(height), GUILayout.Width(20));
+            }
+            EditorGUILayout.EndHorizontal();
+
             // //Ejemplo de variable bool
             // EditorGUILayout.BeginHorizontal();
             // GUILayout.Label("bool Example", GUILayout.Height(height), GUILayout.Width(200));

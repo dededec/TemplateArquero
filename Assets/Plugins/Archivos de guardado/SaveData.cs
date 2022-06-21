@@ -28,7 +28,8 @@ public class SaveData
 
     //public bool[] isAchievementCompleted;
     public string achievements;
-    public string dailyQuests;
+    public bool[] completedDailyQuests;
+    public bool[] reclaimedDailyQuests;
 
     // public bool boolExample;
     // public int intExample;
@@ -63,18 +64,8 @@ public class SaveData
                 achievements += "a" + i + "-0;";
             }
         }
-
-        dailyQuests = "";
-        for (int i = 1; i <= 20; ++i)
-        {
-            if (i < 10)
-            {
-                dailyQuests += "q0" + i + "-0;";
-            }
-            else
-            {
-                dailyQuests += "q" + i + "-0;";
-            }
-        }
+        
+        completedDailyQuests = new bool[12];
+        reclaimedDailyQuests = new bool[12];
     }
 }

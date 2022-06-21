@@ -17,7 +17,8 @@ public class RewardButtonManager : MonoBehaviour
 
     #region LIFECYCLE
 
-    private void Start() {
+    private void Start() 
+    {
         gameObject.GetComponent<Button>().onClick.AddListener(ButtonPressed);
     }
 

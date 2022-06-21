@@ -9,6 +9,7 @@ public class DailyLoginRewardManager : TimedObject
 
     [Header("Reward Settings")]
     [SerializeField] private RewardManager _rewardManager;
+    [SerializeField] private DailyQuestsManager _questManager;
     [SerializeField] private List<List<Reward>> _rewards = new List<List<Reward>>();
     private bool _isRewardGiven = false;
     
@@ -32,6 +33,9 @@ public class DailyLoginRewardManager : TimedObject
         porque son siempre las mismas recompensas.
         */
         // ReadCSV();
+
+        // Esto se llama siempre que se haga login.
+        _questManager.ProgressQuest("Login");
 
         System.TimeSpan timeSpan = _timeManager.TimeSinceLastConnection();
         // Miramos cuántos días han pasado para ver cuál le toca coger.
@@ -92,7 +96,5 @@ public class DailyLoginRewardManager : TimedObject
 
             dailyLoginRewards.Add(new Reward(id, quantity));
         }
-    }
-
-    
+    }    
 }
