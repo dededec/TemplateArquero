@@ -18,6 +18,7 @@ public class SaveData
     public int[] talentsList;
     public string inventory;
     public string equipment;
+    public string equippedCar;
 
     // Progress
     public int currentWorld;
@@ -46,6 +47,7 @@ public class SaveData
         talentsList = new int[12];
         inventory = "";
         equipment = "";
+        equippedCar = "BasicCar";
 
         currentWorld = 0;
         highestStageReached = new int[12];

@@ -186,6 +186,21 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
+    public static string equippedCar
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.equippedCar;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.equippedCar = value;
+            SaveToFile();
+        }
+    }
+
     #endregion
 
     #region Progress

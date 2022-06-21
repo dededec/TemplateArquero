@@ -11,11 +11,13 @@ using UnityEngine;
      private GameObject _car;
      private CarController _cc;
 
-    private void Awake() {
-        _car = GameObject.FindGameObjectWithTag("Car");
-        _cc = _car.GetComponent<CarController>();
-        mOnDown.AddListener(engineUp);
-        mOnUp.AddListener(frenada);
+    override protected void Start() {
+            _car = GameObject.FindGameObjectWithTag("Car");
+            Debug.Log("ah");
+            _cc = _car.GetComponent<CarController>();
+            Debug.Log(_cc);
+            mOnDown.AddListener(engineUp);
+            mOnUp.AddListener(frenada);
     }
 
      public override void OnPointerDown(PointerEventData eventData)

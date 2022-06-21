@@ -13,14 +13,12 @@ TagManager:
   - InventoryManager
   - TalentManager
   - Wall
-<<<<<<< Updated upstream
   - Joystick
   - AccelerateButton
   - AbilityUI
   - HealthBar
-=======
   - DailyManager
->>>>>>> Stashed changes
+  - CinemachineCamera
   layers:
   - Default
   - TransparentFX
