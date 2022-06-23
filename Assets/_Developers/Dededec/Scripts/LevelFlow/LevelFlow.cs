@@ -28,8 +28,8 @@ public class LevelFlow : MonoBehaviour
             }
         }
         
-        _questManager = GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>();
-        _enemies[0].AssignLevelFlow(this);
+        if(GameObject.FindGameObjectWithTag("DailyManager") != null) _questManager = GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>();
+        if(_enemies.Count != 0) _enemies[0].AssignLevelFlow(this);
     }
 
     public void DeleteEnemy(EnemyBase enemy)
