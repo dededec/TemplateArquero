@@ -1767,6 +1767,7 @@ MonoBehaviour:
   - idItemRewarded: 6
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &120445951
 GameObject:
   m_ObjectHideFlags: 0
@@ -8473,6 +8474,7 @@ MonoBehaviour:
   - idItemRewarded: 7
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &688968503
 GameObject:
   m_ObjectHideFlags: 0
@@ -14263,6 +14265,7 @@ MonoBehaviour:
   - idItemRewarded: 3
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &1027569728
 GameObject:
   m_ObjectHideFlags: 0
@@ -15636,6 +15639,7 @@ MonoBehaviour:
   - idItemRewarded: 0
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &1124907396
 GameObject:
   m_ObjectHideFlags: 0
@@ -19179,6 +19183,7 @@ MonoBehaviour:
   - idItemRewarded: 5
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &1394590139
 GameObject:
   m_ObjectHideFlags: 0
@@ -21155,6 +21160,7 @@ MonoBehaviour:
   - idItemRewarded: 4
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1001 &1598139064
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -21696,6 +21702,7 @@ MonoBehaviour:
   - idItemRewarded: sc
     amount: 100
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &1650605255
 GameObject:
   m_ObjectHideFlags: 0
@@ -26538,6 +26545,7 @@ MonoBehaviour:
   - idItemRewarded: 2
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1001 &1934261528
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -27424,6 +27432,7 @@ MonoBehaviour:
   - idItemRewarded: 1
     amount: 1
   _rewardManager: {fileID: 1934261530}
+  _chestType: 0
 --- !u!1 &1976856419
 GameObject:
   m_ObjectHideFlags: 0

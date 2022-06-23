@@ -6,17 +6,6 @@ using UnityEngine.Events;
 
 public class DailyQuestsManager : TimedObject
 {
-    // private static DailyQuestsManager _instance;
-    // public static DailyQuestsManager instance
-    // {
-    //     get 
-    //     {
-    //         if(_instance == null)
-    //             _instance = new DailyQuestsManager();
-    //         return _instance;
-    //     }
-    // }
-
     [SerializeField] private List<Quest> _dailyQuests = new List<Quest>();
     [SerializeField] private RewardManager _rewardManager;
 
@@ -63,15 +52,9 @@ public class DailyQuestsManager : TimedObject
 
     protected override void OnIntervalCompleted()
     {
-        // ? ¿Cambian las misiones?
-
-        foreach(var quest in _dailyQuests)
-        {
-            quest.progress = 0;
-        }
-
         for(int i=0; i < CompletedDailyQuests.Length; ++i)
         {
+            _dailyQuests[i].progress = 0;
             CompletedDailyQuests[i] = false;
             ReclaimedDailyQuests[i] = false;
         }
@@ -112,9 +95,11 @@ public class DailyQuestsManager : TimedObject
         _rewardManager.GiveReward(quest.rewards);
     }
 
-    #endregion
-
-    #region Quest Specific Methods
+    public void resetControlVariables()
+    {
+        _enemiesDefeated = 0;
+        _levelsPlayed = 0;
+    }
 
     /*
     Logearse al juego
@@ -128,12 +113,6 @@ public class DailyQuestsManager : TimedObject
     Fusionar un equipamiento
     Ver un video o comprar algo
     */
-
-    public void resetControlVariables()
-    {
-        _enemiesDefeated = 0;
-        _levelsPlayed = 0;
-    }
 
     public void ProgressQuest(string id)
     {
@@ -166,6 +145,7 @@ public class DailyQuestsManager : TimedObject
             break;
         }
     }
+
     #endregion
 
 

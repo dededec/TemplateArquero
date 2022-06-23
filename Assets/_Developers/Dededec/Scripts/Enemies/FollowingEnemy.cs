@@ -21,7 +21,7 @@ public class FollowingEnemy : EnemyBase
     #endregion
 
 
-    private void Update() 
+    protected override void Update() 
     {
         base.Update();
         if(Input.GetKeyDown(KeyCode.Space))

@@ -13,6 +13,15 @@ public class RewardButtonManager : MonoBehaviour
     [SerializeField] private List<Reward> listOfRewards = new List<Reward>();
     [SerializeField] private RewardManager _rewardManager;
 
+    private enum ChestType
+    {
+        GOLD,
+        OBSIDIAN,
+        NONE,
+    }
+
+    [SerializeField] private ChestType _chestType;
+
     #endregion
 
     #region LIFECYCLE
@@ -33,6 +42,16 @@ public class RewardButtonManager : MonoBehaviour
 
         if(userCanPay)
         {
+            switch(_chestType)
+            {
+                case ChestType.GOLD:
+                GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("GoldChestOpen");
+                break;
+                case ChestType.OBSIDIAN:
+                GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("ObsidianChestOpen");
+                break;
+            }
+            
             _rewardManager.GiveReward(listOfRewards);
         }
     }

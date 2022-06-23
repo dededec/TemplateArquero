@@ -50,7 +50,7 @@ public class EnemyBase : MonoBehaviour
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 
-    protected void Update() 
+    protected virtual void Update() 
     {
         // Offset position above object bbox (in world space)
         float offsetPosZ = transform.position.z + 1.5f;

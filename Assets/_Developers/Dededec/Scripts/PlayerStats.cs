@@ -15,11 +15,6 @@ public class PlayerStats
         }
     }
 
-    private PlayerStats()
-    {
-
-    }
-
     // Movement
     public float accelerationFactor  = 25f;
     public float maxSpeed            = 20f;
@@ -36,4 +31,45 @@ public class PlayerStats
     public int damageReductionMoving = 0;
     public int dropHealing           = 0;
     public int levelUpHealing        = 0;
+
+    private PlayerStats()
+    {
+
+    }
+
+    public void ResetStats()
+    {
+        accelerationFactor    = 25f;
+        maxSpeed              = 20f;
+
+        attackSpeed           = 0.5f;
+        attackDamage          = 5;
+
+        maxHealth             = 100;
+        currentHealth         = 100;
+        
+        damageReductionStill  = 0;
+        damageReductionMoving = 0;
+        dropHealing           = 0;
+        levelUpHealing        = 0;
+        
+        Debug.Log("Stats Reseteadas");
+    }
+
+    public void AssignHeroStats(Hero hero)
+    {
+        accelerationFactor    = hero.AccelerationFactor;
+        maxSpeed              = hero.MaxSpeed;
+
+        attackSpeed           = hero.AttackSpeed;
+        attackDamage          = hero.AttackDamage;
+
+        maxHealth             = hero.MaxHealth;
+        currentHealth         = hero.MaxHealth;
+        
+        damageReductionStill  = hero.DamageReductionStill;
+        damageReductionMoving = hero.DamageReductionMoving;
+        dropHealing           = hero.DropHealing;
+        levelUpHealing        = hero.LevelUpHealing;
+    }
 }

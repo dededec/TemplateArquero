@@ -11,7 +11,6 @@ public class StatIntegration : MonoBehaviour
     */
     
     [Header("Managers")]
-    // [SerializeField] private AbilityManager _abilityManager;
     [SerializeField] private InventoryManager _inventoryManager;
     [SerializeField] private TalentManager _talentManager;
 
@@ -33,19 +32,21 @@ public class StatIntegration : MonoBehaviour
     {
         _talentManager = GameObject.FindGameObjectWithTag("TalentManager").GetComponent<TalentManager>();
         _inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
+        
+        PlayerStats.instance.AssignHeroStats(GetComponent<Hero>());
 
         foreach(var talent in _talentManager.Talents)
         {
-            proccessTalent(talent);
+            processTalent(talent);
         }
 
         foreach(var element in _inventoryManager.Equipment)
         {
-            proccessEquipment(element);
+            processEquipment(element);
         }
     }
 
-    private void proccessTalent(TalentManager.Talent talent)
+    private void processTalent(TalentManager.Talent talent)
     {
         switch(talent.name)
         {
@@ -107,7 +108,7 @@ public class StatIntegration : MonoBehaviour
         }
     }
 
-    private void proccessEquipment(Item item)
+    private void processEquipment(Item item)
     {
         // Formato JSON: Stat:valor;stat:valor;
         string stats = item.stats;
@@ -138,13 +139,6 @@ public class StatIntegration : MonoBehaviour
         }
     }
 
-    private void processHero()
-    {
-        /*
-        Stats y skin
-        */
-    }
-
     #region Talents
 
     private void carMaxHealthTalent(int level)
@@ -154,7 +148,7 @@ public class StatIntegration : MonoBehaviour
 
     private void carDamageTalent(int level)
     {
-        // PlayerStats.instance.IncreaseDamage(level * 10);
+        increaseDamage(level * 10);
     }
 
     private void dropHealingTalent(int level)

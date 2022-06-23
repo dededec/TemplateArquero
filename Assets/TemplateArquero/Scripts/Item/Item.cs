@@ -28,9 +28,10 @@ public class Item : ScriptableObject
 
     public enum Rarity
     {
-        RARE,
         COMMON,
-        COIN,
+        RARE,
+        GREAT,
+        EPIC,
     }
 
     public string id;

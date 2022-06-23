@@ -60,6 +60,7 @@ public class InventoryManager : MonoBehaviour
         }
 
         // ? Habria que decidir como se aumenta el multiplicador
+        GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("EquipmentFuse");
         receptor.multiplier += 1;
     }
 
@@ -67,6 +68,7 @@ public class InventoryManager : MonoBehaviour
     public void LevelUp(Item receptor)
     {
         receptor.level += 1;
+        GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("EquipmentUpgrade");
     }
 
     public void AddToInventory(string id)
