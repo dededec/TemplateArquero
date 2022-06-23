@@ -4,6 +4,9 @@ using UnityEngine;
 
 public class Hero : MonoBehaviour
 {
+    private static Dictionary<string, float> _nameMultiplier;
+    
+
     // Movement
     [SerializeField] private float _accelerationFactor  = 25f;
     [SerializeField] private float _maxSpeed            = 20f;
@@ -19,6 +22,27 @@ public class Hero : MonoBehaviour
     [SerializeField] private int _damageReductionMoving = 0;
     [SerializeField] private int _dropHealing           = 0;
     [SerializeField] private int _levelUpHealing        = 0;
+
+    [SerializeField] private float _multiplier = 1;
+
+    private void Awake() 
+    {
+        /*
+        Se necesita acceder al multiplier, pero este no es persistente, por lo que
+        hay que guardarlo en el SaveData y saber a cuál acceder.
+
+        Unity -> static Dictionary<string, float> NombreMultiplier.
+        SaveData -> string[] y float[], donde float[i] es el multiplier de string[i]
+        */   
+        if(_nameMultiplier == null)
+        {
+            _nameMultiplier = new Dictionary<string, float>();
+            for(int i=0; i<SaveDataController.HeroNames.Length; ++i)
+            {
+                _nameMultiplier.Add(SaveDataController.HeroNames[i], SaveDataController.HeroMultipliers[i]);
+            }
+        }
+    }
 
     public float AccelerationFactor { get => _accelerationFactor; private set => _accelerationFactor = value; }
     public float MaxSpeed { get => _maxSpeed; private set => _maxSpeed = value; }

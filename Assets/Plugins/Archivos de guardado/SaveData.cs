@@ -20,6 +20,9 @@ public class SaveData
     public string equipment;
     public string equippedCar;
 
+    public string[] heroNames; // ? Necesario?
+    public float[] heroMultipliers;
+
     // Progress
     public int currentWorld;
     public int[] highestStageReached;
@@ -27,7 +30,6 @@ public class SaveData
     // Daily Login Reward
     public int currentDailyLoginReward;
 
-    //public bool[] isAchievementCompleted;
     public string achievements;
     public bool[] completedDailyQuests;
     public bool[] reclaimedDailyQuests;
@@ -48,9 +50,10 @@ public class SaveData
         inventory = "";
         equipment = "";
         equippedCar = "BasicCar";
+        heroMultipliers = new float[20]; // Tamaño = Número de coches en el juego
 
         currentWorld = 0;
-        highestStageReached = new int[12];
+        highestStageReached = new int[12]; // Tamaño = Número de mundos
 
         currentDailyLoginReward = 0;
 

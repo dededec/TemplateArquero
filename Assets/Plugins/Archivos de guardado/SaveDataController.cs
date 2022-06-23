@@ -201,6 +201,36 @@ public class SaveDataController : MonoBehaviour
         }
     }
 
+    public static string[] HeroNames
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.heroNames;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.heroNames = value;
+            SaveToFile();
+        }
+    }
+
+    public static float[] HeroMultipliers
+    {
+        get
+        {
+            CheckInitialized();
+            return saveData.heroMultipliers;
+        }
+        set
+        {
+            CheckInitialized();
+            saveData.heroMultipliers = value;
+            SaveToFile();
+        }
+    }
+
     #endregion
 
     #region Progress
