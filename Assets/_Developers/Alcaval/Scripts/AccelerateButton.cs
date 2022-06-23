@@ -13,9 +13,7 @@ using UnityEngine;
 
     override protected void Start() {
             _car = GameObject.FindGameObjectWithTag("Car");
-            Debug.Log("ah");
-            _cc = _car.GetComponent<CarController>();
-            Debug.Log(_cc);
+            if(_car != null) _cc = _car.GetComponent<CarController>();
             mOnDown.AddListener(engineUp);
             mOnUp.AddListener(frenada);
     }
