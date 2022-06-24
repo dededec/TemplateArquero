@@ -276,7 +276,7 @@ MonoBehaviour:
   _enemyLayer:
     serializedVersion: 2
     m_Bits: 64
-  _angleThreshold: 45
+  _angleThreshold: 80
   _detectionRadius: 15
 --- !u!65 &1048988873600808240
 BoxCollider:

@@ -27,6 +27,12 @@ public class TurretEnemy : FollowingEnemy
         StartCoroutine(crShoot());
     }
 
+    protected override void Update() {
+        base.Update();
+        
+        transform.GetChild(0).transform.rotation = Quaternion.LookRotation(_player.transform.position, Vector3.up);
+    }
+
     private IEnumerator crShoot()
     {
         yield return new WaitForSeconds(3f);
@@ -36,6 +42,9 @@ public class TurretEnemy : FollowingEnemy
             {
                 _animator.SetTrigger("Attack");
                 Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position - transform.position));
+                // Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position * Random.Range(-1, 1) - transform.position));
+                // Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position * Random.Range(-1, 1) - transform.position));
+                // Instantiate(_bullet, transform.position + transform.forward, Quaternion.LookRotation(_player.position * Random.Range(-1, 1) - transform.position));
             }
 
             for(float i=0; i<= _timeToShoot; i+=Time.deltaTime)

@@ -20,8 +20,8 @@ public class PlayerStats
     public float maxSpeed            = 20f;
 
     // Combat
-    public float attackSpeed         = 0.5f;
-    public int attackDamage          = 5;
+    public float attackSpeed         = 2f;
+    public int attackDamage          = 10;
     
     // Health and Defense
     public int maxHealth             = 100;
