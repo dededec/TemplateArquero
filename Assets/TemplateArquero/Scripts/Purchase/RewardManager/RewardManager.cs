@@ -9,10 +9,10 @@ public class RewardManager : MonoBehaviour
 
     public void GiveReward(List<Reward> rewards)
     {
-        foreach(Reward r in rewards)
+        foreach (Reward r in rewards)
         {
             Item RewardedItem = _itemDatabaseManager.GetItem(r.idItemRewarded);
-            switch(RewardedItem.typeOfReward)
+            switch (RewardedItem.typeOfReward)
             {
                 case Item.TypeOfReward.HARDCOIN:
                     EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.amount);
@@ -32,6 +32,33 @@ public class RewardManager : MonoBehaviour
                     _inventoryManager.AddToInventory(r.idItemRewarded);
                     break;
             }
+        }
+
+        // TODO Mostrar en pantalla lo que se ha conseguido
+    }
+
+    public void GiveReward(Reward r)
+    {
+        Item RewardedItem = _itemDatabaseManager.GetItem(r.idItemRewarded);
+        switch (RewardedItem.typeOfReward)
+        {
+            case Item.TypeOfReward.HARDCOIN:
+                EconomyManager.Add(EconomyManager.CoinType.HARDCOIN, r.amount);
+                Debug.Log("Hardcoin rewarded");
+                break;
+            case Item.TypeOfReward.SOFTCOIN:
+                EconomyManager.Add(EconomyManager.CoinType.SOFTCOIN, r.amount);
+                Debug.Log("Softcoin rewarded");
+                break;
+            case Item.TypeOfReward.ENERGY:
+                EconomyManager.Add(EconomyManager.CoinType.ENERGY, r.amount);
+                Debug.Log("Energy rewarded");
+                break;
+            case Item.TypeOfReward.EQUIPMENT:
+                // Añadir tal objeto al inventario por ejemplo un objeto random o algo
+                Debug.Log(r.idItemRewarded);
+                _inventoryManager.AddToInventory(r.idItemRewarded);
+                break;
         }
 
         // TODO Mostrar en pantalla lo que se ha conseguido

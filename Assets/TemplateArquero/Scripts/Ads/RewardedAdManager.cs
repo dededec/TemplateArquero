@@ -58,6 +58,16 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         // Then show the ad:
         Advertisement.Show(_adUnitId, this);
     }
+
+    public void ShowAd(Reward reward)
+    {
+        _listOfRewards.Clear();
+        _listOfRewards.Add(reward);
+        // Disable the button:
+        //_showAdButton.interactable = false;
+        // Then show the ad:
+        Advertisement.Show(_adUnitId, this);
+    }
  
     // Implement the Show Listener's OnUnityAdsShowComplete callback method to determine if the user gets a reward:
     public void OnUnityAdsShowComplete(string adUnitId, UnityAdsShowCompletionState showCompletionState)

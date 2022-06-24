@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChestManager : MonoBehaviour
+public class ChestManager
 {
     /*
     Los cofres dan un solo objeto.
@@ -15,10 +15,21 @@ public class ChestManager : MonoBehaviour
         RARE,
     }
 
+    private static ChestManager _instance;
+    public static ChestManager instance
+    {
+        get 
+        {
+            if(_instance == null)
+                _instance = new ChestManager();
+            return _instance;
+        }
+    }
+
     private List<Item> _commonItems, _greatItems, _rareItems, _epicItems;
     [SerializeField] private ItemDatabaseManager _itemDatabase;
 
-    private void Start() 
+    private ChestManager() 
     {
         // Cargamos los items en las listas
         foreach(var item in _itemDatabase.GetAllItems())
@@ -41,7 +52,7 @@ public class ChestManager : MonoBehaviour
         }
     }
 
-    public Item GenerateChest(ChestRarity rarity)
+    public Reward GenerateChest(ChestRarity rarity)
     {
         Item result = null;
         float prob = Random.Range(0f, 1f);
@@ -78,7 +89,7 @@ public class ChestManager : MonoBehaviour
             }
             break;
         }
-        
-        return result;
+
+        return new Reward(result.id, 1);
     }
 }
