@@ -279,6 +279,7 @@ MonoBehaviour:
   _rewardManager: {fileID: 1934261530}
   _button: {fileID: 15210303}
   _uiChestOpened: {fileID: 1210233453}
+  _itemIcon: {fileID: 611654996}
   _uiChestOpenedCloseButton: {fileID: 586299140}
   _scroller: {fileID: 300182856}
   rarity: 0
@@ -24179,6 +24180,7 @@ MonoBehaviour:
   _rewardManager: {fileID: 1934261530}
   _button: {fileID: 1754690452}
   _uiChestOpened: {fileID: 1210233453}
+  _itemIcon: {fileID: 611654996}
   _uiChestOpenedCloseButton: {fileID: 586299140}
   _scroller: {fileID: 300182856}
   rarity: 1
