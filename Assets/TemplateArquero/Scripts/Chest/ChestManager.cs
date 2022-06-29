@@ -31,8 +31,14 @@ public class ChestManager
 
     private ChestManager() 
     {
+        _itemDatabase = GameObject.FindGameObjectWithTag("ItemDatabaseManager").GetComponent<ItemDatabaseManager>();
+        _commonItems = new List<Item>();
+        _greatItems = new List<Item>();
+        _rareItems = new List<Item>();
+        _epicItems = new List<Item>();
+
         // Cargamos los items en las listas
-        foreach(var item in _itemDatabase.GetAllItems())
+        foreach(var item in _itemDatabase.GetAllItems().FindAll(item => item.typeOfReward == Item.TypeOfReward.EQUIPMENT))
         {
             switch(item.rarity)
             {
@@ -52,7 +58,7 @@ public class ChestManager
         }
     }
 
-    public Reward GenerateChest(ChestRarity rarity)
+    public Item GenerateChest(ChestRarity rarity)
     {
         Item result = null;
         float prob = Random.Range(0f, 1f);
@@ -90,6 +96,6 @@ public class ChestManager
             break;
         }
 
-        return new Reward(result.id, 1);
+        return result;
     }
 }

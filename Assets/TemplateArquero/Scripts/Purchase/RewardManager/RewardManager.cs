@@ -56,7 +56,7 @@ public class RewardManager : MonoBehaviour
                 break;
             case Item.TypeOfReward.EQUIPMENT:
                 // Añadir tal objeto al inventario por ejemplo un objeto random o algo
-                Debug.Log(r.idItemRewarded);
+                Debug.Log("Item rewarded: " + r.idItemRewarded);
                 _inventoryManager.AddToInventory(r.idItemRewarded);
                 break;
         }

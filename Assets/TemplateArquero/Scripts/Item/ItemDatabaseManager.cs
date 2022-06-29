@@ -18,6 +18,7 @@ public class ItemDatabaseManager : MonoBehaviour
 
     public void loadData()
     {
+        Debug.Log("Se inicializa ItemDatabase");
         _EveryItemList.Clear();
         List<Dictionary<string, object>> data = CSVReader.Read("ItemDatabase");
         for(int i = 0; i < data.Count; i++)
@@ -50,6 +51,8 @@ public class ItemDatabaseManager : MonoBehaviour
             item.init(id, itemName, typeOfReward, inventoryUse, rarity, description, cStats);
             _EveryItemList.Add(item);
         }
+
+        Debug.Log("ItemDatabase: " + _EveryItemList.Count);
     }
 
     public Item GetItem(string id)

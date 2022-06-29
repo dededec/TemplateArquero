@@ -19,6 +19,7 @@ TagManager:
   - HealthBar
   - DailyManager
   - CinemachineCamera
+  - ItemDatabaseManager
   layers:
   - Default
   - TransparentFX

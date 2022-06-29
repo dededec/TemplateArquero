@@ -5,16 +5,21 @@ using UnityEngine.UI;
 
 public class ChestAdOpen : TimedObject
 {
+    public const float HardCoinRow = 0f;
+
     [Header("Dependencies")]
     [SerializeField] private RewardedAdManager _rewardedAdManager;
     [SerializeField] private RewardManager _rewardManager;
     [SerializeField] private Button _button;
     [SerializeField] private GameObject _uiChestOpened;
+    [SerializeField] private Image _itemIcon;
+    [SerializeField] private Button _uiChestOpenedCloseButton;
+    [SerializeField] private ShopScroller _scroller;
 
     [Header("Chest settings")]
     [SerializeField] private ChestManager.ChestRarity rarity;
     [SerializeField] private int _cost;
-    [SerializeField] private int _consecutiveBuy;
+    private int _consecutiveBuy;
     [SerializeField] private int _costReduction;
     [SerializeField] private int _timesCostReduced;
 
@@ -36,7 +41,7 @@ public class ChestAdOpen : TimedObject
 
     public void OnButtonClickAd()
     {
-        _rewardedAdManager.ShowAd(ChestManager.instance.GenerateChest(rarity));
+        _rewardedAdManager.ShowAd(new Reward(ChestManager.instance.GenerateChest(rarity).id, 1));
         _button.onClick.RemoveAllListeners();
         _button.onClick.AddListener(delegate { OnButtonClickPay(); });
     }
@@ -45,20 +50,23 @@ public class ChestAdOpen : TimedObject
     {
         if (EconomyManager.Pay(EconomyManager.CoinType.HARDCOIN, _cost))
         {
-            _rewardManager.GiveReward(ChestManager.instance.GenerateChest(rarity));
-            _consecutiveBuy++;
+            Item item = ChestManager.instance.GenerateChest(rarity);
+            _rewardManager.GiveReward(new Reward(item.id, 1));
             if (_consecutiveBuy < _timesCostReduced)
             {
+                _consecutiveBuy++;
                 _cost -= _costReduction;
             }
 
             // 1. Meter UI de recompensa obtenida.
             // 2. Meter UI de pagar de nuevo.
-            SetUIChestOpened(true);
+            SetUIChestOpened(true, item);
         }
         else
         {
             // Llevar a que paguen para tener mas hardcoin.
+            SetUIChestOpened(false);
+            _scroller.FocusOn(HardCoinRow);
         }
     }
 
@@ -66,18 +74,19 @@ public class ChestAdOpen : TimedObject
     {
         _cost += _costReduction * _consecutiveBuy;
         _consecutiveBuy = 0;
-
         SetUIChestOpened(false);
     }
 
-    private void SetUIChestOpened(bool value)
+    private void SetUIChestOpened(bool value, Item item = null)
     {
         if(value)
         {
             /*
             -   Poner animación de cofre abriendose y tal.
-            -   Poner botones? Verdaderamente no, se ponen desde el editor.
             */
+            _uiChestOpenedCloseButton.onClick.RemoveAllListeners();
+            _uiChestOpenedCloseButton.onClick.AddListener(delegate {ExitConsecutiveBuy();});
+            _itemIcon.sprite = item.icon;
         }
         
         _uiChestOpened.SetActive(value);

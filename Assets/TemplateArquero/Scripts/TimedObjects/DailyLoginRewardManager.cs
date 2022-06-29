@@ -67,34 +67,4 @@ public class DailyLoginRewardManager : TimedObject
         _rewardManager.GiveReward(_rewards[CurrentDailyLoginReward]);
         _isRewardGiven = true;
     }
-
-    // private void ReadCSV()
-    // {
-    //     // Leemos CSV y guardamos cositas
-    //     List<Dictionary<string, object>> data = CSVReader.Read(CSVFileName);
-
-    //     System.DateTime currentFecha;
-    //     System.DateTime.TryParse(data[0]["fecha"].ToString(), out currentFecha);
-    //     List<Reward> dailyLoginRewards = new List<Reward>();
-
-    //     for (int i = 0; i < data.Count; i++)
-    //     {
-    //         System.DateTime fecha;
-    //         System.DateTime.TryParse(data[i]["fecha"].ToString(), out fecha);
-
-    //         if (fecha != currentFecha)
-    //         {
-    //             _rewards.Add(dailyLoginRewards);
-    //             currentFecha = fecha;
-    //             dailyLoginRewards.Clear();
-    //         }
-
-    //         string id = data[i]["id"].ToString();
-
-    //         int quantity;
-    //         int.TryParse(data[i]["quantity"].ToString(), out quantity);
-
-    //         dailyLoginRewards.Add(new Reward(id, quantity));
-    //     }
-    // }    
 }
