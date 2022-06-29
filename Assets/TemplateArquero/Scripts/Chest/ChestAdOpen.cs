@@ -81,9 +81,6 @@ public class ChestAdOpen : TimedObject
     {
         if(value)
         {
-            /*
-            -   Poner animación de cofre abriendose y tal.
-            */
             _uiChestOpenedCloseButton.onClick.RemoveAllListeners();
             _uiChestOpenedCloseButton.onClick.AddListener(delegate {ExitConsecutiveBuy();});
             _itemIcon.sprite = item.icon;
