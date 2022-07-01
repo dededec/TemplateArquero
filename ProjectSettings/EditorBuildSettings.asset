@@ -9,7 +9,7 @@ EditorBuildSettings:
     path: Assets/_Developers/Dededec/Scenes/World1/Easy/1_0_5.unity
     guid: 1d234aaa4227215449faa556bd2a0cb5
   - enabled: 0
-    path: Assets/_Developers/Alcaval/Scenes/MainMenu.unity
+    path: Assets/TemplateArquero/Example/Scenes/MainMenu.unity
     guid: 30e7a27061d8599418ba823ec8816ab6
   - enabled: 0
     path: Assets/_Developers/Dededec/Scenes/Game.unity

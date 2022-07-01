@@ -78,8 +78,6 @@ public class AbilityManager : MonoBehaviour
     */
 
     [SerializeField] private List<AbilityElement> _abilities;
-    [SerializeField] private CarShooting _shooting;
-    [SerializeField] private CarController _movement;
 
     [Header("Pick Ability UI")]
     [SerializeField] private GameObject _abilityPickUI;
@@ -240,27 +238,18 @@ public class AbilityManager : MonoBehaviour
     {
         switch(index)
         {
-            case 0:
-            TripleShot();
-            break;
-            case 1:
-            LateralTripleShot();
-            break;
-            case 2:
-            AngleTripleShot();
-            break;
+            // case 0:
+            // TripleShot();
+            // break;
 
-            //... case 7: break;
-            
-            case 8:
-            ApplySpark(target);
-            break;
-            case 9:
-            ApplyPoison(target);
-            break;
-            case 10:
-            ApplyBurn(target);
-            break;
+            // case 1: break; ... case 8: break;
+    
+            // case 9:
+            // ApplyPoison(target);
+            // break;
+            // case 10:
+            // ApplyBurn(target);
+            // break;
 
             default:
             Debug.LogWarning("Indice de habilidad " + index + " no tiene habilidad asignada.");
@@ -270,53 +259,31 @@ public class AbilityManager : MonoBehaviour
 
     #endregion
 
-    #region Abilities
+    #region Abilities Example
 
-    #region Shot Modifiers
+    // #region Shot Modifiers
 
-    private void TripleShot()
-    {
-        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward);
-        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward);
-    }
+    // private void TripleShot()
+    // {
+    //     // _shooting.Shoot(_shooting.transform.position + _shooting.transform.right + _shooting.transform.forward);
+    //     // _shooting.Shoot(_shooting.transform.position - _shooting.transform.right + _shooting.transform.forward);
+    // }
 
-    private void LateralTripleShot()
-    {
-        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * 90));
-        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * -90));
-    }
+    // #endregion
 
-    private void AngleTripleShot()
-    {
-        _shooting.Shoot(_shooting.transform.position + _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * 45));
-        _shooting.Shoot(_shooting.transform.position - _shooting.transform.right, _shooting.transform.rotation * Quaternion.Euler(Vector3.up * -45));
-    }
+    // #region OnHitAbilities
 
-    #endregion
+    // private void ApplyPoison(EnemyBase enemy)
+    // {
+    //     enemy.ApplyPoison();
+    // }
 
-    #region OnHitAbilities
+    // private void ApplyBurn(EnemyBase enemy)
+    // {
+    //     enemy.ApplyBurn();
+    // }
 
-    private void ApplySpark(EnemyBase enemy)
-    {
-        enemy.ApplySpark();
-    }
-
-    private void ApplyFreeze(EnemyBase enemy)
-    {
-        enemy.ApplyFreeze();
-    }
-
-    private void ApplyPoison(EnemyBase enemy)
-    {
-        enemy.ApplyPoison();
-    }
-
-    private void ApplyBurn(EnemyBase enemy)
-    {
-        enemy.ApplyBurn();
-    }
-
-    #endregion
+    // #endregion
 
     #endregion
 }

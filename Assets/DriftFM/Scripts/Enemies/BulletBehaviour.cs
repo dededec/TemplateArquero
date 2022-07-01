@@ -99,7 +99,7 @@ namespace LoopJam
             print("entro");
             if(other.gameObject.tag == "Car")
             {
-                other.gameObject.GetComponent<CarHealthManager>().TakeDamage(_damageDealt);
+                // other.gameObject.GetComponent<CarHealthManager>().TakeDamage(_damageDealt);
             }
             else if(other.gameObject.layer != LayerMask.NameToLayer("Enemy"))
             {

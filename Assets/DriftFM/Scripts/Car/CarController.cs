@@ -8,7 +8,6 @@ using UnityEngine.Events;
 public class CarController : MonoBehaviour
 {
     [Header("Controls")]
-    [SerializeField] private Joystick _joystick;
     [SerializeField] private Button _accelerateButton;
 
     private Rigidbody _carRB;
@@ -48,7 +47,6 @@ public class CarController : MonoBehaviour
     private void Awake() 
     {
         _carRB = gameObject.GetComponent<Rigidbody>();
-        _joystick = GameObject.FindGameObjectWithTag("Joystick").GetComponent<Joystick>();
         _accelerateButton = GameObject.FindGameObjectWithTag("AccelerateButton").GetComponent<Button>();
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
@@ -126,7 +124,6 @@ public class CarController : MonoBehaviour
 
     private void GetInput()
     {
-        steeringInput = _joystick.Horizontal;
         //accelerationInput = 1;
     
         if(accelerationInput > 0)

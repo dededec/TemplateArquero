@@ -13,7 +13,7 @@ public class ExitDoor : MonoBehaviour
     {
         if(!enabled) return;
 
-        if(other.gameObject.tag == "Car")
+        if(other.gameObject.tag == "Player")
         {
             WorldManager.AdvanceStage();
         }    

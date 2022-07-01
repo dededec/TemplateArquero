@@ -35,7 +35,6 @@ public class LevelFlow : MonoBehaviour
     public void DeleteEnemy(EnemyBase enemy)
     {
         _enemies.Remove(enemy);
-        // Subir soft coins
         _accSoftCoin += enemy.SoftCoinDrop;
         foreach (var item in enemy.ItemDrop)
         {
@@ -43,15 +42,11 @@ public class LevelFlow : MonoBehaviour
         }
         
         if(_questManager != null) _questManager.ProgressQuest("DefeatEnemies");
+        
         Destroy(enemy.gameObject);
         
         if(_enemies.Count <= 0)
         {
-            // Se han eliminado a todos los enemigos.
-            /*
-            ¿Cómo se sale? - Si es por puerta, estará en el mundo visualmente
-            y se activará un script o algo.
-            */
             _coinCounter.AddCoinAmount(_accSoftCoin);
             _levelprogression.AddExperience(_accSoftCoin);
             _accSoftCoin = 0;

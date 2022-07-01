@@ -16,9 +16,6 @@ public class StatIntegration : MonoBehaviour
 
     [Header("Player")]
     [SerializeField] private GameObject _player;
-    [SerializeField] private CarController _controller;
-    [SerializeField] private CarHealthManager _healthManager;
-    [SerializeField] private CarShooting _shooting;
 
     private float _equipmentBoost = 1f;
     private float _heroBoost = 1f;
@@ -33,6 +30,7 @@ public class StatIntegration : MonoBehaviour
         _talentManager = GameObject.FindGameObjectWithTag("TalentManager").GetComponent<TalentManager>();
         _inventoryManager = GameObject.FindGameObjectWithTag("InventoryManager").GetComponent<InventoryManager>();
         
+        // PlayerStats.instance.ResetStats();
         PlayerStats.instance.AssignHeroStats(GetComponent<Hero>());
 
         foreach(var talent in _talentManager.Talents)
@@ -96,10 +94,6 @@ public class StatIntegration : MonoBehaviour
 
             case "HeroBoost":
             HeroBoostTalent(talent.level);
-            break;
-
-            // No se sabe todavía (lo mismo ni está)
-            case "":
             break;
 
             default:
@@ -170,7 +164,7 @@ public class StatIntegration : MonoBehaviour
 
     private void attackSpeedTalent(int level)
     {
-        // PlayerStats.instance.IncreaseAttackSpeed(level * 10);
+        PlayerStats.instance.attackSpeed += level * 10;
     }
 
     private void levelUpHealing(int level)
@@ -219,12 +213,13 @@ public class StatIntegration : MonoBehaviour
 
     private void increaseSpeed(int amount)
     {
-        _controller.IncreaseSpeed(amount);
+        PlayerStats.instance.accelerationFactor += amount;
+        PlayerStats.instance.maxSpeed += amount;
     }
 
     private void increaseDamage(int amount)
     {
-        _shooting.IncreaseDamage(amount);
+        PlayerStats.instance.attackDamage += amount;
     }
 
     #endregion

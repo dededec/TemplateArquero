@@ -17,11 +17,12 @@ public class EnemyBase : MonoBehaviour
     [Header("Extra drops")]
     [SerializeField] protected Item[] _itemDrop;
 
+    [Header("UI")]
+    [SerializeField] protected Image _healthSlider;
+    private Camera _mainCamera;
+
     private Coroutine _poisonCoroutine = null;
     private Coroutine _burnCoroutine = null;
-
-    [SerializeField] private Camera _mainCamera;
-    [SerializeField] protected Image _healthSlider;
 
     public int SoftCoinDrop
     {
@@ -86,7 +87,6 @@ public class EnemyBase : MonoBehaviour
         _healthSlider.fillAmount = (float)_health/(float)_maxHealth;
         if(_health <= 0)
         {
-            // Destruir cositas
             _animator.SetTrigger("IsDead");
             _flow.DeleteEnemy(this);
         }
@@ -120,29 +120,7 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void onGameStateChanged(GameState newGameState){}
 
-    #region Cosas de los venenos y las quemaduras
-
-    public void ApplySpark() 
-    {
-        /*
-        Ver enemigos a menos de x distancia (con OverlapSphere)
-        y dañarlos en PlayerStats.attackDamage * 0.25f
-
-        Limitar: Solo se puede un rayo por enemigo por "tick"
-        Podríamos hacer una coroutine que, si se puede, lance el rayo
-        espere el tiempo del tick (2/7 segundos) y ponga disponible el spark
-        de nuevo.
-        */
-        Debug.Log("Spark");
-    }
-
-    public void ApplyFreeze()
-    {
-        /*
-        Ni idea de cómo meterlo la verdad
-        */
-        Debug.Log("Freeze");
-    }
+    #region Efectos de estado
 
     public void ApplyPoison() 
     {
