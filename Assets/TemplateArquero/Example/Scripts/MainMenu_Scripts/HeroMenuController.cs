@@ -13,13 +13,11 @@ public class HeroMenuController : MonoBehaviour
             if(i != id)
             {
                 _currentHero.transform.GetChild(i).gameObject.SetActive(false);
-                print(i);
                 _EquippedHero.transform.GetChild(i).gameObject.SetActive(false);
             }
             else
             {
                 _currentHero.transform.GetChild(i).gameObject.SetActive(true);
-                print(i);
                 _EquippedHero.transform.GetChild(i).gameObject.SetActive(true);
                 // TODO: El jugador tiene a este hero? habria que guardarlo en el save data
             }

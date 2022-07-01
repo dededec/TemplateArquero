@@ -3,14 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
 
-public class CarSpawnPosition : MonoBehaviour
+public class HeroSpawnPosition : MonoBehaviour
 {
     [SerializeField] private GameObject[] _heroes;
     private GameObject CurrentCar;
     [SerializeField] private GameObject _camera; 
 
     private void Awake() {
-        _camera = GameObject.FindGameObjectWithTag("CinemachineCamera");
+        //_camera = GameObject.FindGameObjectWithTag("CinemachineCamera");
 
         foreach(GameObject hero in _heroes)
         {
@@ -21,7 +21,7 @@ public class CarSpawnPosition : MonoBehaviour
             }
         }
 
-        _camera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentCar.transform;
+        //_camera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentCar.transform;
 
     }
 }

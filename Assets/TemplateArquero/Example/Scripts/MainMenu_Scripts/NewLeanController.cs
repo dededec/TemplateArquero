@@ -19,13 +19,11 @@ public class NewLeanController : MonoBehaviour
     {
         if(state)
         {
-            print("cerral");
             transform.LeanScale(Vector2.zero, 0.3f).setEaseInBack();
             state = false;
         }
         else if(id == -1 || buttonPanel.transform.GetChild(id).GetChild(0).GetComponent<Image>().sprite.name != "blank")
         {
-            print("abril");
             transform.LeanScale(Vector2.one, 0.3f);
             state = true;
         }

@@ -48,7 +48,7 @@ public class DailyQuestsManager : TimedObject
 
     protected override void OnIntervalCompleted()
     {
-        for(int i=0; i < CompletedDailyQuests.Length; ++i)
+        for(int i=0; i < _dailyQuests.Count; ++i)
         {
             _dailyQuests[i].progress = 0;
             CompletedDailyQuests[i] = false;
