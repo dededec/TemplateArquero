@@ -69,7 +69,7 @@ public class SaveDataEditor : EditorWindow
             // Equipped Car
             EditorGUILayout.BeginHorizontal();
             GUILayout.Label("Car", GUILayout.Height(height), GUILayout.Width(200));
-            saveData.equippedCar = EditorGUILayout.TextField(saveData.equippedCar, GUILayout.Height(height), GUILayout.Width(200)); 
+            saveData.equippedHero = EditorGUILayout.TextField(saveData.equippedHero, GUILayout.Height(height), GUILayout.Width(200)); 
             EditorGUILayout.EndHorizontal();
 
             //Talents.

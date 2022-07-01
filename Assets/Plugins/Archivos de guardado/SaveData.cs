@@ -18,9 +18,8 @@ public class SaveData
     public int[] talentsList;
     public string inventory;
     public string equipment;
-    public string equippedCar;
+    public string equippedHero;
 
-    public string[] heroNames; // ? Necesario?
     public float[] heroMultipliers;
 
     // Progress
@@ -49,8 +48,8 @@ public class SaveData
         talentsList = new int[12];
         inventory = "";
         equipment = "";
-        equippedCar = "BasicCar";
-        heroMultipliers = new float[20]; // Tamaño = Número de coches en el juego
+        equippedHero = "BasicCar";
+        heroMultipliers = new float[20]; // Tamaño = Número de héroes en el juego
 
         currentWorld = 0;
         highestStageReached = new int[12]; // Tamaño = Número de mundos

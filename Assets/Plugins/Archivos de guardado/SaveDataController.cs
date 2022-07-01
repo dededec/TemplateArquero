@@ -191,27 +191,12 @@ public class SaveDataController : MonoBehaviour
         get
         {
             CheckInitialized();
-            return saveData.equippedCar;
+            return saveData.equippedHero;
         }
         set
         {
             CheckInitialized();
-            saveData.equippedCar = value;
-            SaveToFile();
-        }
-    }
-
-    public static string[] HeroNames
-    {
-        get
-        {
-            CheckInitialized();
-            return saveData.heroNames;
-        }
-        set
-        {
-            CheckInitialized();
-            saveData.heroNames = value;
+            saveData.equippedHero = value;
             SaveToFile();
         }
     }
