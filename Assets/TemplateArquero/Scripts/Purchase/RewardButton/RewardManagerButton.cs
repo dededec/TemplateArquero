@@ -31,11 +31,7 @@ public class RewardManagerButton : MonoBehaviour
         if(_paymentMethod != EconomyManager.CoinType.NONE) userCanPay = EconomyManager.Pay(_paymentMethod, price);
 
         if(userCanPay)
-<<<<<<< Updated upstream:Assets/TemplateArquero/Scripts/Purchase/RewardButton/RewardButtonManager.cs
         {
-=======
-        {   
->>>>>>> Stashed changes:Assets/TemplateArquero/Scripts/Purchase/RewardButton/RewardManagerButton.cs
             _rewardManager.GiveReward(listOfRewards);
         }
     }

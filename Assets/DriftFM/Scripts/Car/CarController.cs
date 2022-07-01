@@ -8,10 +8,6 @@ using UnityEngine.Events;
 public class CarController : MonoBehaviour
 {
     [Header("Controls")]
-<<<<<<< Updated upstream
-=======
-
->>>>>>> Stashed changes
     [SerializeField] private Button _accelerateButton;
 
     private Rigidbody _carRB;
