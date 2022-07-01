@@ -16,8 +16,8 @@ MonoBehaviour:
   description: 
   icon: {fileID: 0}
   index: 0
-  stages: 20
-  maxBosses: 3
-  maxEasyStages: 20
-  maxDifficultStages: 20
+  stages: 1
+  maxBosses: 1
+  maxEasyStages: 1
+  maxDifficultStages: 1
   rewards: []

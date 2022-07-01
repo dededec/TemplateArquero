@@ -5,23 +5,23 @@ using Cinemachine;
 
 public class CarSpawnPosition : MonoBehaviour
 {
-    [SerializeField] private GameObject[] cars;
+    [SerializeField] private GameObject[] _heroes;
     private GameObject CurrentCar;
-    [SerializeField] private GameObject cm; 
+    [SerializeField] private GameObject _camera; 
 
     private void Awake() {
-        cm = GameObject.FindGameObjectWithTag("CinemachineCamera");
+        _camera = GameObject.FindGameObjectWithTag("CinemachineCamera");
 
-        foreach(GameObject car in cars)
+        foreach(GameObject hero in _heroes)
         {
-            if(car.name == SaveDataController.equippedCar)
+            if(hero.name == SaveDataController.equippedCar)
             {
-                CurrentCar = Instantiate(car, gameObject.transform.position, Quaternion.identity);
+                CurrentCar = Instantiate(hero, gameObject.transform.position, Quaternion.identity);
                 break;
             }
         }
 
-        cm.GetComponent<CinemachineVirtualCamera>().Follow = CurrentCar.transform;
+        _camera.GetComponent<CinemachineVirtualCamera>().Follow = CurrentCar.transform;
 
     }
 }
