@@ -40,9 +40,7 @@ public class LevelFlow : MonoBehaviour
         {
             _accItem.Add(new Reward(item.id, 1));
         }
-        
-        if(_questManager != null) _questManager.ProgressQuest("DefeatEnemies");
-        
+                
         Destroy(enemy.gameObject);
         
         if(_enemies.Count <= 0)

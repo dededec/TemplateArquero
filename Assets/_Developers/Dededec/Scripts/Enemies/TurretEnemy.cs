@@ -26,13 +26,7 @@ public class TurretEnemy : FollowingEnemy
         }
         StartCoroutine(crShoot());
     }
-
-    protected override void Update() {
-        base.Update();
-        
-        transform.GetChild(0).transform.rotation = Quaternion.LookRotation(_player.transform.position, Vector3.up);
-    }
-
+    
     private IEnumerator crShoot()
     {
         yield return new WaitForSeconds(3f);

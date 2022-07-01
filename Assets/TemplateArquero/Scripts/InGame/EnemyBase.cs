@@ -17,13 +17,6 @@ public class EnemyBase : MonoBehaviour
     [Header("Extra drops")]
     [SerializeField] protected Item[] _itemDrop;
 
-    [Header("UI")]
-    [SerializeField] protected Image _healthSlider;
-    private Camera _mainCamera;
-
-    private Coroutine _poisonCoroutine = null;
-    private Coroutine _burnCoroutine = null;
-
     public int SoftCoinDrop
     {
         get
@@ -44,28 +37,28 @@ public class EnemyBase : MonoBehaviour
 
     protected void Awake() 
     {
+        // _mainCamera = Camera.main;
         gameObject.tag = "Enemy";
         _health = _maxHealth;
-        _mainCamera = Camera.main;
         _animator = GetComponentInChildren<Animator>();
         GameStateManager.instance.onGameStateChanged += onGameStateChanged;
     }
 
-    protected virtual void Update() 
-    {
-        // Offset position above object bbox (in world space)
-        float offsetPosZ = transform.position.z + 1.5f;
-        float offsetPosY = transform.position.y + 1.5f;
+    // protected virtual void Update() 
+    // {
+    //     // Offset position above object bbox (in world space)
+    //     float offsetPosZ = transform.position.z + 1.5f;
+    //     float offsetPosY = transform.position.y + 1.5f;
 
-        // Final position of marker above GameObject in world space
-        Vector3 offsetPos = new Vector3(transform.position.x, offsetPosY, offsetPosZ);
+    //     // Final position of marker above GameObject in world space
+    //     Vector3 offsetPos = new Vector3(transform.position.x, offsetPosY, offsetPosZ);
 
-        // Calculate *screen* position (note, not a canvas/recttransform position)
-        Vector2 screenPoint = _mainCamera.WorldToScreenPoint(offsetPos);
+    //     // Calculate *screen* position (note, not a canvas/recttransform position)
+    //     Vector2 screenPoint = _mainCamera.WorldToScreenPoint(offsetPos);
 
-        // Set
-        _healthSlider.GetComponent<RectTransform>().position = screenPoint;
-    }
+    //     // Set
+    //     _healthSlider.GetComponent<RectTransform>().position = screenPoint;
+    // }
 
     private void OnDestroy() 
     {
@@ -84,7 +77,7 @@ public class EnemyBase : MonoBehaviour
     public virtual void TakeDamage(int amount)
     {
         _health -= amount;
-        _healthSlider.fillAmount = (float)_health/(float)_maxHealth;
+        // _healthSlider.fillAmount = (float)_health/(float)_maxHealth;
         if(_health <= 0)
         {
             _animator.SetTrigger("IsDead");
@@ -119,46 +112,4 @@ public class EnemyBase : MonoBehaviour
     }
 
     protected virtual void onGameStateChanged(GameState newGameState){}
-
-    #region Efectos de estado
-
-    public void ApplyPoison() 
-    {
-        if(_poisonCoroutine == null)
-        {
-            _poisonCoroutine = StartCoroutine(crApplyPoison());
-        }
-    }
-    private IEnumerator crApplyPoison()
-    {
-        int damage = (int)((float) PlayerStats.instance.attackDamage * 0.35f);
-        while(_health > 0)
-        {
-            yield return new WaitForSeconds(1f);
-            TakeDamage(damage);
-        }
-        _poisonCoroutine = null;
-    }
-
-    public void ApplyBurn()
-    {
-        if(_burnCoroutine == null)
-        {
-            _burnCoroutine = StartCoroutine(crApplyBurn());
-        }
-    }
-    private IEnumerator crApplyBurn()
-    {
-        float duracion = 2f;
-        int damage = (int)((float) PlayerStats.instance.attackDamage * 0.18f);
-        for(float i = 0f; i < duracion && _health > 0; i += Time.deltaTime)
-        {
-            yield return new WaitForSeconds(0.25f);
-            TakeDamage(damage);
-        }
-
-        _burnCoroutine = null;
-    }
-
-    #endregion
 }

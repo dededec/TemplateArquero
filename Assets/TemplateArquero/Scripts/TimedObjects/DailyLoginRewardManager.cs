@@ -28,17 +28,9 @@ public class DailyLoginRewardManager : TimedObject
 
     protected override void Initialize()
     {
-        /*
-        Esto puede que no haga falta
-        porque son siempre las mismas recompensas.
-        */
-        // ReadCSV();
-
-        // Esto se llama siempre que se haga login.
-        _questManager.ProgressQuest("Login");
 
         System.TimeSpan timeSpan = _timeManager.TimeSinceLastConnection();
-        // Miramos cuántos días han pasado para ver cuál le toca coger.
+
         if (timeSpan.TotalDays >= 1f)
         {
             for(int i=0; i<timeSpan.TotalDays; ++i)

@@ -9,10 +9,6 @@ public class DailyQuestsManager : TimedObject
     [SerializeField] private List<Quest> _dailyQuests = new List<Quest>();
     [SerializeField] private RewardManager _rewardManager;
 
-    [Header("Control variables")]
-    [SerializeField] private int _enemiesDefeated = 0;
-    [SerializeField] private int _levelsPlayed = 0;
-
     public bool[] CompletedDailyQuests
     {
         get
@@ -95,56 +91,37 @@ public class DailyQuestsManager : TimedObject
         _rewardManager.GiveReward(quest.rewards);
     }
 
-    public void resetControlVariables()
-    {
-        _enemiesDefeated = 0;
-        _levelsPlayed = 0;
-    }
-
-    /*
-    Logearse al juego
-    Jugar dos fases normales
-    Mejorar equipamiento
-    Mejorar Heroe
-    Comprar X pack de cosas
-    Abrir cofre de oro
-    Abrir cofre de obsidiana
-    Comprar una cosa
-    Fusionar un equipamiento
-    Ver un video o comprar algo
-    */
-
-    public void ProgressQuest(string id)
-    {
-        switch(id)
-        {
-            case "BuyOrWatchVideo":
-            case "CarUpgrade":
-            case "EquipmentUpgrade":
-            case "EquipmentFuse":
-            case "GoldChestOpen":
-            case "Login":
-            case "ObsidianChestOpen":
-            SetProgress(id, 100);
-            break;
+    // public void ProgressQuest(string id)
+    // {
+        // switch(id)
+        // {
+        //     case "BuyOrWatchVideo":
+        //     case "CarUpgrade":
+        //     case "EquipmentUpgrade":
+        //     case "EquipmentFuse":
+        //     case "GoldChestOpen":
+        //     case "Login":
+        //     case "ObsidianChestOpen":
+        //     SetProgress(id, 100);
+        //     break;
             
-            case "DefeatEnemies":
-            _enemiesDefeated++;
-            if(_enemiesDefeated >= 3)
-            {
-                SetProgress("DefeatEnemies", Lerp(0, 100, _enemiesDefeated/3));
-            }
-            break;
+        //     case "DefeatEnemies":
+        //     _enemiesDefeated++;
+        //     if(_enemiesDefeated >= 3)
+        //     {
+        //         SetProgress("DefeatEnemies", Lerp(0, 100, _enemiesDefeated/3));
+        //     }
+        //     break;
 
-            case "PlayedLevels":
-            _levelsPlayed++;
-            if(_levelsPlayed > 2)
-            {
-                SetProgress("PlayedLevels", Lerp(0, 100, _enemiesDefeated/2));
-            }
-            break;
-        }
-    }
+        //     case "PlayedLevels":
+        //     _levelsPlayed++;
+        //     if(_levelsPlayed > 2)
+        //     {
+        //         SetProgress("PlayedLevels", Lerp(0, 100, _enemiesDefeated/2));
+        //     }
+        //     break;
+        // }
+    // }
 
     #endregion
 

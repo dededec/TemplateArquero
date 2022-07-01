@@ -20,16 +20,6 @@ public class FollowingEnemy : EnemyBase
 
     #endregion
 
-
-    protected override void Update() 
-    {
-        base.Update();
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            Destroy(this.gameObject);
-        }
-    }
-
     #region Base Methods
 
     protected override void onGameStateChanged(GameState newGameState)

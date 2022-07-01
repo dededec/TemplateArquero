@@ -76,8 +76,6 @@ public class RewardedAdManager : MonoBehaviour, IUnityAdsLoadListener, IUnityAds
         {
             Debug.Log(_listOfRewards);
             _rewardManager.GiveReward(_listOfRewards);
-
-            GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("BuyOrWatchVideo");
             
             // Load another ad:
             Advertisement.Load(_adUnitId, this);

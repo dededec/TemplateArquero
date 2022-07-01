@@ -12,8 +12,7 @@ using System.IO;
 * It is needed to provide a csv file called ItemDatabase following the example at "/Resources"
 */
 public class InventoryManager : MonoBehaviour
-{
-    
+{    
     [SerializeField] private ItemDatabaseManager _itemDatabase;
     [SerializeField] private List<Item> _EveryItemList;
 
@@ -22,6 +21,7 @@ public class InventoryManager : MonoBehaviour
 
     //EQUIPMENT OF THE PLAYER
     [SerializeField] public Item[] _playerEquipment = new Item[6];
+    [SerializeField] private GameObject EquipmentPanels;
     [SerializeField] private Sprite blank;
 
     public Item[] Equipment
@@ -60,7 +60,6 @@ public class InventoryManager : MonoBehaviour
         }
 
         // ? Habria que decidir como se aumenta el multiplicador
-        GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("EquipmentFuse");
         receptor.multiplier += 1;
     }
 
@@ -68,7 +67,6 @@ public class InventoryManager : MonoBehaviour
     public void LevelUp(Item receptor)
     {
         receptor.level += 1;
-        GameObject.FindGameObjectWithTag("DailyManager").GetComponent<DailyQuestsManager>().ProgressQuest("EquipmentUpgrade");
     }
 
     public void AddToInventory(string id)
@@ -89,8 +87,6 @@ public class InventoryManager : MonoBehaviour
         setBag();
         saveData();
     }
-
-    [SerializeField] private GameObject EquipmentPanels;
 
     public void AssignEquipment(string id)
     {
